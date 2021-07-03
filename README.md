@@ -1,15 +1,16 @@
 ![tp2](https://github.com/stissoni/algo3_tp2/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/stissoni/algo3_tp2/branch/master/graph/badge.svg)](https://codecov.io/gh/stissoni/algo3_tp2)
 
-# TP2 Algoritmos 3: {nombre} 
+# TP2 Algoritmos 3: Grupo 21
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {N}
+## Grupo 21
 
-* **Integrante 1** - [integrante1](https://github.com/integrante1)
-* **Integrante 2** - [integrante2](https://github.com/integrante2)
-* **Integrante 3** - [integrante3](https://github.com/integrante3)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Santiago Tissoni** - [stissoni](https://github.com/stissoni)
+* **Ramiro Gestoso** - [ramirogestoso](https://github.com/ramirogestoso)
+* **Matias Montero** - [mattzt](https://github.com/mattzt)
+* **Julian Pinango** - [julioPinango](https://github.com/julioPinango)
+* **Stephany Galindo** - [GaSteph](https://github.com/GaSteph)
 
 Corrector: **{Corrector}**
 

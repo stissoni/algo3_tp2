@@ -1,20 +1,53 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+
 public class Batalla {
-    
-    public Batalla(Ejercito ejecitoAtacante, int numeroTropasAtacan, Ejercito ejercitoDefensor){
-        int numeroDeDadosAtacante;
-        if (numeroTropasAtacan > 3){
+    private Ejercito ejercitoAtacante;
+    private Ejercito ejercitoDefensor;
+
+    public Batalla(Ejercito ejercitoAtacante, Ejercito ejercitoDefensor){
+        this.ejercitoAtacante = ejercitoAtacante;
+        this.ejercitoDefensor = ejercitoDefensor;
+    }
+
+    public int obtenerNumeroDadosAtacante(int numeroTropasAtacan){
+        int numeroDeDadosAtacante =  numeroTropasAtacan;
+        if (numeroDeDadosAtacante > 3){
             numeroDeDadosAtacante = 3;
         }
-        else {
-            numeroDeDadosAtacante = numeroTropasAtacan;
-        }
-        int numeroDeDadosDefensor = ejercitoDefensor.obtenerNumeroTotalDeTropas();
-
-        // Aqui tirar los dados para la batalla. Generar una lista con los resultados.
-        // Ver el que ejercito con menos dados, ese sera el largo de la lista.
-        // Tomar los mas altos de todos los dados tirados y ponerlos en sus respectivas listas.
-        // Comparar uno a uno, e ir restando ejercitos. O hacer toda la cuenta y ver el resultado.
+        return numeroDeDadosAtacante;
     }
+
+    public int obtenerNumeroDadosAComparar(int numeroDadosAtacante, int numeroDadosDefensor){
+        int numeroDadosAComparar;
+        if (numeroDadosAtacante > numeroDadosDefensor){
+            numeroDadosAComparar = numeroDadosDefensor;
+        }
+        else {
+            numeroDadosAComparar = numeroDadosAtacante;
+        }
+        return numeroDadosAComparar;
+    }
+
+    public void luchar(int numeroTropasAtacan){
+        int numeroDeDadosAtacante =  obtenerNumeroDadosAtacante(numeroTropasAtacan);
+        int numeroDeDadosDefensor = this.ejercitoDefensor.obtenerNumeroTotalDeTropas();
+        int numeroDeDadosAComparar = obtenerNumeroDadosAComparar(numeroDeDadosAtacante, numeroDeDadosDefensor);
+
+        ArrayList<Integer> dadosAtacante = new ArrayList<Integer>();
+        ArrayList<Integer> dadosDefensor = new ArrayList<Integer>();
+        
+        int i = 0;
+        while(i <= numeroDeDadosAtacante){
+            dadosAtacante.add(this.ejercitoAtacante.tirarDados());
+            i = i + 1;
+        }
+        i = 0;
+        while(i <= numeroDeDadosDefensor){
+            dadosDefensor.add(this.ejercitoDefensor.tirarDados());
+            i = i + 1;
+        }
+    }
+
 }

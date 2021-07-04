@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.Random;
+
 public class Ejercito {
     private int numeroDeTropas;
 
@@ -20,6 +22,17 @@ public class Ejercito {
     }
 
     public void atacar(int numeroDeTropas, Ejercito otroEjercito){
-        Batalla batalla = new Batalla(this, numeroDeTropas, otroEjercito);
+        //Lanzar excepcion si this.numeroDeTropas - numeroDeTropas < 1.
+        Batalla batalla = new Batalla(this, otroEjercito);
+        batalla.luchar(numeroDeTropas);
+    }
+
+    public void vencer(Ejercito otroEjercito){
+        otroEjercito.reducirTropas(1);
+    }
+
+    public int tirarDados(){
+        Random numerosAleatorios = new Random();
+        return numerosAleatorios.nextInt(7);
     }
 }

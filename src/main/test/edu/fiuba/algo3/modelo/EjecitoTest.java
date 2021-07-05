@@ -54,6 +54,9 @@ public class EjecitoTest {
         //PROBANDO MOCKITO PARA LOS DADOS
         Ejercito mockedEjercito = mock(Ejercito.class);
 
-        when(mockedEjercito.tirarDados()).thenReturn(1).thenReturn(2).thenReturn(3);
+        when(mockedEjercito.tirarDados()).thenReturn(1).thenReturn(2);
+
+        assertEquals(mockedEjercito.tirarDados(), 1);
+        assertEquals(mockedEjercito.tirarDados(), 2);
     }
 }

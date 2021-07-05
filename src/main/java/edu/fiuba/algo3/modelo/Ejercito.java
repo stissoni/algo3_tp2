@@ -21,12 +21,6 @@ public class Ejercito {
         return this.numeroDeTropas;
     }
 
-    public void atacar(int numeroDeTropas, Ejercito otroEjercito){
-        //Lanzar excepcion si this.numeroDeTropas - numeroDeTropas < 1.
-        Batalla batalla = new Batalla(this, otroEjercito);
-        batalla.luchar(numeroDeTropas);
-    }
-
     public void vencer(Ejercito otroEjercito){
         otroEjercito.reducirTropas(1);
     }

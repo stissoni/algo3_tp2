@@ -1,21 +1,27 @@
 package edu.fiuba.algo3.modelo;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EjercitoTest {
+    private Ejercito ejercito;
+    private Jugador unJugador;
+
+    @BeforeEach                                         
+    public void setUp() throws Exception {
+        unJugador = new Jugador("Santiago", 1);
+        ejercito = new Ejercito(3, unJugador);
+    }
     @Test
     public void testNumeroDeTropasDeEjercito(){
-        Ejercito ejercito = new Ejercito(3);
-
         assertEquals(ejercito.obtenerNumeroTotalDeTropas(), 3);
     }
 
     @Test
     public void testReducirNumeroDeTropas(){
-        Ejercito ejercito = new Ejercito(3);
         ejercito.reducirTropas(1);
 
         assertEquals(ejercito.obtenerNumeroTotalDeTropas(), 2);
@@ -23,7 +29,6 @@ public class EjercitoTest {
 
     @Test
     public void testAumentarNumeroDeTropas(){
-        Ejercito ejercito = new Ejercito(3);
         ejercito.aumentarTropas(1);
 
         assertEquals(ejercito.obtenerNumeroTotalDeTropas(), 4);
@@ -31,8 +36,8 @@ public class EjercitoTest {
 
     @Test
     public void testVencerUnaVezEjercitoRival(){
-        Ejercito ejercito = new Ejercito(3);
-        Ejercito otroEjercito = new Ejercito(2);
+        Jugador otroJugador = new Jugador("Matias", 2);
+        Ejercito otroEjercito = new Ejercito(2, otroJugador);
 
         ejercito.vencer(otroEjercito);
 
@@ -40,23 +45,11 @@ public class EjercitoTest {
         assertEquals(otroEjercito.obtenerNumeroTotalDeTropas(), 1);
     }
 
-    @Test
-    public void testTirarDados(){
-        Ejercito ejercito = new Ejercito(3);
+    public void testEjercitoTomaControlDeUnPais(){
+        Pais unPais = new Pais("Italia", new Ejercito(1, new Jugador("Ramiro", 3)));
 
-        int salidaDado = ejercito.tirarDados();
+        ejercito.controlarPais(unPais);
 
-        assertTrue(salidaDado < 7 && salidaDado > 0);
-    }
-
-    @Test
-    public void testSalidaDados(){
-        //PROBANDO MOCKITO PARA LOS DADOS
-        Ejercito mockedEjercito = mock(Ejercito.class);
-
-        when(mockedEjercito.tirarDados()).thenReturn(1).thenReturn(2);
-
-        assertEquals(mockedEjercito.tirarDados(), 1);
-        assertEquals(mockedEjercito.tirarDados(), 2);
+        assertSame(ejercito, unPais.obtenerEjercito());
     }
 }

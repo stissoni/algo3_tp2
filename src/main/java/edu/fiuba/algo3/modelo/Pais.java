@@ -18,7 +18,7 @@ public class Pais {
         return this.ejercitoEnControl;
     }
 
-    public void entregarControlAlEjercitoDe(Ejercito nuevoEjercito){
+    public void entregarControlAlEjercito(Ejercito nuevoEjercito){
         this.ejercitoEnControl = nuevoEjercito;
     }
 
@@ -26,11 +26,15 @@ public class Pais {
         return this.ejercitoEnControl.obtenerNumeroTotalDeTropas();
     }
 
-    public int tirarDados(){
-        return this.ejercitoEnControl.tirarDados();
-    }
-
     public void vencer(Pais otroPais){
         this.ejercitoEnControl.vencer(otroPais.obtenerEjercito());
+    }
+
+    public Jugador obtenerJugadorEnControl(){
+        return this.ejercitoEnControl.obtenerJugador();
+    }
+
+    public String obtenerNombrePais(){
+        return this.nombrePais;
     }
 }

@@ -1,12 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.Random;
-
 public class Ejercito {
     private int numeroDeTropas;
+    private Jugador jugador;
 
-    public Ejercito(int nuevoNumeroDeTropas){
+    public Ejercito(int nuevoNumeroDeTropas, Jugador jugador){
         this.numeroDeTropas = nuevoNumeroDeTropas;
+        this.jugador = jugador;
     }
 
     public void reducirTropas(int numeroDeTropasARestar){
@@ -25,8 +25,11 @@ public class Ejercito {
         otroEjercito.reducirTropas(1);
     }
 
-    public int tirarDados(){
-        Random numerosAleatorios = new Random();
-        return numerosAleatorios.nextInt(7);
+    public Jugador obtenerJugador(){
+        return this.jugador;
+    }
+
+    public void controlarPais(Pais elPaisAControlar){
+        elPaisAControlar.entregarControlAlEjercito(this);
     }
 }

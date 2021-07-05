@@ -1,11 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Batalla {
     private Pais paisAtacante;
     private Pais paisDefensor;
+    private ArrayList<Dado> dadosAtacante;
+    private ArrayList<Dado> dadosDefensor;
 
     public Batalla(Pais paisAtacante, Pais paisDefensor){
         this.paisAtacante = paisAtacante;
@@ -20,6 +21,14 @@ public class Batalla {
         return numeroDeDadosAtacante;
     }
 
+    public void asignarDadosAtacante(ArrayList<Dado> dados){
+        this.dadosAtacante = dados;
+    }
+
+    public void asignarDadosDefensor(ArrayList<Dado> dados){
+        this.dadosAtacante = dados;
+    }
+
     public int obtenerNumeroDadosAComparar(int numeroDadosAtacante, int numeroDadosDefensor){
         int numeroDadosAComparar;
         if (numeroDadosAtacante > numeroDadosDefensor){
@@ -31,43 +40,26 @@ public class Batalla {
         return numeroDadosAComparar;
     }
 
-    public ArrayList<Integer> tirarDados(int numeroDeDados, Pais pais){
-        ArrayList<Integer> dados = new ArrayList<Integer>();
-        int i = 0;
-        while(i < numeroDeDados){
-            dados.add(pais.tirarDados());
-            i = i + 1;
-        }
-        Collections.sort(dados);
-        Collections.reverse(dados);
-        return dados;
+    public ArrayList<Dado> obtenerDadosAtacante(){
+        return this.dadosAtacante;
+    }
+
+    public ArrayList<Dado> obtenerDadosDefensor(){
+        return this.dadosDefensor;
     }
 
     public void luchar(){
-        // Resolver como decidir con el numero de tropas que un pais ataca a otro.
-        int numeroDeDadosAtacante = obtenerNumeroDadosAtacante(this.paisAtacante.obtenerNumeroTotalDeTropas());
-        int numeroDeDadosDefensor = this.paisDefensor.obtenerNumeroTotalDeTropas();
-        int numeroDeDadosAComparar = obtenerNumeroDadosAComparar(numeroDeDadosAtacante, numeroDeDadosDefensor);
-
-        ArrayList<Integer> dadosAtacante = tirarDados(numeroDeDadosAtacante, this.paisAtacante);
-        ArrayList<Integer> dadosDefensor = tirarDados(numeroDeDadosDefensor, this.paisDefensor);
-        
-        int i = 0;
-        while (i < numeroDeDadosAComparar){
-            if (dadosAtacante.get(i) > dadosDefensor.get(i)){
+        // Se puede (o se debe) mejorar sustancialmente.
+        int numeroDadosAtacante = this.obtenerNumeroDadosAtacante(this.paisAtacante.obtenerNumeroTotalDeTropas());
+        int numeroDadosDefensor = this.paisDefensor.obtenerNumeroTotalDeTropas();
+        int index = 0;
+        while (index < this.obtenerNumeroDadosAComparar(numeroDadosAtacante, numeroDadosDefensor)){
+            if (dadosAtacante.get(index).esMayorQue(dadosDefensor.get(index))){
                 this.paisAtacante.vencer(this.paisDefensor);
             }
             else {
                 this.paisDefensor.vencer(this.paisAtacante);
             }
-            i = i + 1;
-        }
-        this.obtenerGanador();
-    }
-    
-    public void obtenerGanador(){
-        if (this.paisDefensor.obtenerNumeroTotalDeTropas() == 0){
-            this.paisDefensor.entregarControlAlEjercitoDe(this.paisAtacante.obtenerEjercito());
         }
     }
 }

@@ -9,9 +9,14 @@ public class Pais {
         this.ejercitoEnControl = ejercito;
     }
 
-    public void atacarA(Pais otroPais){
+    public void atacarA(Pais otroPais, int numeroDeTropas){
+        // Lanzar excepcion si numero de tropas del ejercito - numero de tropas < 1.
+        ejercitoEnControl.reducirTropas(numeroDeTropas);
+        Ejercito ejercitoAtacante = new Ejercito(numeroDeTropas, ejercitoEnControl.obtenerJugador());
+
         Batalla batallaEntrePaises = new Batalla(this, otroPais);
-        batallaEntrePaises.luchar();
+        batallaEntrePaises.asignarEjercitoAtacante(ejercitoAtacante);
+        // Faltaria completar la logica de los dados. Quien tira los dados y quien los ordena. Lo demas esta ok.
     }
 
     public Ejercito obtenerEjercito(){
@@ -36,5 +41,9 @@ public class Pais {
 
     public String obtenerNombrePais(){
         return this.nombrePais;
+    }
+
+    public void reagruparEjercito(Ejercito otroEjercito){
+        this.ejercitoEnControl.reagruparEjercito(otroEjercito);
     }
 }

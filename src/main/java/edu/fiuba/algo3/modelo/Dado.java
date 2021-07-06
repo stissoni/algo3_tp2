@@ -5,6 +5,14 @@ import java.util.Random;
 public class Dado implements Comparable<Dado> {
     private int numeroDeLaTirada;
 
+    public Dado(int numero){
+        this.numeroDeLaTirada = numero;
+    }
+
+    public Dado(){
+        
+    }
+
     public void tirarDado(){
         Random numerosAleatorios = new Random();
         this.numeroDeLaTirada = (1 + numerosAleatorios.nextInt(6));

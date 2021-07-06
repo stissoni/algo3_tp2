@@ -5,12 +5,30 @@ import java.util.ArrayList;
 public class Batalla {
     private Pais paisAtacante;
     private Pais paisDefensor;
+    private Ejercito ejercitoAtacante;
+    private Ejercito ejercitoDefensor;
     private ArrayList<Dado> dadosAtacante;
     private ArrayList<Dado> dadosDefensor;
+    private int numeroDadosAComparar;
 
     public Batalla(Pais paisAtacante, Pais paisDefensor){
         this.paisAtacante = paisAtacante;
         this.paisDefensor = paisDefensor;
+    }
+
+    public void paisAtacaConNumeroDeTropas(int numeroDeTropas){
+        Jugador jugador = this.paisAtacante.obtenerJugadorEnControl();
+        // Lanzar excepcion si numero de tropas del ejercito atacante - numero de tropas < 1.
+        Ejercito ejercitoAtacante = new Ejercito(numeroDeTropas, jugador);
+        this.ejercitoAtacante = ejercitoAtacante;
+    }
+
+    public void asignarEjercitoAtacante(Ejercito unEjercito){
+        this.ejercitoAtacante = unEjercito;
+    }
+
+    public void asignarEjercitoDefensor(Ejercito unEjercito){
+        this.ejercitoDefensor = unEjercito;
     }
 
     public int obtenerNumeroDadosAtacante(int numeroTropasAtacan){
@@ -26,18 +44,22 @@ public class Batalla {
     }
 
     public void asignarDadosDefensor(ArrayList<Dado> dados){
-        this.dadosAtacante = dados;
+        this.dadosDefensor = dados;
     }
 
-    public int obtenerNumeroDadosAComparar(int numeroDadosAtacante, int numeroDadosDefensor){
-        int numeroDadosAComparar;
+    public void asignarNumeroDadosAComparar(int numeroDadosAtacante, int numeroDadosDefensor){
+        int numeroDados;
         if (numeroDadosAtacante > numeroDadosDefensor){
-            numeroDadosAComparar = numeroDadosDefensor;
+            numeroDados = numeroDadosDefensor;
         }
         else {
-            numeroDadosAComparar = numeroDadosAtacante;
+            numeroDados = numeroDadosAtacante;
         }
-        return numeroDadosAComparar;
+        this.numeroDadosAComparar = numeroDados;
+    }
+
+    public int obtenerNumeroDadosAComparar(){
+        return this.numeroDadosAComparar;
     }
 
     public ArrayList<Dado> obtenerDadosAtacante(){
@@ -49,17 +71,28 @@ public class Batalla {
     }
 
     public void luchar(){
-        // Se puede (o se debe) mejorar sustancialmente.
-        int numeroDadosAtacante = this.obtenerNumeroDadosAtacante(this.paisAtacante.obtenerNumeroTotalDeTropas());
-        int numeroDadosDefensor = this.paisDefensor.obtenerNumeroTotalDeTropas();
         int index = 0;
-        while (index < this.obtenerNumeroDadosAComparar(numeroDadosAtacante, numeroDadosDefensor)){
-            if (dadosAtacante.get(index).esMayorQue(dadosDefensor.get(index))){
+        Dado dadoAtacante;
+        Dado dadoDefensor;
+        while (index < this.numeroDadosAComparar){
+            dadoAtacante = this.dadosAtacante.get(index);
+            dadoDefensor = this.dadosDefensor.get(index);
+            if (dadoAtacante.esMayorQue(dadoDefensor)){
                 this.paisAtacante.vencer(this.paisDefensor);
             }
             else {
                 this.paisDefensor.vencer(this.paisAtacante);
             }
+            index = index + 1;
+        }
+    }
+
+    public void definirGananadorDeLaBatalla(){
+        if (this.paisDefensor.obtenerNumeroTotalDeTropas() == 0){
+            this.paisDefensor.entregarControlAlEjercito(this.ejercitoAtacante);
+        }
+        else {
+            this.paisAtacante.reagruparEjercito(this.ejercitoAtacante);
         }
     }
 }

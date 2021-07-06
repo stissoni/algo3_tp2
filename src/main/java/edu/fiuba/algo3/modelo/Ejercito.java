@@ -10,6 +10,7 @@ public class Ejercito {
     }
 
     public void reducirTropas(int numeroDeTropasARestar){
+        // Lanzar excepcion si la resta es menor a 0. 
         this.numeroDeTropas = this.numeroDeTropas - numeroDeTropasARestar;
     }
 
@@ -31,5 +32,10 @@ public class Ejercito {
 
     public void controlarPais(Pais elPaisAControlar){
         elPaisAControlar.entregarControlAlEjercito(this);
+    }
+
+    public void reagruparEjercito(Ejercito otroEjercito){
+        // Lanzar excepcion si el nuevo ejercito es de otro jugador.
+        this.numeroDeTropas = this.numeroDeTropas + otroEjercito.obtenerNumeroTotalDeTropas();
     }
 }

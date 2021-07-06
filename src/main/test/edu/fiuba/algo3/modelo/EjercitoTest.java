@@ -15,6 +15,14 @@ public class EjercitoTest {
         unJugador = new Jugador("Santiago", 1);
         ejercito = new Ejercito(3, unJugador);
     }
+
+    @Test
+    public void testAgruparEjercitos(){
+        Ejercito otroEjercito = new Ejercito(4, unJugador);
+        ejercito.reagruparEjercito(otroEjercito);
+
+        assertEquals(7, ejercito.obtenerNumeroTotalDeTropas());
+    }
     @Test
     public void testNumeroDeTropasDeEjercito(){
         assertEquals(ejercito.obtenerNumeroTotalDeTropas(), 3);
@@ -45,6 +53,7 @@ public class EjercitoTest {
         assertEquals(otroEjercito.obtenerNumeroTotalDeTropas(), 1);
     }
 
+    @Test
     public void testEjercitoTomaControlDeUnPais(){
         Pais unPais = new Pais("Italia", new Ejercito(1, new Jugador("Ramiro", 3)));
 

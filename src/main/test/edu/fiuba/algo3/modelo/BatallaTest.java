@@ -163,6 +163,13 @@ public class BatallaTest {
 
     @Test
     public void testLuchaEntrePaisesConEmpateDeDadosConDiferenciaDeTropas(){
+        Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
+        Ejercito ejercitoDefensor = new Ejercito(1, jugador2);
+
+        Pais paisAtacante = new Pais("Argentina", ejercitoAtacante);
+        Pais paisDefensor = new Pais("Brasil", ejercitoDefensor);
+        
+        // Los dados que le salieron al atacante.
         ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
         Dado dado = new Dado(6);
         Dado otroDado = new Dado(5);
@@ -170,16 +177,11 @@ public class BatallaTest {
         dadosAtacante.add(dado);
         dadosAtacante.add(otroDado);
         dadosAtacante.add(otroDadoMas);
-
+        
+        // Los dados del defensor.
         ArrayList<Dado> dadosDefensor = new ArrayList<Dado>();
         Dado dadoDefensor = new Dado(6); // Compara contra el 6 y empata con el 6 del atacante.
         dadosDefensor.add(dadoDefensor);
-
-        Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
-        Ejercito ejercitoDefensor = new Ejercito(1, jugador2);
-
-        Pais paisAtacante = new Pais("Argentina", ejercitoAtacante);
-        Pais paisDefensor = new Pais("Brasil", ejercitoDefensor);
 
         Batalla unaBatallaEpica = new Batalla(paisAtacante, paisDefensor);
         unaBatallaEpica.asignarDadosAtacante(dadosAtacante);

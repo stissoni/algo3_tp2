@@ -12,7 +12,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Julian Pinango** - [julioPinango](https://github.com/julioPinango)
 * **Stephany Galindo** - [GaSteph](https://github.com/GaSteph)
 
-Corrector: **{Corrector}**
+Corrector: **Pablo M y Maia**
 
 ## Aplicación
 

@@ -38,18 +38,14 @@ public class DadoTest {
     @Test
     public void testSePuedeCrearUnArrayListDeDados() {
         int cantidad = 3;
-        ArrayList<Dado> dados = new ArrayList<>();
-        for (int i=0; i<cantidad; ++i) dados.add(new Dado());
-        assertEquals(3, dados.size());
+        ArrayList<Dado> dados = Dado.tirar(cantidad);
+        assertEquals(cantidad, dados.size());
     }
 
     @Test
     public void testTirarVariosDadosEnArrayListEsValido() {
         int cantidad = 10;
-        ArrayList<Dado> dados = new ArrayList<>();
-        for (int i=0; i<cantidad; ++i) dados.add(new Dado());
-        for (Dado dado: dados) dado.tirar();
-
+        ArrayList<Dado> dados = Dado.tirar(cantidad);
         boolean valorValido = true;
         for (Dado dado: dados) {
             valorValido = dado.obtenerValor() > 0 && dado.obtenerValor() < 7;
@@ -68,9 +64,7 @@ public class DadoTest {
     @Test
     public void testSePuedeOrdenarUnArrayListDeDadosDecrecientemente(){
         int cantidad = 10;
-        ArrayList<Dado> dados = new ArrayList<>();
-        for (int i=0; i<cantidad; ++i) dados.add(new Dado());
-        for (Dado dado: dados) dado.tirar();
+        ArrayList<Dado> dados = Dado.tirar(cantidad);
 
         dados.sort(Collections.reverseOrder());
 

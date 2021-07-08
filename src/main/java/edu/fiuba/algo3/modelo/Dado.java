@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Dado implements Comparable<Dado> {
@@ -11,6 +12,12 @@ public class Dado implements Comparable<Dado> {
 
     public Dado(){
         tirar();
+    }
+
+    public static ArrayList<Dado> tirar(int cantidad) {
+        ArrayList<Dado> dados = new ArrayList<>();
+        for (int i=0; i<cantidad; ++i) dados.add(new Dado());
+        return dados;
     }
 
     public void tirar() {

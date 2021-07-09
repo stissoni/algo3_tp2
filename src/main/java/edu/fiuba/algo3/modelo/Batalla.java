@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Batalla {
     private Pais paisAtacante;
@@ -13,14 +15,8 @@ public class Batalla {
 
     public Batalla(Pais paisAtacante, Pais paisDefensor){
         this.paisAtacante = paisAtacante;
+        //Lanzar excepcion si el país Atacante no está vinculado con el Defensor.
         this.paisDefensor = paisDefensor;
-    }
-
-    public void paisAtacaConNumeroDeTropas(int numeroDeTropas){
-        Jugador jugador = this.paisAtacante.obtenerJugadorEnControl();
-        // Lanzar excepcion si numero de tropas del ejercito atacante - numero de tropas < 1.
-        Ejercito ejercitoAtacante = new Ejercito(numeroDeTropas, jugador);
-        this.ejercitoAtacante = ejercitoAtacante;
     }
 
     public void asignarEjercitoAtacante(Ejercito unEjercito){
@@ -31,31 +27,12 @@ public class Batalla {
         this.ejercitoDefensor = unEjercito;
     }
 
-    public int obtenerNumeroDadosAtacante(int numeroTropasAtacan){
-        int numeroDeDadosAtacante = numeroTropasAtacan;
-        if (numeroDeDadosAtacante > 3){
-            numeroDeDadosAtacante = 3;
-        }
-        return numeroDeDadosAtacante;
-    }
-
-    public void asignarDadosAtacante(ArrayList<Dado> dados){
-        this.dadosAtacante = dados;
-    }
-
-    public void asignarDadosDefensor(ArrayList<Dado> dados){
-        this.dadosDefensor = dados;
-    }
-
-    public void asignarNumeroDadosAComparar(int numeroDadosAtacante, int numeroDadosDefensor){
-        int numeroDados;
-        if (numeroDadosAtacante > numeroDadosDefensor){
-            numeroDados = numeroDadosDefensor;
-        }
-        else {
-            numeroDados = numeroDadosAtacante;
-        }
-        this.numeroDadosAComparar = numeroDados;
+    public void asignarDados(ArrayList<Dado> dadosAtacante, ArrayList<Dado> dadosDefensor){
+        this.dadosAtacante = dadosAtacante;
+        this.dadosDefensor = dadosDefensor;
+        this.dadosAtacante.sort(Collections.reverseOrder());
+        this.dadosDefensor.sort(Collections.reverseOrder());
+        this.numeroDadosAComparar = Math.min(dadosAtacante.size(),dadosDefensor.size());
     }
 
     public int obtenerNumeroDadosAComparar(){
@@ -68,6 +45,14 @@ public class Batalla {
 
     public ArrayList<Dado> obtenerDadosDefensor(){
         return this.dadosDefensor;
+    }
+
+    public Ejercito obtenerEjercitoAtacante(){
+        return this.ejercitoAtacante;
+    }
+
+    public Ejercito obtenerEjercitoDefensor(){
+        return this.ejercitoDefensor;
     }
 
     public void luchar(){
@@ -87,12 +72,24 @@ public class Batalla {
         }
     }
 
+    public void tirarDadosRandomYLuchar(){
+        ArrayList<Dado> dadosAtaque = Dado.tirar(ejercitoAtacante.obtenerNumeroTotalDeTropas());
+        ArrayList<Dado> dadosDefensa = Dado.tirar(ejercitoDefensor.obtenerNumeroTotalDeTropas());
+        asignarDados(dadosAtaque,dadosDefensa);
+
+        for (int i = 0;i<this.numeroDadosAComparar;i++){
+            Dado dadoDeAtaque = this.dadosAtacante.get(i);
+            Dado dadoDeDefensa = this.dadosDefensor.get(i);
+            if (dadoDeAtaque.esMayorQue(dadoDeDefensa)) paisAtacante.vencer(paisDefensor);
+            else paisDefensor.vencer(paisAtacante);
+        }
+    }
+
+
     public void definirGananadorDeLaBatalla(){
-        if (this.paisDefensor.obtenerNumeroTotalDeTropas() == 0){
+        if (this.paisDefensor.obtenerNumeroTotalDeTropas() == 0) {
             this.paisDefensor.entregarControlAlEjercito(this.ejercitoAtacante);
         }
-        else {
-            this.paisAtacante.reagruparEjercito(this.ejercitoAtacante);
-        }
+        else this.paisAtacante.reagruparEjercito(this.ejercitoAtacante);
     }
 }

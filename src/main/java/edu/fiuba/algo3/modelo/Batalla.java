@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,6 +19,7 @@ public class Batalla {
         this.paisAtacante = paisAtacante;
         //Lanzar excepcion si el país Atacante no está vinculado con el Defensor.
         this.paisDefensor = paisDefensor;
+        this.ejercitoDefensor = this.paisDefensor.obtenerEjercito();
     }
 
     public void asignarEjercitoAtacante(Ejercito unEjercito){
@@ -75,7 +75,7 @@ public class Batalla {
         }
     }
 
-    public void tirarDadosRandomYLuchar(){
+    public void tirarDadosRandomYLuchar() throws EjercitoYaVencidoException {
         ArrayList<Dado> dadosAtaque = Dado.tirar(ejercitoAtacante.obtenerNumeroTotalDeTropas());
         ArrayList<Dado> dadosDefensa = Dado.tirar(ejercitoDefensor.obtenerNumeroTotalDeTropas());
         asignarDados(dadosAtaque,dadosDefensa);

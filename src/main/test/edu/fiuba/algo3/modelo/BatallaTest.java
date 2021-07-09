@@ -56,7 +56,7 @@ public class BatallaTest {
 
     @Test
     public void testLuchaEntrePaises() throws EjercitoYaVencidoException{
-        ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
+        ArrayList<Dado> dadosAtacante = new ArrayList<>();
         Dado dado = new Dado(5);
         Dado otroDado = new Dado(4);
         Dado otroDadoMas = new Dado(2);
@@ -89,7 +89,7 @@ public class BatallaTest {
     
     @Test
     public void testLuchaEntrePaisesConVictoriaDelAtacante() throws EjercitoYaVencidoException{
-        ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
+        ArrayList<Dado> dadosAtacante = new ArrayList<>();
         Dado dado = new Dado(6);
         Dado otroDado = new Dado(5);
         Dado otroDadoMas = new Dado(5);
@@ -122,7 +122,7 @@ public class BatallaTest {
 
     @Test
     public void testLuchaEntrePaisesConVictoriaDelAtacanteConDiferenciaDeTropas() throws EjercitoYaVencidoException{
-        ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
+        ArrayList<Dado> dadosAtacante = new ArrayList<>();
         Dado dado = new Dado(6);
         Dado otroDado = new Dado(5);
         Dado otroDadoMas = new Dado(5);
@@ -181,7 +181,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaConDadosRandom(){
+    public void testLuchaConDadosRandom() throws EjercitoYaVencidoException {
         Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
         Ejercito ejercitoDefensor = new Ejercito(3, jugador2);
 

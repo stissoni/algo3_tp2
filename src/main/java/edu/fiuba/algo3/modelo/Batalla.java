@@ -92,7 +92,7 @@ public class Batalla {
 
     public void definirGananadorDeLaBatalla() throws EjercitosDeJugadoresDiferentesException{
         if (this.paisDefensor.obtenerNumeroTotalDeTropas() == 0){
-            this.paisDefensor.entregarControlAlEjercito(this.ejercitoAtacante);
+            this.paisDefensor.asignarEjercito(this.ejercitoAtacante);
         }
         else {
             this.paisAtacante.reagruparEjercito(this.ejercitoAtacante);

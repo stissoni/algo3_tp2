@@ -42,7 +42,7 @@ public class Ejercito {
     }
 
     public void controlarPais(Pais elPaisAControlar){
-        elPaisAControlar.entregarControlAlEjercito(this);
+        elPaisAControlar.asignarEjercito(this);
     }
 
     public void reagruparEjercito(Ejercito otroEjercito) throws EjercitosDeJugadoresDiferentesException{

@@ -12,11 +12,15 @@ public class Pais {
         this.ejercitoEnControl = ejercito;
     }
 
+    public Pais(String nombrePais){
+        this.nombrePais = nombrePais;
+    }
+
     public Ejercito obtenerEjercito(){
         return this.ejercitoEnControl;
     }
 
-    public void entregarControlAlEjercito(Ejercito nuevoEjercito){
+    public void asignarEjercito(Ejercito nuevoEjercito){
         this.ejercitoEnControl = nuevoEjercito;
     }
 

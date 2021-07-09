@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
+import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
+import edu.fiuba.algo3.excepciones.NumeroDeTropasInsuficienteException;
+
 public class EjercitoTest {
     private Ejercito ejercito;
     private Jugador unJugador;
@@ -17,7 +21,7 @@ public class EjercitoTest {
     }
 
     @Test
-    public void testAgruparEjercitos(){
+    public void testAgruparEjercitos() throws EjercitosDeJugadoresDiferentesException{
         Ejercito otroEjercito = new Ejercito(4, unJugador);
         ejercito.reagruparEjercito(otroEjercito);
 
@@ -29,7 +33,7 @@ public class EjercitoTest {
     }
 
     @Test
-    public void testReducirNumeroDeTropas(){
+    public void testReducirNumeroDeTropas() throws NumeroDeTropasInsuficienteException{
         ejercito.reducirTropas(1);
 
         assertEquals(ejercito.obtenerNumeroTotalDeTropas(), 2);
@@ -43,7 +47,7 @@ public class EjercitoTest {
     }
 
     @Test
-    public void testVencerUnaVezEjercitoRival(){
+    public void testVencerUnaVezEjercitoRival() throws EjercitoYaVencidoException{
         Jugador otroJugador = new Jugador("Matias", 2);
         Ejercito otroEjercito = new Ejercito(2, otroJugador);
 

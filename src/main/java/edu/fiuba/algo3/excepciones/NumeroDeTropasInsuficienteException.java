@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.excepciones;
 
-public class NumeroDeTropasInsuficienteException extends Exception{
+public class NumeroDeTropasInsuficienteException extends Throwable {
     private final int id = 1;
     private final String mensajeError = "No hay suficientes topas.";
 

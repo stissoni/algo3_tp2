@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.excepciones;
 
-public class TropasDeEjercitosDeJugadoresDiferentesException {
+public class EjercitosDeJugadoresDiferentesException extends Throwable {
     private final int id = 3;
     private final String mensajeError = "No se pueden reagrupar ejercitos de jugadores diferentes.";
 

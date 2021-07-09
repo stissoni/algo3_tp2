@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
+
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -61,7 +64,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaEntrePaises(){
+    public void testLuchaEntrePaises() throws EjercitoYaVencidoException{
         ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
         Dado dado = new Dado(5);
         Dado otroDado = new Dado(4);
@@ -96,7 +99,7 @@ public class BatallaTest {
     }
     
     @Test
-    public void testLuchaEntrePaisesConVictoriaDelAtacante(){
+    public void testLuchaEntrePaisesConVictoriaDelAtacante() throws EjercitoYaVencidoException{
         ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
         Dado dado = new Dado(6);
         Dado otroDado = new Dado(5);
@@ -131,7 +134,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaEntrePaisesConVictoriaDelAtacanteConDiferenciaDeTropas(){
+    public void testLuchaEntrePaisesConVictoriaDelAtacanteConDiferenciaDeTropas() throws EjercitoYaVencidoException{
         ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
         Dado dado = new Dado(6);
         Dado otroDado = new Dado(5);
@@ -162,7 +165,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaEntrePaisesConEmpateDeDadosConDiferenciaDeTropas(){
+    public void testLuchaEntrePaisesConEmpateDeDadosConDiferenciaDeTropas() throws EjercitoYaVencidoException{
         Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
         Ejercito ejercitoDefensor = new Ejercito(1, jugador2);
 

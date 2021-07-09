@@ -2,6 +2,9 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
+import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
+
 public class Batalla {
     private Pais paisAtacante;
     private Pais paisDefensor;
@@ -70,7 +73,7 @@ public class Batalla {
         return this.dadosDefensor;
     }
 
-    public void luchar(){
+    public void luchar() throws EjercitoYaVencidoException{
         int index = 0;
         Dado dadoAtacante;
         Dado dadoDefensor;
@@ -87,7 +90,7 @@ public class Batalla {
         }
     }
 
-    public void definirGananadorDeLaBatalla(){
+    public void definirGananadorDeLaBatalla() throws EjercitosDeJugadoresDiferentesException{
         if (this.paisDefensor.obtenerNumeroTotalDeTropas() == 0){
             this.paisDefensor.entregarControlAlEjercito(this.ejercitoAtacante);
         }

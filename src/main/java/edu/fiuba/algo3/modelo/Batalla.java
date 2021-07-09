@@ -4,6 +4,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
+import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
+
 public class Batalla {
     private Pais paisAtacante;
     private Pais paisDefensor;
@@ -55,7 +58,7 @@ public class Batalla {
         return this.ejercitoDefensor;
     }
 
-    public void luchar(){
+    public void luchar() throws EjercitoYaVencidoException{
         int index = 0;
         Dado dadoAtacante;
         Dado dadoDefensor;
@@ -85,10 +88,9 @@ public class Batalla {
         }
     }
 
-
-    public void definirGananadorDeLaBatalla(){
-        if (this.paisDefensor.obtenerNumeroTotalDeTropas() == 0) {
-            this.paisDefensor.entregarControlAlEjercito(this.ejercitoAtacante);
+    public void definirGananadorDeLaBatalla() throws EjercitosDeJugadoresDiferentesException{
+        if (this.paisDefensor.obtenerNumeroTotalDeTropas() == 0){
+            this.paisDefensor.asignarEjercito(this.ejercitoAtacante);
         }
         else this.paisAtacante.reagruparEjercito(this.ejercitoAtacante);
     }

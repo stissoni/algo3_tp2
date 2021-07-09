@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -54,8 +55,8 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaEntrePaises(){
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
+    public void testLuchaEntrePaises() throws EjercitoYaVencidoException{
+        ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
         Dado dado = new Dado(5);
         Dado otroDado = new Dado(4);
         Dado otroDadoMas = new Dado(2);
@@ -87,8 +88,8 @@ public class BatallaTest {
     }
     
     @Test
-    public void testLuchaEntrePaisesConVictoriaDelAtacante(){
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
+    public void testLuchaEntrePaisesConVictoriaDelAtacante() throws EjercitoYaVencidoException{
+        ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
         Dado dado = new Dado(6);
         Dado otroDado = new Dado(5);
         Dado otroDadoMas = new Dado(5);
@@ -120,8 +121,8 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaEntrePaisesConVictoriaDelAtacanteConDiferenciaDeTropas(){
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
+    public void testLuchaEntrePaisesConVictoriaDelAtacanteConDiferenciaDeTropas() throws EjercitoYaVencidoException{
+        ArrayList<Dado> dadosAtacante = new ArrayList<Dado>();
         Dado dado = new Dado(6);
         Dado otroDado = new Dado(5);
         Dado otroDadoMas = new Dado(5);
@@ -149,7 +150,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaEntrePaisesConEmpateDeDadosConDiferenciaDeTropas(){
+    public void testLuchaEntrePaisesConEmpateDeDadosConDiferenciaDeTropas() throws EjercitoYaVencidoException{
         Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
         Ejercito ejercitoDefensor = new Ejercito(1, jugador2);
 

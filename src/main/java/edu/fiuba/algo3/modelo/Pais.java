@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
+import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
+
 public class Pais {
     private String nombrePais;
     private Ejercito ejercitoEnControl; 
@@ -9,21 +12,15 @@ public class Pais {
         this.ejercitoEnControl = ejercito;
     }
 
-    public void atacarA(Pais otroPais, int numeroDeTropas){
-        // Lanzar excepcion si numero de tropas del ejercito - numero de tropas < 1.
-        ejercitoEnControl.reducirTropas(numeroDeTropas);
-        Ejercito ejercitoAtacante = new Ejercito(numeroDeTropas, ejercitoEnControl.obtenerJugador());
-
-        Batalla batallaEntrePaises = new Batalla(this, otroPais);
-        batallaEntrePaises.asignarEjercitoAtacante(ejercitoAtacante);
-        // Faltaria completar la logica de los dados. Quien tira los dados y quien los ordena. Lo demas esta ok.
+    public Pais(String nombrePais){
+        this.nombrePais = nombrePais;
     }
 
     public Ejercito obtenerEjercito(){
         return this.ejercitoEnControl;
     }
 
-    public void entregarControlAlEjercito(Ejercito nuevoEjercito){
+    public void asignarEjercito(Ejercito nuevoEjercito){
         this.ejercitoEnControl = nuevoEjercito;
     }
 
@@ -31,7 +28,7 @@ public class Pais {
         return this.ejercitoEnControl.obtenerNumeroTotalDeTropas();
     }
 
-    public void vencer(Pais otroPais){
+    public void vencer(Pais otroPais) throws EjercitoYaVencidoException{
         this.ejercitoEnControl.vencer(otroPais.obtenerEjercito());
     }
 
@@ -43,7 +40,7 @@ public class Pais {
         return this.nombrePais;
     }
 
-    public void reagruparEjercito(Ejercito otroEjercito){
+    public void reagruparEjercito(Ejercito otroEjercito) throws EjercitosDeJugadoresDiferentesException{
         this.ejercitoEnControl.reagruparEjercito(otroEjercito);
     }
 }

@@ -15,7 +15,7 @@ public class Ejercito {
 
     public void reducirTropas (int numeroDeTropasARestar) throws NumeroDeTropasInsuficienteException {
         if ((this.numeroDeTropas - numeroDeTropasARestar) < 0){
-            throw new NumeroDeTropasInsuficienteException();
+            throw new NumeroDeTropasInsuficienteException("No hay tropas suficientes");
         }
         this.numeroDeTropas = this.numeroDeTropas - numeroDeTropasARestar;
     }
@@ -33,7 +33,7 @@ public class Ejercito {
             otroEjercito.reducirTropas(1);
         }
         catch (NumeroDeTropasInsuficienteException e){
-            throw new EjercitoYaVencidoException();
+            throw new EjercitoYaVencidoException("El ejercito ya no cuenta con tropas", e);
         }
     }
 
@@ -47,7 +47,7 @@ public class Ejercito {
 
     public void reagruparEjercito(Ejercito otroEjercito) throws EjercitosDeJugadoresDiferentesException{
         if (this.obtenerJugador().sonJugadoresDiferentes(otroEjercito.obtenerJugador())){
-            throw new EjercitosDeJugadoresDiferentesException();
+            throw new EjercitosDeJugadoresDiferentesException("Los ejercitos son de jugadores diferentes");
         }
         this.numeroDeTropas = this.numeroDeTropas + otroEjercito.obtenerNumeroTotalDeTropas();
         // Tambien se podria hacer return new Ejercito(this.obtenerNumeroTotalTropas()+otroEjercito.obtenerNumeroTotal...)

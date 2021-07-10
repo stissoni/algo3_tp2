@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -72,6 +73,10 @@ public class BatallaTest {
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
+
+        assertSame(ejercitoAtacante, unaBatallaEpica.obtenerEjercitoAtacante());
+        assertSame(ejercitoDefensor, unaBatallaEpica.obtenerEjercitoDefensor());
+
         unaBatallaEpica.asignarDados(dadosAtacante, dadosDefensor);
         unaBatallaEpica.asignarNumeroDadosAComparar();
 

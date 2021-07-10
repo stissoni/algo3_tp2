@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 
 public class Pais {
@@ -21,10 +20,6 @@ public class Pais {
 
     public int obtenerNumeroTotalDeTropas(){
         return this.ejercitoEnControl.obtenerNumeroTotalDeTropas();
-    }
-
-    public void vencer(Pais otroPais) throws EjercitoYaVencidoException{
-        this.ejercitoEnControl.vencer(otroPais.obtenerEjercito());
     }
 
     public Jugador obtenerJugadorEnControl(){

@@ -48,6 +48,7 @@ public class Partida {
             Jugador unJugador = listaDeJugadores.get(i%this.cantidadDeJugadores);
             Ejercito unEjercito = new Ejercito(1,unJugador);
             Pais nuevoPais = new Pais(nombrePais);
+            nuevoPais.asignarEjercito(unEjercito);
             listaPaises.add(nuevoPais);
             i++;
         }

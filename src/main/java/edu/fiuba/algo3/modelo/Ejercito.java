@@ -50,6 +50,5 @@ public class Ejercito {
             throw new EjercitosDeJugadoresDiferentesException("Los ejercitos son de jugadores diferentes");
         }
         this.numeroDeTropas = this.numeroDeTropas + otroEjercito.obtenerNumeroTotalDeTropas();
-        // Tambien se podria hacer return new Ejercito(this.obtenerNumeroTotalTropas()+otroEjercito.obtenerNumeroTotal...)
     }
 }

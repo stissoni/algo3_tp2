@@ -60,11 +60,12 @@ public class EjercitoTest {
 
     @Test
     public void testEjercitoTomaControlDeUnPais(){
-        Pais unPais = new Pais("Italia", new Ejercito(1, new Jugador("Ramiro", 3)));
+        Pais unPais = new Pais("Italia");
+        Ejercito unEjercito = new Ejercito(1, new Jugador("Ramiro", 3));
 
-        ejercito.controlarPais(unPais);
+        unEjercito.controlarPais(unPais);
 
-        assertSame(ejercito, unPais.obtenerEjercito());
+        assertSame(unEjercito, unPais.obtenerEjercito());
     }
 
     @Test

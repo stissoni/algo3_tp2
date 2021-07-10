@@ -71,4 +71,15 @@ public class DadoTest {
         assertTrue(arrayListDeDadosEstaOrdenadoDecrecientemente(dados));
     }
 
+    @Test
+    public void testVerSalidaDeTirarDados(){
+        int cantidad = 3;
+        ArrayList<Dado> dados = Dado.tirar(cantidad);
+
+        dados.sort(Collections.reverseOrder());
+
+        for (int i = 0; i < cantidad; ++i){
+            System.out.println(dados.get(i).obtenerValor());
+        }
+    }
 }

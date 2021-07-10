@@ -5,12 +5,7 @@ import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 
 public class Pais {
     private String nombrePais;
-    private Ejercito ejercitoEnControl; 
-
-    public Pais(String nombrePais, Ejercito ejercito){
-        this.nombrePais = nombrePais;
-        this.ejercitoEnControl = ejercito;
-    }
+    private Ejercito ejercitoEnControl;
 
     public Pais(String nombrePais){
         this.nombrePais = nombrePais;
@@ -42,5 +37,9 @@ public class Pais {
 
     public void reagruparEjercito(Ejercito otroEjercito) throws EjercitosDeJugadoresDiferentesException{
         this.ejercitoEnControl.reagruparEjercito(otroEjercito);
+    }
+
+    public boolean suEjercitoFueVencido(){
+        return this.ejercitoEnControl.obtenerNumeroTotalDeTropas() == 0;
     }
 }

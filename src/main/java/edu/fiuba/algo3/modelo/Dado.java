@@ -36,5 +36,4 @@ public class Dado implements Comparable<Dado> {
     public int compareTo(Dado otroDado){
         return this.numero - otroDado.numero;
     }
-
 }

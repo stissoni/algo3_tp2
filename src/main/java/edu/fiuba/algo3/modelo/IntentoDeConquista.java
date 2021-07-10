@@ -6,24 +6,24 @@ import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 public class IntentoDeConquista {
     private Pais paisConquistador;
     private Pais paisDefensor;
-    private Batalla laBatalla;
+    private Batalla batalla;
 
     public IntentoDeConquista(Pais paisConquistador, Pais paisDefensor, Batalla unaBatalla){
         this.paisConquistador = paisConquistador;
         this.paisDefensor = paisDefensor;
-        this.laBatalla = unaBatalla;
+        this.batalla = unaBatalla;
     }
 
     public void iniciarConquista() throws EjercitoYaVencidoException{
-        laBatalla.luchar();
+        batalla.luchar();
     }
 
     public void resultadoDeConquista() throws EjercitosDeJugadoresDiferentesException{
         if (paisDefensor.suEjercitoFueVencido()){
-            paisDefensor.asignarEjercito(this.laBatalla.obtenerEjercitoAtacante());
+            paisDefensor.asignarEjercito(this.batalla.obtenerEjercitoAtacante());
         }
         else {
-            paisConquistador.reagruparEjercito(this.laBatalla.obtenerEjercitoAtacante());
+            paisConquistador.reagruparEjercito(this.batalla.obtenerEjercitoAtacante());
         }
     }
 }

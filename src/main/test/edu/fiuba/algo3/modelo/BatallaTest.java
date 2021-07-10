@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
-import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 

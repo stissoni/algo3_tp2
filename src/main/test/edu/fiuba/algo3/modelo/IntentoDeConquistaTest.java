@@ -52,9 +52,9 @@ public class IntentoDeConquistaTest {
 
         IntentoDeConquista intentarConquista = new IntentoDeConquista(
             paisAtacante,
-            paisDefensor,
-            unaBatalla
+            paisDefensor
         );
+        intentarConquista.asignarBatalla(unaBatalla);
         intentarConquista.iniciarConquista();
         intentarConquista.resultadoDeConquista();
 
@@ -99,9 +99,9 @@ public class IntentoDeConquistaTest {
 
         IntentoDeConquista intentarConquista = new IntentoDeConquista(
             paisAtacante,
-            paisDefensor,
-            unaBatalla
+            paisDefensor
         );
+        intentarConquista.asignarBatalla(unaBatalla);
         intentarConquista.iniciarConquista();
         intentarConquista.resultadoDeConquista();
 

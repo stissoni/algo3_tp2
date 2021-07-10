@@ -8,9 +8,12 @@ public class IntentoDeConquista {
     private Pais paisDefensor;
     private Batalla batalla;
 
-    public IntentoDeConquista(Pais paisConquistador, Pais paisDefensor, Batalla unaBatalla){
+    public IntentoDeConquista(Pais paisConquistador, Pais paisDefensor){
         this.paisConquistador = paisConquistador;
         this.paisDefensor = paisDefensor;
+    }
+
+    public void asignarBatalla(Batalla unaBatalla){
         this.batalla = unaBatalla;
     }
 

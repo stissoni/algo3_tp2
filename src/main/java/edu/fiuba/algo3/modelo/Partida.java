@@ -47,7 +47,7 @@ public class Partida {
         for (String nombrePais : america){
             Jugador unJugador = listaDeJugadores.get(i%this.cantidadDeJugadores);
             Ejercito unEjercito = new Ejercito(1,unJugador);
-            Pais nuevoPais = new Pais(nombrePais,unEjercito);
+            Pais nuevoPais = new Pais(nombrePais);
             listaPaises.add(nuevoPais);
             i++;
         }

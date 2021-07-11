@@ -82,22 +82,22 @@ public class Partida {
 
     private ArrayList<Pais> repartirOcupacionDePaises(Map<String,String[]> continentes){
         ArrayList<Pais> listaPaises = new ArrayList<>();
-        AtomicInteger index = new AtomicInteger();
+        AtomicInteger indiceJugador = new AtomicInteger();
         continentes.forEach((continente,paisesDelContinente) ->
-                index.set(_repartirOcupacionDePaises(continente, paisesDelContinente, listaPaises, index.get())));
+                indiceJugador.set(_repartirOcupacionDePaises(continente, paisesDelContinente, listaPaises, indiceJugador.get())));
         return listaPaises;
     }
 
-    private int _repartirOcupacionDePaises(String continente,String[] paisesDelContinente,ArrayList<Pais> listaPaises,int i){
+    private int _repartirOcupacionDePaises(String continente,String[] paisesDelContinente,ArrayList<Pais> listaPaises,int indiceJugador){
     for (String nombrePais : paisesDelContinente){
-        Jugador unJugador = listaDeJugadores.get(i%this.cantidadDeJugadores);
+        Jugador unJugador = listaDeJugadores.get(indiceJugador%this.cantidadDeJugadores);
         Ejercito unEjercito = new Ejercito(1,unJugador);
         Pais nuevoPais = new Pais(nombrePais);
         nuevoPais.asignarEjercito(unEjercito);
         listaPaises.add(nuevoPais);
-        i++;
+        indiceJugador++;
         }
-    return i;
+    return indiceJugador;
     }
 
     public int obtenerCantidadDeJugadores(){

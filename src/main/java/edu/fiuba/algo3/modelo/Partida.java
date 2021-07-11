@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Partida {
@@ -10,7 +11,7 @@ public class Partida {
     // Debería haber una forma de agrupar en continentes, o nueva clase para chequear posible condición de victoria
 
     public Partida(ArrayList<Jugador> listaDeJugadores){
-        this.listaDeJugadores = listaDeJugadores;
+        this.listaDeJugadores = listaDeJugadores; //Limitar a 2-6 jugadores.
         cantidadDeJugadores = listaDeJugadores.size();
         //listaDeJugadores = crearJugadores();
         Map<String,String[]> listaDePaises = solicitarPaises();
@@ -75,29 +76,28 @@ public class Partida {
     }
 
     private void mezclar_paises (Map<String,String[]> continentes){
-        for (Map.Entry<String,String[]> entry : continentes.entrySet()){
-            String continente = entry.getKey(); //Posible uso futuro para "Objetivos"
-            String[] paisesDelContinente = entry.getValue();
-            Collections.shuffle(Arrays.asList(paisesDelContinente));
-            }
+        continentes.forEach((continente,paisesDelContinente) ->
+                Collections.shuffle(Arrays.asList(paisesDelContinente)));
         }
 
     private ArrayList<Pais> repartirOcupacionDePaises(Map<String,String[]> continentes){
         ArrayList<Pais> listaPaises = new ArrayList<>();
-        int i = 0;
-        for (Map.Entry<String,String[]> entry : continentes.entrySet()){
-            String continente = entry.getKey();
-            String[] paisesDelContinente = entry.getValue();
-            for (String nombrePais : paisesDelContinente){
-                Jugador unJugador = listaDeJugadores.get(i%cantidadDeJugadores);
-                Ejercito unEjercito = new Ejercito(1,unJugador);
-                Pais nuevoPais = new Pais(nombrePais);
-                nuevoPais.asignarEjercito(unEjercito);
-                listaPaises.add(nuevoPais);
-                i++;
-            }
-        }
+        AtomicInteger index = new AtomicInteger();
+        continentes.forEach((continente,paisesDelContinente) ->
+                index.set(_repartirOcupacionDePaises(continente, paisesDelContinente, listaPaises, index.get())));
         return listaPaises;
+    }
+
+    private int _repartirOcupacionDePaises(String continente,String[] paisesDelContinente,ArrayList<Pais> listaPaises,int i){
+    for (String nombrePais : paisesDelContinente){
+        Jugador unJugador = listaDeJugadores.get(i%this.cantidadDeJugadores);
+        Ejercito unEjercito = new Ejercito(1,unJugador);
+        Pais nuevoPais = new Pais(nombrePais);
+        nuevoPais.asignarEjercito(unEjercito);
+        listaPaises.add(nuevoPais);
+        i++;
+        }
+    return i;
     }
 
     public int obtenerCantidadDeJugadores(){

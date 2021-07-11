@@ -13,7 +13,9 @@ public class Partida {
         this.listaDeJugadores = listaDeJugadores;
         cantidadDeJugadores = listaDeJugadores.size();
         //listaDeJugadores = crearJugadores();
-        mapa = solicitarPaises(); // Falta dividir la funcionalidad en solicitar y ocupar
+        Map<String,String[]> listaDePaises = solicitarPaises();
+        mezclar_paises(listaDePaises);
+        mapa = repartirOcupacionDePaises(listaDePaises);
     }
 
 //    private int solicitarCantidadDeJugadores(){ //TEMP
@@ -36,21 +38,64 @@ public class Partida {
 //        return scanNombre.next();
 //    }
 
-    public ArrayList<Pais> solicitarPaises(){ //TEMP for testing
-        ArrayList<Pais> listaPaises = new ArrayList<>();
-        String[] america = new String[]{
-                "Argentina", "Brasil", "Uruguay", "Chile", "Peru", "Paraguay", "Bolivia",
-                "Ecuador", "Colombia", "Venezuela",
+
+    // Me basé en el mapa de TEG tradicional:
+    // https://pbs.twimg.com/media/EbYRjuBXkAUfado.png:large
+    public Map<String,String[]> solicitarPaises(){
+        String[] americaDelSur = new String[]{
+                "Argentina", "Brasil", "Uruguay", "Chile", "Peru", "Colombia"
         };
-        Collections.shuffle(Arrays.asList(america)); //Para que sea aleatorio mezclo la lista de países
+        String[] americaDelNorte = new String[]{
+                "México", "California", "Nueva York", "Oregón", "Alaska", "Yukón", "Canadá",
+                "Terranova", "Labrador", "Groenlandia"
+        };
+        String[] europa = new String[]{
+                "España", "Francia", "Alemania", "Gran Bretaña", "Islandia", "Italia",
+                "Polonia", "Rusia", "Suecia"
+        };
+        String[] asia = new String[]{
+                "Aral", "Tartaria", "Taymír", "Kamchatka", "Japón", "Siberia", "Mongolia",
+                "Irán", "Gobí", "China", "Malasia", "India", "Arabia", "Israel", "Turquía",
+        };
+        String[] oceania = new String[]{
+                "Australia","Borneo","Java", "Sumatra",
+        };
+        String[] africa = new String[]{
+                "Sahara", "Zaire", "Etiopía", "Egipto", "Sudáfrica", "Madagascar"
+        };
+
+        Map<String,String[]> continentes = new HashMap<>();
+        continentes.put("America del Sur", americaDelSur);
+        continentes.put("America del Norte", americaDelNorte);
+        continentes.put("Europa", europa);
+        continentes.put("Asia", asia);
+        continentes.put("Oceania", oceania);
+        continentes.put("Africa",africa);
+        return continentes;
+    }
+
+    private void mezclar_paises (Map<String,String[]> continentes){
+        for (Map.Entry<String,String[]> entry : continentes.entrySet()){
+            String continente = entry.getKey(); //Posible uso futuro para "Objetivos"
+            String[] paisesDelContinente = entry.getValue();
+            Collections.shuffle(Arrays.asList(paisesDelContinente));
+            }
+        }
+
+    private ArrayList<Pais> repartirOcupacionDePaises(Map<String,String[]> continentes){
+        ArrayList<Pais> listaPaises = new ArrayList<>();
         int i = 0;
-        for (String nombrePais : america){
-            Jugador unJugador = listaDeJugadores.get(i%this.cantidadDeJugadores);
-            Ejercito unEjercito = new Ejercito(1,unJugador);
-            Pais nuevoPais = new Pais(nombrePais);
-            nuevoPais.asignarEjercito(unEjercito);
-            listaPaises.add(nuevoPais);
-            i++;
+        for (Map.Entry<String,String[]> entry : continentes.entrySet()){
+            String continente = entry.getKey();
+            String[] paisesDelContinente = entry.getValue();
+            for (String nombrePais : paisesDelContinente){
+                Jugador unJugador = listaDeJugadores.get(i%cantidadDeJugadores);
+                Ejercito unEjercito = new Ejercito(1,unJugador);
+                Pais nuevoPais = new Pais(nombrePais);
+                nuevoPais.asignarEjercito(unEjercito);
+                listaPaises.add(nuevoPais);
+                i++;
+            }
         }
         return listaPaises;
     }
@@ -64,15 +109,4 @@ public class Partida {
     public ArrayList<Pais> obtenerlistaDePaises(){
         return mapa;
     }
-
-//    public void colocarEjercitosIniciales(){
-//        int i = 0;
-//        for (Pais pais : mapa) {
-//            Jugador unJugador = listaDeJugadores.get(i%this.cantidadDeJugadores);
-//            pais.asignarOcupanteInicial(unJugador);
-//            i++;
-//            }
-//    }
-
-
 }

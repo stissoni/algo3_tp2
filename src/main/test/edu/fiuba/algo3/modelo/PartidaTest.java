@@ -11,18 +11,19 @@ public class PartidaTest {
 
     Jugador jugador1;
     Jugador jugador2;
+    ArrayList<Jugador> listaDeJugadores;
 
     @BeforeEach
     public void setUp() {
         this.jugador1 = new Jugador("Santiago", 1);
         this.jugador2 = new Jugador("Ramiro", 2);
+        listaDeJugadores = new ArrayList<>();
+        listaDeJugadores.add(jugador1);
+        listaDeJugadores.add(jugador2);
     }
 
     @Test
     public void crearPartidaDe2JugadoresTiene2Jugadores(){
-        ArrayList<Jugador> listaDeJugadores = new ArrayList<>();
-        listaDeJugadores.add(jugador1);
-        listaDeJugadores.add(jugador2);
         Partida teg = new Partida(listaDeJugadores);
         Assertions.assertEquals(2,teg.obtenerCantidadDeJugadores());
         Assertions.assertEquals(jugador1, teg.obtenerListaDeJugadores().get(0));
@@ -30,9 +31,6 @@ public class PartidaTest {
     }
     @Test
     public void partidaDe2JugadoresTieneTodosLosPaisesAsignados(){
-        ArrayList<Jugador> listaDeJugadores = new ArrayList<>();
-        listaDeJugadores.add(jugador1);
-        listaDeJugadores.add(jugador2);
         Partida teg = new Partida(listaDeJugadores);
         ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
         for (Pais pais : listaDePaises){
@@ -42,11 +40,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void losPaisesSeAsignanAlAzarEntreLosJugadores(){
-        ArrayList<Jugador> listaDeJugadores = new ArrayList<>();
-        listaDeJugadores.add(jugador1);
-        listaDeJugadores.add(jugador2);
-
+    public void losPaisesSeAsignanAlAzarEntre2Jugadores(){
         Partida teg1 = new Partida(listaDeJugadores);
         Partida teg2 = new Partida(listaDeJugadores);
         ArrayList<Pais> listaDePaises1 = teg1.obtenerlistaDePaises();
@@ -57,16 +51,16 @@ public class PartidaTest {
         for (int i=0;i<cantidadPaises;i++){
             String nombrePaisTeg1 = listaDePaises1.get(i).obtenerNombrePais();
             String nombrePaisTeg2 = listaDePaises2.get(i).obtenerNombrePais();
-            if (!nombrePaisTeg1.equals(nombrePaisTeg2)) iguales = false ;
+            if (!nombrePaisTeg1.equals(nombrePaisTeg2)){
+                iguales = false ;
+                break;
+            }
         }
         Assertions.assertFalse(iguales);
     }
 
     @Test
     public void partidaDe2JugadoresTieneTodosLosPaisesAsignadosEquitativamente(){
-        ArrayList<Jugador> listaDeJugadores = new ArrayList<>();
-        listaDeJugadores.add(jugador1);
-        listaDeJugadores.add(jugador2);
         Partida teg = new Partida(listaDeJugadores);
         ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
         int paisesJugador1 = 0;
@@ -76,6 +70,103 @@ public class PartidaTest {
             else paisesJugador2 ++;
         }
         int resultado = paisesJugador1-paisesJugador2;
-        Assertions.assertTrue(resultado<=1);
+        Assertions.assertTrue(resultado<=1 && resultado>=-1);
+    }
+
+    @Test
+    public void partidaDe3JugadoresTiene3Jugadores(){
+        Jugador jugador3 = new Jugador("Mati", 3);
+        listaDeJugadores.add(jugador3);
+
+        Partida teg = new Partida(listaDeJugadores);
+        Assertions.assertEquals(3,teg.obtenerCantidadDeJugadores());
+        Assertions.assertEquals(jugador1, teg.obtenerListaDeJugadores().get(0));
+        Assertions.assertEquals(jugador2,teg.obtenerListaDeJugadores().get(1));
+        Assertions.assertEquals(jugador3,teg.obtenerListaDeJugadores().get(2));
+    }
+    @Test
+    public void partidaDe3JugadoresTieneTodosLosPaisesAsignados(){
+        Jugador jugador3 = new Jugador("Mati", 3);
+        listaDeJugadores.add(jugador3);
+        Partida teg = new Partida(listaDeJugadores);
+        ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
+        for (Pais pais : listaDePaises){
+            Ejercito ejercitoAsignado = pais.obtenerEjercito();
+            Assertions.assertEquals(1,ejercitoAsignado.obtenerNumeroTotalDeTropas());
+        }
+    }
+
+    @Test
+    public void losPaisesSeAsignanAlAzarEntre3Jugadores(){
+        Jugador jugador3 = new Jugador("Mati", 3);
+        listaDeJugadores.add(jugador3);
+        Partida teg1 = new Partida(listaDeJugadores);
+        Partida teg2 = new Partida(listaDeJugadores);
+        ArrayList<Pais> listaDePaises1 = teg1.obtenerlistaDePaises();
+        ArrayList<Pais> listaDePaises2 = teg2.obtenerlistaDePaises();
+        int cantidadPaises = teg1.obtenerlistaDePaises().size();
+        boolean iguales = true;
+
+        for (int i=0;i<cantidadPaises;i++){
+            String nombrePaisTeg1 = listaDePaises1.get(i).obtenerNombrePais();
+            String nombrePaisTeg2 = listaDePaises2.get(i).obtenerNombrePais();
+            if (!nombrePaisTeg1.equals(nombrePaisTeg2)){
+                iguales = false ;
+                break;
+            }
+        }
+        Assertions.assertFalse(iguales);
+    }
+
+    @Test
+    public void partidaDe3JugadoresTieneTodosLosPaisesAsignadosEquitativamente(){
+        Jugador jugador3 = new Jugador("Mati", 3);
+        listaDeJugadores.add(jugador3);
+        Partida teg = new Partida(listaDeJugadores);
+        ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
+        int paisesJugador1 = 0;
+        int paisesJugador2 = 0;
+        int paisesJugador3 = 0;
+        for (Pais pais : listaDePaises){
+            if (pais.obtenerJugadorEnControl() == jugador1) paisesJugador1 ++;
+            else if (pais.obtenerJugadorEnControl() == jugador2) paisesJugador2 ++;
+            else paisesJugador3++;
+        }
+        int promedioEsperadoRedondeado = listaDePaises.size()/ teg.obtenerCantidadDeJugadores();
+        int resultadoParcial = (paisesJugador1-paisesJugador2+paisesJugador3);
+        int resultado = promedioEsperadoRedondeado-resultadoParcial;
+        Assertions.assertTrue(resultado<=1 && resultado>=-1);
+    }
+
+    @Test
+    public void partidaDe6JugadoresTieneTodosLosPaisesAsignadosEquitativamente(){
+        Jugador jugador3 = new Jugador("Mati", 3);
+        listaDeJugadores.add(jugador3);
+        Jugador jugador4 = new Jugador("Julio", 4);
+        listaDeJugadores.add(jugador4);
+        Jugador jugador5 = new Jugador("Pablo", 5);
+        listaDeJugadores.add(jugador5);
+        Jugador jugador6 = new Jugador("Maia", 6);
+        listaDeJugadores.add(jugador6);
+
+        Partida teg = new Partida(listaDeJugadores);
+        ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
+        int paisesJugador1 = 0;
+        int paisesJugador2 = 0;
+        int paisesJugador3 = 0;
+        int paisesJugador4 = 0;
+        int paisesJugador5 = 0;
+        int paisesJugador6 = 0;
+        for (Pais pais : listaDePaises){
+            if (pais.obtenerJugadorEnControl() == jugador1) paisesJugador1 ++;
+            else if (pais.obtenerJugadorEnControl() == jugador2) paisesJugador2 ++;
+            else if (pais.obtenerJugadorEnControl() == jugador3) paisesJugador3 ++;
+            else if (pais.obtenerJugadorEnControl() == jugador4) paisesJugador4 ++;
+            else if (pais.obtenerJugadorEnControl() == jugador5) paisesJugador5 ++;
+            else paisesJugador6 ++;
+        }
+        int resultado = (paisesJugador1-paisesJugador2+paisesJugador3-
+                paisesJugador4+paisesJugador5-paisesJugador6);
+        Assertions.assertTrue(resultado<=1 && resultado>=-1);
     }
 }

@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.excepciones.VerticeNoExisteError;
+
 import java.util.*;
 
 public class Grafo {
@@ -15,27 +17,22 @@ public class Grafo {
         vertices.put(nombreVertice, new HashSet<String>());
     }
 
-    public void agregarArista(String nombreVertice, String otroNombreVertice) {
-        // if (!existeVertice(nombreVertice)) throw new VerticeNoExisteError(nombreVertice);
-        // if (!existeVertice(otroNombreVertice)) throw new VerticeNoExisteError(otroNombreVertice);
+    public void agregarArista(String nombreVertice, String otroNombreVertice) throws VerticeNoExisteError {
+        if (!existeVertice(nombreVertice)) throw new VerticeNoExisteError(nombreVertice);
+        if (!existeVertice(otroNombreVertice)) throw new VerticeNoExisteError(otroNombreVertice);
         if (nombreVertice.equals(otroNombreVertice)) return;
         vertices.get(nombreVertice).add(otroNombreVertice);
         vertices.get(otroNombreVertice).add(nombreVertice);
     }
 
-    public void eliminarArista(String nombreVertice, String otroNombreVertice) {
-        // si no existe alguna clave en el grafo --> exception.
-        vertices.get(nombreVertice).remove(otroNombreVertice);
-        vertices.get(otroNombreVertice).remove(nombreVertice);
-    }
-
-    public boolean estanUnidos(String nombreVertice, String otroNombreVertice) {
-        // si no existe alguna clave en el grafo --> exception.
+    public boolean estanUnidos(String nombreVertice, String otroNombreVertice) throws VerticeNoExisteError {
+        if (!existeVertice(nombreVertice)) throw new VerticeNoExisteError(nombreVertice);
+        if (!existeVertice(otroNombreVertice)) throw new VerticeNoExisteError(otroNombreVertice);
         return vertices.get(nombreVertice).contains(otroNombreVertice);
     }
 
-    public String[] obtenerAdyacentes(String nombreVertice) {
-        // si no existe alguna clave en el grafo --> exception.
+    public String[] obtenerAdyacentes(String nombreVertice) throws VerticeNoExisteError {
+        if (!existeVertice(nombreVertice)) throw new VerticeNoExisteError(nombreVertice);
         return vertices.get(nombreVertice).toArray(new String[0]);
     }
 

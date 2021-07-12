@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.excepciones.VerticeNoExisteError;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +28,7 @@ public class GrafoTest {
     }
 
     @Test
-    public void aristaEstreDosVerticesEstanUnidos() {
+    public void aristaEstreDosVerticesEstanUnidos() throws VerticeNoExisteError {
         grafo.agregarVertice("1");
         grafo.agregarVertice("2");
         grafo.agregarArista("1","2");
@@ -35,11 +36,9 @@ public class GrafoTest {
     }
 
     @Test
-    public void agregarYLuegoEliminarAristaNoEstanUnidos() {
+    public void dosVerticesSinAristaNoEstanUnidos() throws VerticeNoExisteError {
         grafo.agregarVertice("1");
         grafo.agregarVertice("2");
-        grafo.agregarArista("1","2");
-        grafo.eliminarArista("1","2");
         assertFalse(grafo.estanUnidos("1","2"));
     }
 
@@ -63,7 +62,7 @@ public class GrafoTest {
     }
 
     @Test
-    public void obtenerAdyacentesDevuelveUnArregloDelTamanoEsperado() {
+    public void obtenerAdyacentesDevuelveUnArregloDelTamanoEsperado() throws VerticeNoExisteError {
         grafo.agregarVertice("1");
         grafo.agregarVertice("2");
         grafo.agregarVertice("3");
@@ -75,4 +74,18 @@ public class GrafoTest {
         assertEquals(3, grafo.obtenerAdyacentes("1").length);
     }
 
+    @Test
+    public void agregarAristaAAlgunVerticeInexistenteLanzaError() {
+        assertThrows(VerticeNoExisteError.class, ()->grafo.agregarArista("1","2"));
+    }
+
+    @Test
+    public void preguntarSiVerticesQueNoExistenEstanUnidosLanzaError() {
+        assertThrows(VerticeNoExisteError.class, ()->grafo.estanUnidos("2","1"));
+    }
+
+    @Test
+    public void obtenerAdyacentesDeVerticeInexistenteLanzaError() {
+        assertThrows(VerticeNoExisteError.class, ()->grafo.obtenerAdyacentes("Arg"));
+    }
 }

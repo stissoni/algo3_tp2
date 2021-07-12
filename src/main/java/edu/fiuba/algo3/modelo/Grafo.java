@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.excepciones.VerticeNoExisteError;
-
 import java.util.*;
 
 public class Grafo {

@@ -2,83 +2,84 @@ package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class DadoTest {
     
     @Test
-    public void testNumeroDeDadoMayorA0(){
-        Dado unDado = new Dado();
-        unDado.tirarDado();
-
-        assertTrue(unDado.obtenerNumeroDeTirada() > 0);
+    public void testNumeroDeDadoMayorACero(){
+        Dado dado = new Dado();
+        assertTrue(dado.obtenerValor() > 0);
     }
 
     @Test
-    public void testNumeroDeDadoMenorA7(){
-        Dado unDado = new Dado();
-        unDado.tirarDado();
-
-        assertTrue(unDado.obtenerNumeroDeTirada() < 7);
+    public void testNumeroDeDadoMenorASiete(){
+        Dado dado = new Dado();
+        assertTrue(dado.obtenerValor() < 7);
     }
 
     @Test
-    public void testSePuedenOrdenarLosDados(){
-        Dado unDado = mock(Dado.class);
-        Dado otroDado = mock(Dado.class);
-
-        when(unDado.obtenerNumeroDeTirada()).thenReturn(6);
-        when(otroDado.obtenerNumeroDeTirada()).thenReturn(4);
-
-        when(unDado.compareTo(otroDado)).thenCallRealMethod();
-        when(otroDado.compareTo(unDado)).thenCallRealMethod();
-
-        ArrayList<Dado> dados = new ArrayList<Dado>();
-        dados.add(unDado);
-        dados.add(otroDado);
-        
-        Collections.sort(dados);
-
-        assertSame(otroDado, dados.get(0));
-        assertSame(unDado, dados.get(1));
+    public void testTirarDadoTieneValorValido(){
+        Dado dado = new Dado();
+        dado.tirar();
+        assertTrue(dado.obtenerValor() > 0 && dado.obtenerValor() < 7);
     }
 
-    public void testSePuedenOrdenarLosDadosDeMayorAMenor(){
-        Dado unDado = mock(Dado.class);
-        Dado otroDado = mock(Dado.class);
-
-        when(unDado.obtenerNumeroDeTirada()).thenReturn(3);
-        when(otroDado.obtenerNumeroDeTirada()).thenReturn(2);
-
-        when(unDado.compareTo(otroDado)).thenCallRealMethod();
-        when(otroDado.compareTo(unDado)).thenCallRealMethod();
-
-        ArrayList<Dado> dados = new ArrayList<Dado>();
-        dados.add(unDado);
-        dados.add(otroDado);
-        
-        Collections.sort(dados);
-        Collections.reverse(dados);
-
-        assertSame(unDado, dados.get(0));
-        assertSame(otroDado, dados.get(1));
-    }
-
-    @Test 
+    @Test
     public void testUnDadoEsMayorQueOtro(){
-        Dado unDado = mock(Dado.class);
-        Dado otroDado = mock(Dado.class);
-
-        when(unDado.obtenerNumeroDeTirada()).thenReturn(3);
-        when(otroDado.obtenerNumeroDeTirada()).thenReturn(2);
-
-        when(unDado.esMayorQue(otroDado)).thenCallRealMethod();
+        Dado unDado = new Dado(5);
+        Dado otroDado = new Dado(4);
 
         assertTrue(unDado.esMayorQue(otroDado));
+    }
+
+    @Test
+    public void testSePuedeCrearUnArrayListDeDados() {
+        int cantidad = 3;
+        ArrayList<Dado> dados = Dado.tirar(cantidad);
+        assertEquals(cantidad, dados.size());
+    }
+
+    @Test
+    public void testTirarVariosDadosEnArrayListEsValido() {
+        int cantidad = 10;
+        ArrayList<Dado> dados = Dado.tirar(cantidad);
+        boolean valorValido = true;
+        for (Dado dado: dados) {
+            valorValido = dado.obtenerValor() > 0 && dado.obtenerValor() < 7;
+            if (!valorValido) break;
+        }
+        assertTrue(valorValido);
+    }
+
+    private boolean arrayListDeDadosEstaOrdenadoDecrecientemente(ArrayList<Dado> dados) {
+        for (int i=0; i<(dados.size()-1); ++i){
+            if (dados.get(i+1).esMayorQue(dados.get(i))) return false;
+        }
+        return true;
+    }
+
+    @Test
+    public void testSePuedeOrdenarUnArrayListDeDadosDecrecientemente(){
+        int cantidad = 10;
+        ArrayList<Dado> dados = Dado.tirar(cantidad);
+
+        dados.sort(Collections.reverseOrder());
+
+        assertTrue(arrayListDeDadosEstaOrdenadoDecrecientemente(dados));
+    }
+
+    @Test
+    public void testVerSalidaDeTirarDados(){
+        int cantidad = 3;
+        ArrayList<Dado> dados = Dado.tirar(cantidad);
+
+        dados.sort(Collections.reverseOrder());
+
+        for (int i = 0; i < cantidad; ++i){
+            System.out.println(dados.get(i).obtenerValor());
+        }
     }
 }

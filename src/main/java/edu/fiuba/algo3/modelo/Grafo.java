@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.*;
 
 public class Grafo {
-    // Grafo no dirigido, no pesado.
+    // Grafo simple, no dirigido, no pesado.
     Map<String, Set<String>> vertices;
 
     public Grafo() {
@@ -11,13 +11,14 @@ public class Grafo {
     }
 
     public void agregarVertice(String nombreVertice) {
-        if (vertices.containsKey(nombreVertice)) return;
+        if (existeVertice(nombreVertice)) return;
         vertices.put(nombreVertice, new HashSet<String>());
     }
 
     public void agregarArista(String nombreVertice, String otroNombreVertice) {
         // if (!existeVertice(nombreVertice)) throw new VerticeNoExisteError(nombreVertice);
         // if (!existeVertice(otroNombreVertice)) throw new VerticeNoExisteError(otroNombreVertice);
+        if (nombreVertice.equals(otroNombreVertice)) return;
         vertices.get(nombreVertice).add(otroNombreVertice);
         vertices.get(otroNombreVertice).add(nombreVertice);
     }

@@ -1,0 +1,50 @@
+Argentina,America Del Sur,Uruguay,Chile,Peru,Brasil
+Chile,America Del Sur,Peru,Argentina,Australia
+Brasil,America Del Sur,Uruguay,Argentina,Peru,Colombia,Sahara
+Uruguay,America Del Sur,Argentina,Brasil
+Peru,America Del Sur,Chile,Argentina,Brasil,Colombia
+Colombia,America Del Sur,Brasil,Peru,Mexico
+Mexico,America Del Norte,Colombia,California
+California,America Del Norte,Mexico,Oregon,Nueva York
+Oregon,America Del Norte,California,Nueva York,Canada,Yukon,Alaska
+Alaska,America Del Norte,Oregon,Yukon,Kamchatka
+Yukon,America Del Norte,Alaska,Oregon,Canada
+Canada,America Del Norte,Yukon,Nueva York,Terranova,Oregon
+Nueva York,America Del Norte,California,Oregon,Canada,Terranova,Groenlandia
+Terranova,America Del Norte,Canada,Nueva York,Labrador
+Labrador,America Del Norte,Terranova,Groenlandia
+Groenlandia,America Del Norte,Labrador,Nueva York,Islandia
+Islandia,Europa,Groenlandia,Suecia,Gran Bretaña
+Gran Bretaña,Europa,Islandia,España,Alemania
+España,Europa,Gran Bretaña,Francia,Sahara
+Francia,Europa,España,Alemania,Italia
+Alemania,Europa,Francia,Italia,Gran Bretaña,Polonia
+Italia,Europa,Francia,Alemania
+Polonia,Europa,Alemania,Rusia,Egipto,Turquia
+Rusia,Europa,Polonia,Suecia,Aral,Iran,Turquia
+Suecia,Europa,Islandia,Rusia
+Sahara,Africa,Brasil,Zaire,Etiopia,España,Egipto
+Zaire,Africa,Sahara,Etiopia,Sudafrica,Madagascar
+Etiopia,Africa,Egipto,Sahara,Zaire,Sudafrica
+Egipto,Africa,Sahara,Etiopia,Madagascar,Israel,Turquia,Polonia
+Sudafrica,Africa,Zaire,Etiopia,
+Madagascar,Africa,Egipto,Zaire
+Sumatra,Oceania,India,Australia
+Java,Oceania,Australia
+Australia,Oceania,Sumatra,Borneo,Java,Chile
+Borneo,Oceania,Australia,Malasia
+Arabia,Asia,Israel,Turquia
+Israel,Asia,Arabia,Turquia,Egipto
+Turquia,Asia,Iran,Rusia,Polonia,Egipto,Israel,Arabia
+Iran,Asia,India,China,Gobi,Mongolia,Aral,Rusia,Turquia
+Aral,Asia,Tartaria,Siberia,Mongolia,Iran,Rusia
+Tartaria,Asia,Aral,Taymir,Siberia
+Taymir,Asia,Tartaria,Siberia
+Siberia,Asia,Aral,Tartaria,Taymir,Kamchatka,China,Mongolia
+Mongolia,Asia,Iran,Aral,Siberia,China,Gobi
+Gobi,Asia,Iran,Mongolia,China
+China,Asia,Malasia,India,Iran,Gobi,Mongolia,Siberia,Kamchatka,Japon
+India,Asia,Sumatra,Iran,China,Malasia
+Malasia,Asia,India,China,Borneo
+Japon,Asia,China,Kamchatka
+Kamchatka,Asia,Siberia,Alaska,Japon,China

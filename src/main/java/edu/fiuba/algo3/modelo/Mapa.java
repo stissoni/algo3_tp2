@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Mapa {
     Grafo grafoPaises;
@@ -40,5 +44,15 @@ public class Mapa {
 
     public boolean puedeAtacar(String unNombrePais, String otroNombrePais) {
         return grafoPaises.estanUnidos(unNombrePais,otroNombrePais);
+    }
+
+    public List<String> obtenerPaises() {
+        return Arrays.asList(grafoPaises.obtenerVertices());
+    }
+
+    public List<String> obtenerPaisesMezclados() {
+        List<String> paises = obtenerPaises();
+        Collections.shuffle(paises);
+        return paises;
     }
 }

@@ -50,4 +50,8 @@ public class Grafo {
     public boolean existeVertice(String nombreVertice) {
         return vertices.containsKey(nombreVertice);
     }
+
+    public String[] obtenerVertices() {
+        return vertices.keySet().toArray(new String[0]);
+    }
 }

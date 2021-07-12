@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MapaTest {
@@ -21,5 +23,12 @@ public class MapaTest {
     @Test
     public void paisesNoAdyacentesNoPuedenAtacarse() {
         assertFalse(mapa.puedeAtacar("Argentina","China"));
+    }
+
+    @Test
+    public void mezclarPaisesLosMezcla() {
+        List<String> paisesEnOrden = mapa.obtenerPaises();
+        List<String> paisesDesordenados = mapa.obtenerPaisesMezclados();
+        assertNotEquals(paisesEnOrden, paisesDesordenados);
     }
 }

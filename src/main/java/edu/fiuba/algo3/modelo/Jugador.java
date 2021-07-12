@@ -16,8 +16,4 @@ public class Jugador {
     public String obtenerNombre(){
         return this.nombreJugador;
     }
-
-    public boolean sonJugadoresDiferentes(Jugador otroJugador){
-        return (this.obtenerId() != otroJugador.obtenerId());
-    }
 }

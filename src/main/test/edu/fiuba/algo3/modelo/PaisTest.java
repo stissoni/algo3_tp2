@@ -1,13 +1,11 @@
 package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-
-import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
 
 public class PaisTest {
 
@@ -19,58 +17,27 @@ public class PaisTest {
     public void setUp() throws Exception {
         unJugador = new Jugador("Santiago", 1);
         unEjercito = new Ejercito(3, unJugador);
-        unPais = new Pais("Argentina");
-    }
-
-    @Test
-    public void testNombreDePais(){
-        assertEquals("Argentina", unPais.obtenerNombrePais());
+        unPais = new Pais("Argentina", unEjercito);
     }
 
     @Test
     public void testPaisEjercitoControlando(){
-        unPais.asignarEjercito(unEjercito);
         assertSame(unPais.obtenerEjercito(), unEjercito);
 
         Jugador otroJugador = new Jugador("Ramiro", 2);
         Ejercito otroEjercito = new Ejercito(2, otroJugador);
-        unPais.asignarEjercito(otroEjercito);
+        unPais.entregarControlAlEjercito(otroEjercito);
 
         assertSame(unPais.obtenerEjercito(), otroEjercito);
     }
 
     @Test
-    public void testJugadorEnControl(){
-        unPais.asignarEjercito(unEjercito);
+    public void testNombreJugadorEnControl(){
         assertSame(unJugador, unPais.obtenerJugadorEnControl());
     }
 
     @Test 
     public void testNumeroDeTropas(){
-        unPais.asignarEjercito(unEjercito);
         assertEquals(3, unPais.obtenerNumeroTotalDeTropas());
-    }
-
-    @Test
-    public void testReagruparEjercitoQuePerdioUnaBatalla() throws EjercitosDeJugadoresDiferentesException{
-        unPais.asignarEjercito(unEjercito);
-        Ejercito ejercitoQuePerdioBatalla = new Ejercito(1, unJugador);
-        unPais.reagruparEjercito(ejercitoQuePerdioBatalla);
-
-        assertEquals(4, unPais.obtenerNumeroTotalDeTropas());
-        assertSame(unJugador, unPais.obtenerJugadorEnControl());
-    }
-
-    @Test
-    public void testReagruparEjercitosDeJugadoresDiferentesEnPais() throws EjercitosDeJugadoresDiferentesException{
-        unPais.asignarEjercito(unEjercito);
-
-        Jugador otroJugador = new Jugador("Julio", 2);
-        Ejercito ejercitoDeOtroJugador = new Ejercito(2, otroJugador);
-
-        assertThrows(
-            EjercitosDeJugadoresDiferentesException.class,
-            ()->unPais.reagruparEjercito(ejercitoDeOtroJugador)
-        );
     }
 }

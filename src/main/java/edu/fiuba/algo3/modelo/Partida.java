@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.excepciones.LeerArchivoError;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -7,16 +9,52 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Partida {
     private final int cantidadDeJugadores;
     private final ArrayList<Jugador> listaDeJugadores;
-    private ArrayList<Pais> mapa;
+    private Mapa mapa;
+    private Map<String, Pais> paises;
     // Debería haber una forma de agrupar en continentes, o nueva clase para chequear posible condición de victoria
 
     public Partida(ArrayList<Jugador> listaDeJugadores){
         this.listaDeJugadores = listaDeJugadores; //Limitar a 2-6 jugadores.
         cantidadDeJugadores = listaDeJugadores.size();
         //listaDeJugadores = crearJugadores();
-        Map<String,String[]> listaDePaises = solicitarPaises();
-        mezclar_paises(listaDePaises);
-        mapa = repartirOcupacionDePaises(listaDePaises);
+        try {
+            mapa = new Mapa("src/main/java/edu/fiuba/algo3/modelo/paises.csv");
+            List<String> paisesMezclados = mapa.obtenerPaisesMezclados();
+            inizializarPaises(paisesMezclados);
+            repartirOcupacionDePaises(paisesMezclados);
+        } catch (LeerArchivoError leerArchivoError) {
+            leerArchivoError.printStackTrace();
+        }
+    }
+
+    private void inizializarPaises(List<String> listaPaises) {
+        paises = new HashMap<String,Pais>();
+        for (String nombrePais: listaPaises) {
+            paises.put(nombrePais, new Pais(nombrePais));
+        }
+    }
+
+    private void repartirOcupacionDePaises(List<String> listaPaisesMezcalda) {
+        int contador = 0;
+        for (String nombrePais: listaPaisesMezcalda) {
+            Jugador unJugador = listaDeJugadores.get(contador%cantidadDeJugadores);
+            paises.get(nombrePais).asignarEjercito(new Ejercito(1,unJugador));
+            contador++;
+        }
+    }
+
+    public int obtenerCantidadDeJugadores(){
+        return cantidadDeJugadores;
+    }
+    public ArrayList<Jugador> obtenerListaDeJugadores(){
+        return listaDeJugadores;
+    }
+    public List<String> obtenerlistaDePaises(){
+        return Arrays.asList(paises.keySet().toArray(new String[0]));
+    }
+
+    public Pais obtenerPais(String nombrePais) {
+        return paises.get(nombrePais);
     }
 
 //    private int solicitarCantidadDeJugadores(){ //TEMP
@@ -42,6 +80,7 @@ public class Partida {
 
     // Me basé en el mapa de TEG tradicional:
     // https://pbs.twimg.com/media/EbYRjuBXkAUfado.png:large
+    /*
     public Map<String,String[]> solicitarPaises(){
         String[] americaDelSur = new String[]{
                 "Argentina", "Brasil", "Uruguay", "Chile", "Peru", "Colombia"
@@ -74,39 +113,6 @@ public class Partida {
         continentes.put("Africa",africa);
         return continentes;
     }
+    */
 
-    private void mezclar_paises (Map<String,String[]> continentes){
-        continentes.forEach((continente,paisesDelContinente) ->
-                Collections.shuffle(Arrays.asList(paisesDelContinente)));
-        }
-
-    private ArrayList<Pais> repartirOcupacionDePaises(Map<String,String[]> continentes){
-        ArrayList<Pais> listaPaises = new ArrayList<>();
-        AtomicInteger indiceJugador = new AtomicInteger();
-        continentes.forEach((continente,paisesDelContinente) ->
-                indiceJugador.set(_repartirOcupacionDePaises(continente, paisesDelContinente, listaPaises, indiceJugador.get())));
-        return listaPaises;
-    }
-
-    private int _repartirOcupacionDePaises(String continente,String[] paisesDelContinente,ArrayList<Pais> listaPaises,int indiceJugador){
-    for (String nombrePais : paisesDelContinente){
-        Jugador unJugador = listaDeJugadores.get(indiceJugador%this.cantidadDeJugadores);
-        Ejercito unEjercito = new Ejercito(1,unJugador);
-        Pais nuevoPais = new Pais(nombrePais);
-        nuevoPais.asignarEjercito(unEjercito);
-        listaPaises.add(nuevoPais);
-        indiceJugador++;
-        }
-    return indiceJugador;
-    }
-
-    public int obtenerCantidadDeJugadores(){
-        return cantidadDeJugadores;
-    }
-    public ArrayList<Jugador> obtenerListaDeJugadores(){
-        return listaDeJugadores;
-    }
-    public ArrayList<Pais> obtenerlistaDePaises(){
-        return mapa;
-    }
 }

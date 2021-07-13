@@ -75,7 +75,22 @@ public class GrafoTest {
     }
 
     @Test
+    public void aristaDeVerticeConSiMismoNoEstaUnido() throws VerticeNoExisteError {
+        String arg = "Argentina";
+        grafo.agregarVertice(arg);
+        grafo.agregarArista(arg,arg);
+        assertFalse(grafo.estanUnidos(arg,arg));
+    }
+
+    @Test
     public void agregarAristaAAlgunVerticeInexistenteLanzaError() {
+        grafo.agregarVertice("1");;
+        assertThrows(VerticeNoExisteError.class, ()->grafo.agregarArista("1","2"));
+    }
+
+    @Test
+    public void agregarAristaDesdeVerticeInexstenteLanzaError() {
+        grafo.agregarVertice("2");
         assertThrows(VerticeNoExisteError.class, ()->grafo.agregarArista("1","2"));
     }
 

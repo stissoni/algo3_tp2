@@ -6,15 +6,14 @@ import java.util.*;
 
 public class Grafo {
     // Grafo simple, no dirigido, no pesado.
-    Map<String, Set<String>> vertices;
+    private Map<String, Set<String>> vertices;
 
     public Grafo() {
-        vertices = new HashMap<String, Set<String>>();
+        vertices = new HashMap<>();
     }
 
     public void agregarVertice(String nombreVertice) {
-        if (existeVertice(nombreVertice)) return;
-        vertices.put(nombreVertice, new HashSet<String>());
+        vertices.putIfAbsent(nombreVertice, new HashSet<>());
     }
 
     public void agregarArista(String nombreVertice, String otroNombreVertice) throws VerticeNoExisteError {

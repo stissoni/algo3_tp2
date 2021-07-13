@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class PartidaTest {
@@ -32,9 +35,9 @@ public class PartidaTest {
     @Test
     public void partidaDe2JugadoresTieneTodosLosPaisesAsignados(){
         Partida teg = new Partida(listaDeJugadores);
-        ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
-        for (Pais pais : listaDePaises){
-            Ejercito ejercitoAsignado = pais.obtenerEjercito();
+        List<String> listaDePaises = teg.obtenerlistaDePaises();
+        for (String pais : listaDePaises){
+            Ejercito ejercitoAsignado = teg.obtenerPais(pais).obtenerEjercito();
             Assertions.assertEquals(1,ejercitoAsignado.obtenerNumeroTotalDeTropas());
         }
     }
@@ -43,30 +46,19 @@ public class PartidaTest {
     public void losPaisesSeAsignanAlAzarEntre2Jugadores(){
         Partida teg1 = new Partida(listaDeJugadores);
         Partida teg2 = new Partida(listaDeJugadores);
-        ArrayList<Pais> listaDePaises1 = teg1.obtenerlistaDePaises();
-        ArrayList<Pais> listaDePaises2 = teg2.obtenerlistaDePaises();
-        int cantidadPaises = teg1.obtenerlistaDePaises().size();
-        boolean iguales = true;
-
-        for (int i=0;i<cantidadPaises;i++){
-            String nombrePaisTeg1 = listaDePaises1.get(i).obtenerNombrePais();
-            String nombrePaisTeg2 = listaDePaises2.get(i).obtenerNombrePais();
-            if (!nombrePaisTeg1.equals(nombrePaisTeg2)){
-                iguales = false ;
-                break;
-            }
-        }
-        Assertions.assertFalse(iguales);
+        List<String> listaDePaises1 = teg1.obtenerlistaDePaises();
+        List<String> listaDePaises2 = teg2.obtenerlistaDePaises();
+        assertNotEquals(listaDePaises1,listaDePaises2);
     }
 
     @Test
     public void partidaDe2JugadoresTieneTodosLosPaisesAsignadosEquitativamente(){
         Partida teg = new Partida(listaDeJugadores);
-        ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
+        List<String> listaDePaises = teg.obtenerlistaDePaises();
         int paisesJugador1 = 0;
         int paisesJugador2 = 0;
-        for (Pais pais : listaDePaises){
-            if (pais.obtenerJugadorEnControl() == jugador1) paisesJugador1 ++;
+        for (String pais : listaDePaises){
+            if (teg.obtenerPais(pais).obtenerJugadorEnControl() == jugador1) paisesJugador1 ++;
             else paisesJugador2 ++;
         }
         int resultado = paisesJugador1-paisesJugador2;
@@ -89,9 +81,9 @@ public class PartidaTest {
         Jugador jugador3 = new Jugador("Mati", 3);
         listaDeJugadores.add(jugador3);
         Partida teg = new Partida(listaDeJugadores);
-        ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
-        for (Pais pais : listaDePaises){
-            Ejercito ejercitoAsignado = pais.obtenerEjercito();
+        List<String> listaDePaises = teg.obtenerlistaDePaises();
+        for (String pais : listaDePaises){
+            Ejercito ejercitoAsignado = teg.obtenerPais(pais).obtenerEjercito();
             Assertions.assertEquals(1,ejercitoAsignado.obtenerNumeroTotalDeTropas());
         }
     }
@@ -102,20 +94,9 @@ public class PartidaTest {
         listaDeJugadores.add(jugador3);
         Partida teg1 = new Partida(listaDeJugadores);
         Partida teg2 = new Partida(listaDeJugadores);
-        ArrayList<Pais> listaDePaises1 = teg1.obtenerlistaDePaises();
-        ArrayList<Pais> listaDePaises2 = teg2.obtenerlistaDePaises();
-        int cantidadPaises = teg1.obtenerlistaDePaises().size();
-        boolean iguales = true;
-
-        for (int i=0;i<cantidadPaises;i++){
-            String nombrePaisTeg1 = listaDePaises1.get(i).obtenerNombrePais();
-            String nombrePaisTeg2 = listaDePaises2.get(i).obtenerNombrePais();
-            if (!nombrePaisTeg1.equals(nombrePaisTeg2)){
-                iguales = false ;
-                break;
-            }
-        }
-        Assertions.assertFalse(iguales);
+        List<String> listaDePaises1 = teg1.obtenerlistaDePaises();
+        List<String> listaDePaises2 = teg2.obtenerlistaDePaises();
+        assertNotEquals(listaDePaises1,listaDePaises2);
     }
 
     @Test
@@ -123,11 +104,12 @@ public class PartidaTest {
         Jugador jugador3 = new Jugador("Mati", 3);
         listaDeJugadores.add(jugador3);
         Partida teg = new Partida(listaDeJugadores);
-        ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
+        List<String> listaDePaises = teg.obtenerlistaDePaises();
         int paisesJugador1 = 0;
         int paisesJugador2 = 0;
         int paisesJugador3 = 0;
-        for (Pais pais : listaDePaises){
+        for (String nombrePais : listaDePaises){
+            Pais pais = teg.obtenerPais(nombrePais);
             if (pais.obtenerJugadorEnControl() == jugador1) paisesJugador1 ++;
             else if (pais.obtenerJugadorEnControl() == jugador2) paisesJugador2 ++;
             else paisesJugador3++;
@@ -150,14 +132,15 @@ public class PartidaTest {
         listaDeJugadores.add(jugador6);
 
         Partida teg = new Partida(listaDeJugadores);
-        ArrayList<Pais> listaDePaises = teg.obtenerlistaDePaises();
+        List<String> listaDePaises = teg.obtenerlistaDePaises();
         int paisesJugador1 = 0;
         int paisesJugador2 = 0;
         int paisesJugador3 = 0;
         int paisesJugador4 = 0;
         int paisesJugador5 = 0;
         int paisesJugador6 = 0;
-        for (Pais pais : listaDePaises){
+        for (String nombrePais : listaDePaises){
+            Pais pais = teg.obtenerPais(nombrePais);
             if (pais.obtenerJugadorEnControl() == jugador1) paisesJugador1 ++;
             else if (pais.obtenerJugadorEnControl() == jugador2) paisesJugador2 ++;
             else if (pais.obtenerJugadorEnControl() == jugador3) paisesJugador3 ++;

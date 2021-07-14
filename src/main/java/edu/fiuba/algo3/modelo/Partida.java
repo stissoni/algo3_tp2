@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Partida {
-    private final int cantidadDeJugadores;
     private final ArrayList<Jugador> listaDeJugadores;
     private Mapa mapa;
     private Map<String, Pais> paises;
@@ -15,26 +14,18 @@ public class Partida {
 
     public Partida(ArrayList<Jugador> listaDeJugadores){
         this.listaDeJugadores = listaDeJugadores; //Limitar a 2-6 jugadores.
-        cantidadDeJugadores = listaDeJugadores.size();
         //listaDeJugadores = crearJugadores();
         try {
             mapa = new Mapa("src/main/java/edu/fiuba/algo3/modelo/paises.csv");
-            List<String> paisesMezclados = mapa.obtenerPaisesMezclados();
-            inizializarPaises(paisesMezclados);
-            repartirOcupacionDePaises(paisesMezclados);
+//            List<String> paisesMezclados = mapa.obtenerPaisesMezclados();
+//            repartirOcupacionDePaises(paisesMezclados);
         } catch (LeerArchivoError leerArchivoError) {
             leerArchivoError.printStackTrace();
         }
     }
 
-    private void inizializarPaises(List<String> listaPaises) {
-        paises = new HashMap<String,Pais>();
-        for (String nombrePais: listaPaises) {
-            paises.put(nombrePais, new Pais(nombrePais));
-        }
-    }
-
     private void repartirOcupacionDePaises(List<String> listaPaisesMezcalda) {
+        int cantidadDeJugadores = listaDeJugadores.size();
         int contador = 0;
         for (String nombrePais: listaPaisesMezcalda) {
             Jugador unJugador = listaDeJugadores.get(contador%cantidadDeJugadores);
@@ -43,9 +34,12 @@ public class Partida {
         }
     }
 
-    public int obtenerCantidadDeJugadores(){
-        return cantidadDeJugadores;
+    /*Método de Prueba*/
+    public boolean partidaSeCreaConNJugadores(int n){
+        int cantJugadores = listaDeJugadores.size();
+        return cantJugadores == n;
     }
+
     public ArrayList<Jugador> obtenerListaDeJugadores(){
         return listaDeJugadores;
     }

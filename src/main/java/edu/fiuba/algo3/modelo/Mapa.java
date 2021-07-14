@@ -1,64 +1,53 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.excepciones.LeerArchivoError;
-import edu.fiuba.algo3.excepciones.PaisNoExisteError;
-import edu.fiuba.algo3.excepciones.VerticeNoExisteError;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Mapa {
-    Grafo grafoPaises;
+    ArrayList<Continente> listaDeContinentes;
 
     public Mapa(String ruta) throws LeerArchivoError {
-        grafoPaises = new Grafo();
+        listaDeContinentes = new ArrayList<>();
         cargarPaises(ruta);
     }
 
-    private void cargarPaises(String ruta) throws LeerArchivoError {
-        try {
-            BufferedReader csvReader = new BufferedReader(new FileReader(ruta));
-            String row;
-            while ((row = csvReader.readLine()) != null) {
-                String[] linea = row.split(",");
-                String paisOrigen = linea[0];
-                String continente = linea[1];
-                grafoPaises.agregarVertice(paisOrigen);
-                for (String pais: linea) {
-                    if (pais.equals(paisOrigen) || pais.equals(continente)) continue;
-                    grafoPaises.agregarVertice(pais);
-                    grafoPaises.agregarArista(paisOrigen,pais);
-                }
-            }
-            csvReader.close();
-        } catch (IOException | VerticeNoExisteError e) {
-            throw new LeerArchivoError(ruta);
+    private void cargarPaises(String rutaArchivoPaises) throws LeerArchivoError {
+        Fachada archivoParseado = new Fachada(rutaArchivoPaises,"csv");
+        archivoParseado.cargarPaises(this);
+    }
+
+    public void agregarContinente(Continente nuevoContinente) {
+        listaDeContinentes.add(nuevoContinente);
+    }
+
+    public Continente obtenerContinente(String nombreContinente) {
+        for (Continente continente : listaDeContinentes){
+            if (continente.tieneElMismoNombre(nombreContinente)) return continente;
         }
+        return null;
     }
 
-    public int size() {
-        return grafoPaises.size();
-    }
-
-    public boolean puedeAtacar(String unNombrePais, String otroNombrePais) throws PaisNoExisteError {
-        try {
-            return grafoPaises.estanUnidos(unNombrePais,otroNombrePais);
-        } catch (VerticeNoExisteError verticeNoExisteError) {
-            throw new PaisNoExisteError(unNombrePais);
+    public boolean continenteYaCreado(String nombreContinente) {
+        for (Continente continente : listaDeContinentes){
+            if (continente.tieneElMismoNombre(nombreContinente)) return true;
         }
+        return false;
     }
 
-    public List<String> obtenerPaises() {
-        return Arrays.asList(grafoPaises.obtenerVertices());
+
+    /** Método solo usado para prueba de mapa */
+    private int cantidadDePaisesCreados(){
+        int cantidad = 0;
+        for (Continente continente : listaDeContinentes){
+            cantidad+= continente.cantidadDePaises();
+        }
+        return cantidad;
     }
 
-    public List<String> obtenerPaisesMezclados() {
-        List<String> paises = obtenerPaises();
-        Collections.shuffle(paises);
-        return paises;
+    /** Método solo usado para prueba de mapa */
+    public boolean mapaFueCreadoCorrectamente(){
+        final int continentesEsperados = 6;
+        final int paisesEsperados = 50;
+        return listaDeContinentes.size() == continentesEsperados && cantidadDePaisesCreados() == paisesEsperados;
     }
 }

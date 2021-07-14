@@ -28,11 +28,10 @@ public class PartidaTest {
     @Test
     public void crearPartidaDe2JugadoresTiene2Jugadores(){
         Partida teg = new Partida(listaDeJugadores);
-        Assertions.assertEquals(2,teg.obtenerCantidadDeJugadores());
-        Assertions.assertEquals(jugador1, teg.obtenerListaDeJugadores().get(0));
-        Assertions.assertEquals(jugador2,teg.obtenerListaDeJugadores().get(1));
+        int n = 2;
+        Assertions.assertTrue(teg.partidaSeCreaConNJugadores(n));
     }
-    @Test
+/*    @Test
     public void partidaDe2JugadoresTieneTodosLosPaisesAsignados(){
         Partida teg = new Partida(listaDeJugadores);
         List<String> listaDePaises = teg.obtenerlistaDePaises();
@@ -151,5 +150,5 @@ public class PartidaTest {
         int resultado = (paisesJugador1-paisesJugador2+paisesJugador3-
                 paisesJugador4+paisesJugador5-paisesJugador6);
         Assertions.assertTrue(resultado<=1 && resultado>=-1);
-    }
+    }*/
 }

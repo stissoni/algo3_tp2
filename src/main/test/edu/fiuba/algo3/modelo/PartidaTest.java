@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void crearPartidaDe2JugadoresTiene2Jugadores(){
+    public void crearPartidaDe2JugadoresTiene2Jugadores() {
         Partida teg = new Partida(listaDeJugadores);
         int n = 2;
         Assertions.assertTrue(teg.partidaSeCreaConNJugadores(n));

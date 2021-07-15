@@ -21,4 +21,11 @@ public class Continente {
     public int cantidadDePaises() {
         return listaDePaises.size();
     }
+
+    public Pais buscarPais(String nombrePais) {
+        for (Pais pais : listaDePaises){
+            if(pais.tieneElMismoNombre(nombrePais)) return pais;
+        }
+        return null;
+    }
 }

@@ -1,37 +1,50 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.excepciones.LeerArchivoError;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Mapa {
     ArrayList<Continente> listaDeContinentes;
 
-    public Mapa(String ruta) throws LeerArchivoError {
+    public Mapa(String ruta) {
         listaDeContinentes = new ArrayList<>();
         cargarPaises(ruta);
     }
 
-    private void cargarPaises(String rutaArchivoPaises) throws LeerArchivoError {
-        Fachada archivoParseado = new Fachada(rutaArchivoPaises,"csv");
-        archivoParseado.cargarPaises(this);
+    /**Carga los paises del archivo parseado y luego asigna sus limítrofes*/
+    private void cargarPaises(String rutaArchivoPaises) {
+        MapaFachada facade = new MapaFachada(this);
+        facade.parsearArchivo(rutaArchivoPaises,"csv");
+        facade.cargarPaises();
+        facade.asignarPaisesLimitrofes();
     }
 
-    public void agregarContinente(Continente nuevoContinente) {
+
+//    public void repartirOcupacionDePaises(ArrayList<Jugador> listaDeJugadores) {
+//        facade.repartirOcupacionDePaises(listaDeJugadores,this);
+//    }
+
+    /**Agrega un continente al mapa*/
+    void agregarContinente(Continente nuevoContinente) {
         listaDeContinentes.add(nuevoContinente);
     }
 
-    public Continente obtenerContinente(String nombreContinente) {
+    /**Devuelve un continente del mapa que tenga el nombre pasado por parámetro, o null si no existe*/
+    public Continente buscarContinente(String nombreContinente) {
         for (Continente continente : listaDeContinentes){
             if (continente.tieneElMismoNombre(nombreContinente)) return continente;
         }
         return null;
     }
 
-    public boolean continenteYaCreado(String nombreContinente) {
+    /**Devuelve un pais del mapa que tenga el nombre pasado por parámetro, o null si no existe*/
+    public Pais buscarPais(String nombrePais) {
+        Pais pais = null;
         for (Continente continente : listaDeContinentes){
-            if (continente.tieneElMismoNombre(nombreContinente)) return true;
+            pais = continente.buscarPais(nombrePais);
+            if (pais != null) break;
         }
-        return false;
+        return pais;
     }
 
 

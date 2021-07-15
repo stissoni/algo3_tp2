@@ -2,12 +2,16 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 
+import java.util.ArrayList;
+
 public class Pais {
     private String nombrePais;
     private Ejercito ejercitoEnControl;
+    private ArrayList<Pais> limitrofes;
 
     public Pais(String nombrePais){
         this.nombrePais = nombrePais;
+        limitrofes = new ArrayList<>();
     }
 
     public Ejercito obtenerEjercito(){
@@ -20,6 +24,10 @@ public class Pais {
 
     public int obtenerNumeroTotalDeTropas(){
         return this.ejercitoEnControl.obtenerNumeroTotalDeTropas();
+    }
+
+    public void agregarPaisLimitrofe(Pais unPais){
+        if (!limitrofes.contains(unPais)) limitrofes.add(unPais);
     }
 
     public Jugador obtenerJugadorEnControl(){
@@ -36,5 +44,9 @@ public class Pais {
 
     public boolean suEjercitoFueVencido(){
         return this.ejercitoEnControl.obtenerNumeroTotalDeTropas() == 0;
+    }
+
+    public boolean tieneElMismoNombre(String nombrePais) {
+        return nombrePais.equals(this.nombrePais);
     }
 }

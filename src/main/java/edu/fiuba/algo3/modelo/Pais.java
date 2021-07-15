@@ -49,4 +49,14 @@ public class Pais {
     public boolean tieneElMismoNombre(String nombrePais) {
         return nombrePais.equals(this.nombrePais);
     }
+
+    public void ocuparPor(Jugador unJugador) {
+        int numeroDeTropasInicial = 1;
+        ejercitoEnControl = new Ejercito(numeroDeTropasInicial,unJugador);
+    }
+
+    /**Metodo de prueba unicamente*/
+    public boolean estaOcupadoPor(Jugador unJugador) {
+        return ejercitoEnControl.perteneceA(unJugador);
+    }
 }

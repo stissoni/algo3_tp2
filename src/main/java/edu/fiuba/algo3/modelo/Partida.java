@@ -1,23 +1,23 @@
 package edu.fiuba.algo3.modelo;
 
-import java.io.FileNotFoundException;
-import java.util.*;
-
-
 public class Partida {
-    private final ArrayList<Jugador> listaDeJugadores;
-    private Mapa mapa;
+    private final Jugadores listaDeJugadores;
+    private final Mapa mapa;
 
-    public Partida(ArrayList<Jugador> listaDeJugadores) {
+    public Partida(Jugadores listaDeJugadores) {
         this.listaDeJugadores = listaDeJugadores; //Limitar a 2-6 jugadores.
-        //listaDeJugadores = crearJugadores();
+        listaDeJugadores.mezclarJugadores();
         mapa = new Mapa("src/main/java/edu/fiuba/algo3/modelo/paises.csv");
-//        mapa.repartirOcupacionDePaises(listaDeJugadores);
+        mapa.repartirOcupacionDePaises(listaDeJugadores);
     }
 
-    /*Método de Prueba*/
+    /**Método solo usado para prueba*/
     public boolean partidaSeCreaConNJugadores(int n){
-        int cantJugadores = listaDeJugadores.size();
-        return cantJugadores == n;
+        return listaDeJugadores.cantidadDeJugadores() == n;
+    }
+
+    /**Método solo usado para prueba*/
+    public boolean mapaFueOcupadoCorrectamente(){
+        return mapa.mapaFueOcupadoCorrectamente(listaDeJugadores);
     }
 }

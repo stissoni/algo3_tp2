@@ -28,4 +28,20 @@ public class Continente {
         }
         return null;
     }
+
+    public void repartirOcupacionDePaises(Jugadores listaDeJugadores) {
+        listaDePaises.forEach(pais -> {
+            Jugador unJugadorOcupante = listaDeJugadores.devolverUnJugadorParaAsignar();
+            pais.ocuparPor(unJugadorOcupante);
+        });
+    }
+
+    /**Metodo solo usado para prueba*/
+    public int contarPaisesAsignadosA(Jugador unJugador) {
+        int cantidadPaisesAsignados = 0;
+        for (Pais pais : listaDePaises){
+            if (pais.estaOcupadoPor(unJugador)) cantidadPaisesAsignados++;
+        }
+        return cantidadPaisesAsignados;
+    }
 }

@@ -51,4 +51,8 @@ public class Ejercito {
         }
         this.numeroDeTropas = this.numeroDeTropas + otroEjercito.obtenerNumeroTotalDeTropas();
     }
+
+    public boolean perteneceA(Jugador unJugador) {
+        return jugador.equals(unJugador);
+    }
 }

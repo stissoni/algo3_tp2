@@ -30,11 +30,20 @@ public class Pais {
         return this.nombrePais;
     }
 
+    public void reducirTropas(int numeroDeTropas) throws Throwable{
+        this.ejercitoEnControl.reducirTropas(numeroDeTropas);
+    }
+
     public void reagruparEjercito(Ejercito otroEjercito) throws EjercitosDeJugadoresDiferentesException{
         this.ejercitoEnControl.reagruparEjercito(otroEjercito);
     }
 
     public boolean suEjercitoFueVencido(){
         return this.ejercitoEnControl.obtenerNumeroTotalDeTropas() == 0;
+    }
+
+    public Ejercito ejercitoParaAtacar(int numeroDeTropas) throws Throwable{
+        this.reducirTropas(numeroDeTropas);
+        return new Ejercito(numeroDeTropas, this.obtenerJugadorEnControl());
     }
 }

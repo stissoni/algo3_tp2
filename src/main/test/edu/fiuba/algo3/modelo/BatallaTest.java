@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,36 +21,7 @@ public class BatallaTest {
     }
 
     @Test
-    public void testAsignarDadosLosOrdenaPorValorDescendente(){
-        // Los dados que le salieron al atacante.
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
-        Dado dado = new Dado(6);
-        Dado otroDado = new Dado(1);
-        dadosAtacante.add(dado);
-        dadosAtacante.add(otroDado);
-
-        // Los dados del defensor.
-        ArrayList<Dado> dadosDefensor = new ArrayList<>();
-        Dado dadoDefensor = new Dado(6);
-        Dado dadoDefensor2 = new Dado(2);
-        dadosDefensor.add(dadoDefensor);
-        dadosDefensor.add(dadoDefensor2);
-
-        Batalla unaBatallaEpica = new Batalla();
-        unaBatallaEpica.asignarDados(dadosAtacante,dadosDefensor);
-        unaBatallaEpica.asignarNumeroDadosAComparar();
-
-        assertEquals(2,unaBatallaEpica.obtenerNumeroDadosAComparar());
-        
-        assertEquals(6,unaBatallaEpica.obtenerDadosAtacante().get(0).obtenerValor());
-        assertEquals(1,unaBatallaEpica.obtenerDadosAtacante().get(1).obtenerValor());
-        
-        assertEquals(6,unaBatallaEpica.obtenerDadosDefensor().get(0).obtenerValor());
-        assertEquals(2,unaBatallaEpica.obtenerDadosDefensor().get(1).obtenerValor());
-    }
-
-    @Test
-    public void testLuchaEntrePaises() throws EjercitoYaVencidoException{
+    public void testLuchaEntreEjercitos() throws EjercitoYaVencidoException{
         ArrayList<Dado> dadosAtacante = new ArrayList<>();
         Dado dado = new Dado(5);
         Dado otroDado = new Dado(4);
@@ -73,21 +43,14 @@ public class BatallaTest {
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-
-        assertSame(ejercitoAtacante, unaBatallaEpica.obtenerEjercitoAtacante());
-        assertSame(ejercitoDefensor, unaBatallaEpica.obtenerEjercitoDefensor());
-
-        unaBatallaEpica.asignarDados(dadosAtacante, dadosDefensor);
-        unaBatallaEpica.asignarNumeroDadosAComparar();
-
-        unaBatallaEpica.luchar();
+        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
 
         assertEquals(2, ejercitoAtacante.obtenerNumeroTotalDeTropas());
         assertEquals(1, ejercitoDefensor.obtenerNumeroTotalDeTropas());
     }
     
     @Test
-    public void testLuchaEntrePaisesConVictoriaDelAtacante() throws EjercitoYaVencidoException{
+    public void testLuchaEntreEjercitosConVictoriaDelAtacante() throws EjercitoYaVencidoException{
         ArrayList<Dado> dadosAtacante = new ArrayList<>();
         Dado dado = new Dado(6);
         Dado otroDado = new Dado(5);
@@ -109,17 +72,15 @@ public class BatallaTest {
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-        unaBatallaEpica.asignarDados(dadosAtacante,dadosDefensor);
-        unaBatallaEpica.asignarNumeroDadosAComparar();
 
-        unaBatallaEpica.luchar();
+        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
 
         assertEquals(3, ejercitoAtacante.obtenerNumeroTotalDeTropas());
         assertEquals(0, ejercitoDefensor.obtenerNumeroTotalDeTropas());
     }
 
     @Test
-    public void testLuchaEntrePaisesConVictoriaDelAtacanteConDiferenciaDeTropas() throws EjercitoYaVencidoException{
+    public void testLuchaEntreEjercitosConVictoriaDelAtacanteConDiferenciaDeTropas() throws EjercitoYaVencidoException{
         ArrayList<Dado> dadosAtacante = new ArrayList<>();
         Dado dado = new Dado(6);
         Dado otroDado = new Dado(5);
@@ -137,19 +98,19 @@ public class BatallaTest {
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-        unaBatallaEpica.asignarDados(dadosAtacante,dadosDefensor);
-        unaBatallaEpica.asignarNumeroDadosAComparar();
 
-        unaBatallaEpica.luchar();
+        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
 
         assertEquals(3, ejercitoAtacante.obtenerNumeroTotalDeTropas());
         assertEquals(0, ejercitoDefensor.obtenerNumeroTotalDeTropas());
     }
 
     @Test
-    public void testLuchaEntrePaisesConEmpateDeDadosConDiferenciaDeTropas() throws EjercitoYaVencidoException{
-        Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
-        Ejercito ejercitoDefensor = new Ejercito(1, jugador2);
+    public void testLuchaEntreEjercitosConEmpateDeDadosConDiferenciaDeTropas() throws EjercitoYaVencidoException{
+        int numeroTropasAtacante = 3;
+        int numeroTropasDefensor = 1;
+        Ejercito ejercitoAtacante = new Ejercito(numeroTropasAtacante, jugador1);
+        Ejercito ejercitoDefensor = new Ejercito(numeroTropasDefensor, jugador2);
         
         // Los dados que le salieron al atacante.
         ArrayList<Dado> dadosAtacante = new ArrayList<>();
@@ -167,10 +128,8 @@ public class BatallaTest {
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-        unaBatallaEpica.asignarDados(dadosAtacante,dadosDefensor);
-        unaBatallaEpica.asignarNumeroDadosAComparar();
 
-        unaBatallaEpica.luchar();
+        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
 
         assertEquals(2, ejercitoAtacante.obtenerNumeroTotalDeTropas());
         assertEquals(1, ejercitoDefensor.obtenerNumeroTotalDeTropas());

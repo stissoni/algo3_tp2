@@ -1,14 +1,18 @@
 @startuml
 
-class Batalla
-class Ejercito {
-    -numeroDeTropas: int
-    +reducirTropas()
-    +aumentarTropas()
-    +obtenerNumeroTotalDeTropas(): int
-    +atacar(cantidadDeTropas, otroEjercito)
+class Mapa {
+    -paises: HashMap
+    {static}+Mapa(ruta: String)
+    +inicializar(jugadores: Jugadores[])
+    +obtenerPais(nombre: String)
+    +size()
 }
 
-Batalla .. Ejercito
+class CargadorDePaises {
+    {static}+cargarPaisesConRuta(ruta: String)
+    -cargarCsv(ruta: String)
+}
+
+Mapa --> CargadorDePaises
 
 @enduml

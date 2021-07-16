@@ -2,12 +2,20 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 
+import java.util.ArrayList;
+
 public class Pais {
     private String nombrePais;
     private Ejercito ejercitoEnControl;
+    private ArrayList<Pais> vecinos;
 
     public Pais(String nombrePais){
         this.nombrePais = nombrePais;
+        this.vecinos = new ArrayList<>();
+    }
+
+    public void agregarVecino(Pais pais) {
+        vecinos.add(pais);
     }
 
     public Ejercito obtenerEjercito(){

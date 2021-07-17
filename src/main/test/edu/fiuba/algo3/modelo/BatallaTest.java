@@ -17,8 +17,8 @@ public class BatallaTest {
 
     @BeforeEach
     public void setUp() {
-        this.jugador1 = new Jugador("Santiago", 1);
-        this.jugador2 = new Jugador("Ramiro", 2);
+        this.jugador1 = new Jugador("Santiago");
+        this.jugador2 = new Jugador("Ramiro");
     }
 
     @Test

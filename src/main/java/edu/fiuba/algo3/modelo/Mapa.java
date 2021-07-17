@@ -68,7 +68,7 @@ public class Mapa {
         final int asignadosPorJugador = 50 / cantidadDeJugadores;
         for (int i = 0; i < cantidadDeJugadores; i++) {
             int paisesAsignados = 0;
-            Jugador unJugador = listaDeJugadores.devolverUnJugadorParaAsignar();
+            Jugador unJugador = listaDeJugadores.siguienteJugador();
             for (Continente continente : listaDeContinentes) {
                 paisesAsignados += continente.contarPaisesAsignadosA(unJugador);
             }

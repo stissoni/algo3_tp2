@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.excepciones.NumeroDeTropasInsuficienteException;
-import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
 
 public class Ejercito {
@@ -22,6 +21,7 @@ public class Ejercito {
 
     public void aumentarTropas(int numeroDeTropasASumar){
         this.numeroDeTropas = this.numeroDeTropas + numeroDeTropasASumar;
+        jugador.reducirtropasDisponibles(numeroDeTropasASumar);
     }
 
     public int obtenerNumeroTotalDeTropas(){
@@ -45,14 +45,19 @@ public class Ejercito {
         elPaisAControlar.asignarEjercito(this);
     }
 
-    public void reagruparEjercito(Ejercito otroEjercito) throws EjercitosDeJugadoresDiferentesException{
-        if (this.obtenerJugador().sonJugadoresDiferentes(otroEjercito.obtenerJugador())){
-            throw new EjercitosDeJugadoresDiferentesException("Los ejercitos son de jugadores diferentes");
-        }
+    public void reagruparEjercito(Ejercito otroEjercito) {
         this.numeroDeTropas = this.numeroDeTropas + otroEjercito.obtenerNumeroTotalDeTropas();
     }
 
     public boolean perteneceA(Jugador unJugador) {
         return jugador.equals(unJugador);
+    }
+
+    public void obtenerControlDelPais(Pais pais) {
+        jugador.agregarPaisOcupado(pais);
+    }
+
+    public void entregarControlDelPais(Pais pais) {
+        jugador.quitarPaisPerdido(pais);
     }
 }

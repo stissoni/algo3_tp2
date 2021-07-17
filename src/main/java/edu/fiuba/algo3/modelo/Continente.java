@@ -31,8 +31,9 @@ public class Continente {
 
     public void repartirOcupacionDePaises(Jugadores listaDeJugadores) {
         listaDePaises.forEach(pais -> {
-            Jugador unJugadorOcupante = listaDeJugadores.devolverUnJugadorParaAsignar();
+            Jugador unJugadorOcupante = listaDeJugadores.siguienteJugador();
             pais.ocuparPor(unJugadorOcupante);
+            unJugadorOcupante.agregarPaisOcupado(pais);
         });
     }
 
@@ -43,5 +44,14 @@ public class Continente {
             if (pais.estaOcupadoPor(unJugador)) cantidadPaisesAsignados++;
         }
         return cantidadPaisesAsignados;
+    }
+
+    /**Metodo solo usado para prueba
+     * @param unJugador Jugador que va a controlar el continente*/
+    public void controlarPor(Jugador unJugador) {
+        for (Pais pais : listaDePaises){
+            Ejercito ejercitoConquistador = new Ejercito(1,unJugador);
+            pais.ganarControlPor(ejercitoConquistador);
+        }
     }
 }

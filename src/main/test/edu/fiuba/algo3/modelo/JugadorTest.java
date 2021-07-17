@@ -1,16 +1,26 @@
 package edu.fiuba.algo3.modelo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class JugadorTest {
-    
-    @Test
-    public void testNombreYJugadorId(){
-        Jugador unJugador = new Jugador("Santiago", 1);
+    Jugador unJugador;
 
-        assertEquals("Santiago", unJugador.obtenerNombre());
-        assertEquals(1, unJugador.obtenerId());
+    @BeforeEach
+    public void SetUp(){
+        unJugador = new Jugador("Santiago");
+    }
+
+    @Test
+    public void jugadorSeCreaConNombreCorrecto(){
+        assertEquals("Santiago", unJugador.getNombreJugador());
+    }
+
+    @Test
+    public void jugadorNuevoTieneTropasDisponibles(){
+        assertTrue(unJugador.tieneTropasDisponibles());
     }
 }

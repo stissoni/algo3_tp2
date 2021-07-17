@@ -16,8 +16,8 @@ public class PaisTest {
     private Jugador unJugador;
 
     @BeforeEach                                         
-    public void setUp() throws Exception {
-        unJugador = new Jugador("Santiago", 1);
+    public void setUp() {
+        unJugador = new Jugador("Santiago");
         unEjercito = new Ejercito(3, unJugador);
         unPais = new Pais("Argentina");
     }
@@ -32,7 +32,7 @@ public class PaisTest {
         unPais.asignarEjercito(unEjercito);
         assertSame(unPais.obtenerEjercito(), unEjercito);
 
-        Jugador otroJugador = new Jugador("Ramiro", 2);
+        Jugador otroJugador = new Jugador("Ramiro");
         Ejercito otroEjercito = new Ejercito(2, otroJugador);
         unPais.asignarEjercito(otroEjercito);
 
@@ -59,18 +59,5 @@ public class PaisTest {
 
         assertEquals(4, unPais.obtenerNumeroTotalDeTropas());
         assertSame(unJugador, unPais.obtenerJugadorEnControl());
-    }
-
-    @Test
-    public void testReagruparEjercitosDeJugadoresDiferentesEnPais() throws EjercitosDeJugadoresDiferentesException{
-        unPais.asignarEjercito(unEjercito);
-
-        Jugador otroJugador = new Jugador("Julio", 2);
-        Ejercito ejercitoDeOtroJugador = new Ejercito(2, otroJugador);
-
-        assertThrows(
-            EjercitosDeJugadoresDiferentesException.class,
-            ()->unPais.reagruparEjercito(ejercitoDeOtroJugador)
-        );
     }
 }

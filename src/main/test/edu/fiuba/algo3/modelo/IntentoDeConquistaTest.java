@@ -13,9 +13,9 @@ public class IntentoDeConquistaTest {
     private Jugador jugadorDefensor;
 
     @BeforeEach
-    public void setUp() throws Exception {
-        this.jugadorAtacante = new Jugador("Santiago", 1);
-        this.jugadorDefensor = new Jugador("Ramiro", 2);
+    public void setUp() {
+        this.jugadorAtacante = new Jugador("Santiago");
+        this.jugadorDefensor = new Jugador("Ramiro");
     }
     @Test
     public void testIntentarConquistaDePaisConVictoriaAtacante() throws Throwable{

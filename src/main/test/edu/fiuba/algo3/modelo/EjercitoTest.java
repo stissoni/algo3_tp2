@@ -16,8 +16,8 @@ public class EjercitoTest {
     private Jugador unJugador;
 
     @BeforeEach                                         
-    public void setUp() throws Exception {
-        unJugador = new Jugador("Santiago", 1);
+    public void setUp(){
+        unJugador = new Jugador("Santiago");
         ejercito = new Ejercito(3, unJugador);
     }
 
@@ -49,7 +49,7 @@ public class EjercitoTest {
 
     @Test
     public void testVencerUnaVezEjercitoRival() throws EjercitoYaVencidoException{
-        Jugador otroJugador = new Jugador("Matias", 2);
+        Jugador otroJugador = new Jugador("Matias");
         Ejercito otroEjercito = new Ejercito(2, otroJugador);
 
         ejercito.vencer(otroEjercito);
@@ -61,20 +61,13 @@ public class EjercitoTest {
     @Test
     public void testEjercitoTomaControlDeUnPais(){
         Pais unPais = new Pais("Italia");
-        Ejercito unEjercito = new Ejercito(1, new Jugador("Ramiro", 3));
+        Ejercito unEjercito = new Ejercito(1, new Jugador("Ramiro"));
 
         unEjercito.controlarPais(unPais);
 
         assertSame(unEjercito, unPais.obtenerEjercito());
     }
 
-    @Test
-    public void testReagruparEjercitosDeJugadoresDiferentesLanzaExcepcion() throws EjercitosDeJugadoresDiferentesException{
-        Jugador otroJugador = new Jugador("Matias", 2);
-        Ejercito otroEjercito = new Ejercito(2, otroJugador);
-
-        assertThrows(EjercitosDeJugadoresDiferentesException.class, ()->ejercito.reagruparEjercito(otroEjercito));
-    }
 
     @Test
     public void testRestarTropasDeEjercitoDe0TropasLanzaExcepcion() throws NumeroDeTropasInsuficienteException{
@@ -85,7 +78,7 @@ public class EjercitoTest {
 
     @Test
     public void testVencerEjercitoCon0TropasLanzaExcepcion() throws EjercitoYaVencidoException{
-        Jugador otroJugador = new Jugador("Matias", 2);
+        Jugador otroJugador = new Jugador("Matias");
         Ejercito otroEjercito = new Ejercito(1, otroJugador);
 
         ejercito.vencer(otroEjercito);

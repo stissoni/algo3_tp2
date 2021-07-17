@@ -56,7 +56,19 @@ public class Pais {
     }
 
     /**Metodo de prueba unicamente*/
+    public void ganarControlPor(Ejercito unEjercitoVictorioso) {
+        Ejercito ejercitoPerdedor = ejercitoEnControl;
+        ejercitoPerdedor.entregarControlDelPais(this);
+        ejercitoEnControl = unEjercitoVictorioso;
+        unEjercitoVictorioso.obtenerControlDelPais(this);
+    }
+
+    /**Metodo de prueba unicamente*/
     public boolean estaOcupadoPor(Jugador unJugador) {
         return ejercitoEnControl.perteneceA(unJugador);
+    }
+
+    public void aumentarTropas(int tropasADistribuir) {
+        ejercitoEnControl.aumentarTropas(tropasADistribuir);
     }
 }

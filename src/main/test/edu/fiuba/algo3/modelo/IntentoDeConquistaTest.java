@@ -47,15 +47,13 @@ public class IntentoDeConquistaTest {
 
         Batalla unaBatalla = new Batalla();
         unaBatalla.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-        unaBatalla.asignarDados(dadosAtacante, dadosDefensor);
-        unaBatalla.asignarNumeroDadosAComparar();
 
         IntentoDeConquista intentarConquista = new IntentoDeConquista(
             paisAtacante,
             paisDefensor
         );
         intentarConquista.asignarBatalla(unaBatalla);
-        intentarConquista.iniciarConquista();
+        unaBatalla.luchar(dadosAtacante, dadosDefensor);
         intentarConquista.resultadoDeConquista();
 
         assertSame(ejercitoAtacante, paisDefensor.obtenerEjercito()); // Cambia el control del pais.
@@ -94,15 +92,14 @@ public class IntentoDeConquistaTest {
 
         Batalla unaBatalla = new Batalla();
         unaBatalla.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-        unaBatalla.asignarDados(dadosAtacante, dadosDefensor);
-        unaBatalla.asignarNumeroDadosAComparar();
 
         IntentoDeConquista intentarConquista = new IntentoDeConquista(
             paisAtacante,
             paisDefensor
         );
         intentarConquista.asignarBatalla(unaBatalla);
-        intentarConquista.iniciarConquista();
+
+        unaBatalla.luchar(dadosAtacante, dadosDefensor);
         intentarConquista.resultadoDeConquista();
 
         assertSame(ejercitoDefensor, paisDefensor.obtenerEjercito()); // Mantiene el pais.

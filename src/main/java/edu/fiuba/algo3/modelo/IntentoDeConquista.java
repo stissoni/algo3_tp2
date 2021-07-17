@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 
 public class IntentoDeConquista {
@@ -15,10 +14,6 @@ public class IntentoDeConquista {
 
     public void asignarBatalla(Batalla unaBatalla){
         this.batalla = unaBatalla;
-    }
-
-    public void iniciarConquista() throws EjercitoYaVencidoException{
-        batalla.luchar();
     }
 
     public void resultadoDeConquista() throws EjercitosDeJugadoresDiferentesException{

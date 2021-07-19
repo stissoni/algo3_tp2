@@ -26,6 +26,7 @@ class TurnoTest {
         Pais unPais = new Pais ("Argentina");
         unPais.ocuparPor(jugador1);
         unTurno.cambiarJugadorActivo(jugador1);
-        assertEquals(unPais,unTurno.elegirPais("Argentina"));
+        Pais paisElegido = unTurno.elegirPais("Argentina");
+        assertEquals(unPais,paisElegido);
     }
 }

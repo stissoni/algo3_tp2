@@ -58,5 +58,6 @@ class FaseAtaqueTest {
         dadosDefensa.add(unDadoDefensa);
 
         unTurno.atacarConNTropasA(paisAtacante,tropasAtacantes,paisDefensor,dadosAtaque,dadosDefensa);
+        assertTrue(paisDefensor.suEjercitoFueVencido());
     }
 }

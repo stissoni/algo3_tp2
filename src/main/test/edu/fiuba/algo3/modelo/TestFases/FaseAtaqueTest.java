@@ -11,14 +11,12 @@ import java.util.ArrayList;
 
 class FaseAtaqueTest {
     Turno unTurno;
-    FaseAtaque unaFase;
     Jugadores listaDePersonas;
     Jugador jugador1;
     Pais paisAtacante;
     Jugador jugador2;
     Pais paisDefensor;
     int tropasAtacantes;
-    private Object EjercitoYaVencidoException;
 
     @BeforeEach
     public void SetUp(){

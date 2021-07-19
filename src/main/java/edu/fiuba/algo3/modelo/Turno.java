@@ -20,10 +20,6 @@ public class Turno {
     }
 
 
-    public Pais elegirPais(String nombrePais){
-        return jugadorActivo.elegirPais(nombrePais);
-    }
-
     public void atacarConNTropasA(Pais paisAtacante, int tropasAtacantes, Pais paisDefensor, ArrayList<Dado> dadosAtaque, ArrayList<Dado> dadosDefensa) throws EjercitoYaVencidoException {
         FaseAtaque faseAtaque = new FaseAtaque(paisAtacante,paisDefensor,tropasAtacantes);
         faseAtaque.atacar(dadosAtaque,dadosDefensa);

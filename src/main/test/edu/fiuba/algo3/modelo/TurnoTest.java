@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TurnoTest {
@@ -19,14 +18,5 @@ class TurnoTest {
         listaDePersonas.agregarJugador(jugador1);
         listaDePersonas.agregarJugador(jugador2);
         unTurno = new Turno(listaDePersonas);
-    }
-
-    @Test
-    public void jugadorEligePaisCorrectamente(){
-        Pais unPais = new Pais ("Argentina");
-        unPais.ocuparPor(jugador1);
-        unTurno.cambiarJugadorActivo(jugador1);
-        Pais paisElegido = unTurno.elegirPais("Argentina");
-        assertEquals(unPais,paisElegido);
     }
 }

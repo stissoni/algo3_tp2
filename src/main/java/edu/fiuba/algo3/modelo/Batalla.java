@@ -28,6 +28,9 @@ public class Batalla {
             dadosAtacante.size(),
             dadosDefensor.size()
         );
+        if (numeroDadosAComparar > 3){
+            numeroDadosAComparar = 3;
+        }
         int index = 0;
         while (index < numeroDadosAComparar){
             dadoAtacante = dadosAtacante.get(index);

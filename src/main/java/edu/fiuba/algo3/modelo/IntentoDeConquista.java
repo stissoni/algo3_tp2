@@ -1,27 +1,33 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
+import java.util.ArrayList;
 
 public class IntentoDeConquista {
     private Pais paisConquistador;
     private Pais paisDefensor;
-    private Batalla batalla;
 
     public IntentoDeConquista(Pais paisConquistador, Pais paisDefensor){
         this.paisConquistador = paisConquistador;
         this.paisDefensor = paisDefensor;
     }
 
-    public void asignarBatalla(Batalla unaBatalla){
-        this.batalla = unaBatalla;
-    }
+    public void intentarConquista(int numeroTropasAtacante) throws Throwable{
+        Ejercito ejercitoAtacante = this.paisConquistador.ejercitoParaAtacar(numeroTropasAtacante);
+        Ejercito ejercitoDefensor = this.paisConquistador.obtenerEjercito();
 
-    public void resultadoDeConquista() throws EjercitosDeJugadoresDiferentesException{
+        Batalla batalla = new Batalla();
+        batalla.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
+
+        ArrayList<Dado> dadosAtacante = Dado.tirar(ejercitoAtacante.obtenerNumeroTotalDeTropas());
+        ArrayList<Dado> dadosDefensor = Dado.tirar(ejercitoDefensor.obtenerNumeroTotalDeTropas());
+
+        batalla.luchar(dadosAtacante, dadosDefensor);
+
         if (paisDefensor.suEjercitoFueVencido()){
-            paisDefensor.asignarEjercito(this.batalla.obtenerEjercitoAtacante());
+            paisDefensor.asignarEjercito(batalla.obtenerEjercitoAtacante());
         }
         else {
-            paisConquistador.reagruparEjercito(this.batalla.obtenerEjercitoAtacante());
+            paisConquistador.reagruparEjercito(batalla.obtenerEjercitoAtacante());
         }
     }
 }

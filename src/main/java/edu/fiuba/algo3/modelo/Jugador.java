@@ -27,12 +27,21 @@ public class Jugador {
         return tropasDisponibles>0;
     }
 
+    public Pais elegirPais(String nombrePais){
+        for (Pais pais : paisesOcupados) if (pais.tieneElMismoNombre(nombrePais)) return pais;
+        return null;
+    }
+
     public void agregarPaisOcupado(Pais pais) {
         paisesOcupados.add(pais);
     }
 
     public void quitarPaisPerdido(Pais pais) {
         paisesOcupados.remove(pais);
+    }
+
+    public void aumentartropasDisponibles(int numeroDeTropasASumar) {
+        tropasDisponibles += numeroDeTropasASumar;
     }
 
     public void reducirtropasDisponibles(int numeroDeTropasARestar) {

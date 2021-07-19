@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +36,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void jugarUnaRondaCon2JugadoresSinAtacar(){
+    public void jugarUnaRondaCon2JugadoresSinAtacar() {
         Partida teg = new Partida(listaDeJugadores);
         assertTrue(teg.tienenTropasDisponibles());
         teg.jugarUnaRondaDe2JugadoresSoloConPosicionamientos(jugador1,jugador2);
@@ -42,7 +44,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void jugarUnaRondaCon3JugadoresSinAtacar(){
+    public void jugarUnaRondaCon3JugadoresSinAtacar() {
         Jugador jugador3 = new Jugador("Matias");
         listaDeJugadores.agregarJugador(jugador3);
         Partida teg = new Partida(listaDeJugadores);

@@ -38,7 +38,7 @@ public class Pais {
         return this.nombrePais;
     }
 
-    public void reagruparEjercito(Ejercito otroEjercito) throws EjercitosDeJugadoresDiferentesException{
+    public void reagruparEjercito(Ejercito otroEjercito){
         this.ejercitoEnControl.reagruparEjercito(otroEjercito);
     }
 
@@ -53,6 +53,7 @@ public class Pais {
     public void ocuparPor(Jugador unJugador) {
         int numeroDeTropasInicial = 1;
         ejercitoEnControl = new Ejercito(numeroDeTropasInicial,unJugador);
+        unJugador.agregarPaisOcupado(this);
     }
 
     /**Metodo de prueba unicamente*/

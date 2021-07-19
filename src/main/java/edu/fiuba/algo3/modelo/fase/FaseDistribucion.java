@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo.fase;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Pais;
 
-public class FaseDistribucion implements Fase {
+public class FaseDistribucion{
     int tropasADistribuir;
     Pais paisReforzado;
 
@@ -11,9 +11,7 @@ public class FaseDistribucion implements Fase {
         this.tropasADistribuir = tropasADistribuir;
         this.paisReforzado = unPais;
     }
-
-    @Override
-    public void iniciar() {
-        paisReforzado.aumentarTropas(tropasADistribuir);
+    public void colocacionTropas(Pais unPais, int cantidadDeTropas){
+        unPais.aumentarTropas(cantidadDeTropas);
     }
 }

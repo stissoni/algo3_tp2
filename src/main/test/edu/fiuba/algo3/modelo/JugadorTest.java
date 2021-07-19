@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JugadorTest {
     Jugador unJugador;
@@ -22,5 +21,18 @@ public class JugadorTest {
     @Test
     public void jugadorNuevoTieneTropasDisponibles(){
         assertTrue(unJugador.tieneTropasDisponibles());
+    }
+
+    @Test
+    public void jugadorEligeCorrectamenteUnPaisDeLosQueControla(){
+        Pais argentina = new Pais("Argentina");
+        argentina.ocuparPor(unJugador);
+
+        assertEquals(argentina,unJugador.elegirPais("Argentina"));
+    }
+
+    @Test
+    public void jugadorIntentaElegirPaisQueNoControla(){
+        assertNull(unJugador.elegirPais("Argentina"));
     }
 }

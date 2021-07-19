@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
+
 public class Partida {
     private final Jugadores listaDeJugadores;
     private final Mapa mapa;
@@ -33,7 +35,6 @@ public class Partida {
         Pais unPais = mapa.buscarPais("Argentina");
         Pais otroPais = mapa.buscarPais("Brasil");
 
-
         unPais.ganarControlPor(new Ejercito(5,jugador1));
         otroPais.ganarControlPor(new Ejercito(5,jugador2));
 
@@ -58,6 +59,7 @@ public class Partida {
         unPais.ganarControlPor(new Ejercito(5,jugador1));
         asia.controlarPor(jugador2);
         otroPais.ganarControlPor(new Ejercito(5,jugador3));
+
         int tropasADistribuirJ1 = jugador1.getTropasDisponibles();
         int tropasADistribuirJ2 = jugador2.getTropasDisponibles();
         int tropasADistribuirJ3 = jugador3.getTropasDisponibles();

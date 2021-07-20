@@ -1,9 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-
-import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
-
 public class Batalla {
     private Ejercito ejercitoAtacante;
     private Ejercito ejercitoDefensor;
@@ -11,6 +7,17 @@ public class Batalla {
     public void asignarEjercitos(Ejercito ejercitoAtacante, Ejercito ejercitoDefensor){
         this.ejercitoAtacante = ejercitoAtacante;
         this.ejercitoDefensor = ejercitoDefensor;
+    }
+
+    public int numeroDeDadosQueSeUtilizaran(){
+        int numeroDados = Math.min(
+            ejercitoAtacante.obtenerNumeroTotalDeTropas(),
+            ejercitoDefensor.obtenerNumeroTotalDeTropas()
+        );
+        if (numeroDados > 3){
+            numeroDados = 3;
+        }
+        return numeroDados;
     }
 
     public Ejercito obtenerEjercitoAtacante(){
@@ -21,27 +28,14 @@ public class Batalla {
         return this.ejercitoDefensor;
     }
 
-    public void luchar(ArrayList<Dado> dadosAtacante, ArrayList<Dado> dadosDefensor) throws EjercitoYaVencidoException{
-        Dado dadoAtacante;
-        Dado dadoDefensor;
-        int numeroDadosAComparar = Math.min(
-            dadosAtacante.size(),
-            dadosDefensor.size()
-        );
-        if (numeroDadosAComparar > 3){
-            numeroDadosAComparar = 3;
-        }
-        int index = 0;
-        while (index < numeroDadosAComparar){
-            dadoAtacante = dadosAtacante.get(index);
-            dadoDefensor = dadosDefensor.get(index);
-            if (dadoAtacante.esMayorQue(dadoDefensor)){
-                this.ejercitoAtacante.vencer(this.ejercitoDefensor);
-            }
-            else {
-                this.ejercitoDefensor.vencer(this.ejercitoAtacante);
-            }
-            index = index + 1;
-        }
+    public void luchar(ConjuntoDados dadosAtacante, ConjuntoDados dadosDefensor) throws Throwable{
+        int numeroDeTropasPerdidasPorDefensor = 
+            dadosAtacante.numeroDeDadosQueSonMayores(dadosDefensor);
+
+        int numeroDeTropasPerdidasPorAtacante =
+            dadosDefensor.numeroDeDadosQueSonMayoresOIguales(dadosAtacante);
+
+        this.ejercitoAtacante.reducirTropas(numeroDeTropasPerdidasPorAtacante);
+        this.ejercitoDefensor.reducirTropas(numeroDeTropasPerdidasPorDefensor);
     }
 }

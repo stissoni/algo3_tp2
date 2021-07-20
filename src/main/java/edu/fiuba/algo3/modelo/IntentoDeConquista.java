@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-
 public class IntentoDeConquista {
     private Pais paisConquistador;
     private Pais paisDefensor;
@@ -11,23 +9,29 @@ public class IntentoDeConquista {
         this.paisDefensor = paisDefensor;
     }
 
-    public void intentarConquista(int numeroTropasAtacante) throws Throwable{
+    public void intentarConquista(int numeroTropasAtacante, GeneradorAleatorio generador) throws Throwable{
         Ejercito ejercitoAtacante = this.paisConquistador.ejercitoParaAtacar(numeroTropasAtacante);
-        Ejercito ejercitoDefensor = this.paisConquistador.obtenerEjercito();
+        Ejercito ejercitoDefensor = this.paisDefensor.obtenerEjercito();
 
         Batalla batalla = new Batalla();
         batalla.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
+        int numeroDeDados = batalla.numeroDeDadosQueSeUtilizaran();
 
-        ArrayList<Dado> dadosAtacante = Dado.tirar(ejercitoAtacante.obtenerNumeroTotalDeTropas());
-        ArrayList<Dado> dadosDefensor = Dado.tirar(ejercitoDefensor.obtenerNumeroTotalDeTropas());
+        ConjuntoDados dadosAtacante = new ConjuntoDados(generador);
+        ConjuntoDados dadosDefensor = new ConjuntoDados(generador);
+
+        dadosAtacante.tirarDados(numeroDeDados);
+        dadosAtacante.ordenarDadosDeMayorAMenor();
+        dadosDefensor.tirarDados(numeroDeDados);
+        dadosDefensor.ordenarDadosDeMayorAMenor();
 
         batalla.luchar(dadosAtacante, dadosDefensor);
 
         if (paisDefensor.suEjercitoFueVencido()){
-            paisDefensor.asignarEjercito(batalla.obtenerEjercitoAtacante());
+            paisDefensor.asignarEjercito(ejercitoAtacante);
         }
         else {
-            paisConquistador.reagruparEjercito(batalla.obtenerEjercitoAtacante());
+            paisConquistador.reagruparEjercito(ejercitoAtacante);
         }
     }
 }

@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.modelo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
-
-import java.util.ArrayList;
 
 public class BatallaTest {
 
@@ -21,28 +18,27 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaEntreEjercitos() throws EjercitoYaVencidoException{
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
-        Dado dado = new Dado(5);
-        Dado otroDado = new Dado(4);
-        Dado otroDadoMas = new Dado(2);
-        dadosAtacante.add(dado);
-        dadosAtacante.add(otroDado);
-        dadosAtacante.add(otroDadoMas);
-
-        ArrayList<Dado> dadosDefensor = new ArrayList<>();
-        Dado dadoDefensor = new Dado(4); // Pierde contra el 5.
-        Dado otroDadoDefensor = new Dado(3); // Pierde contra el 4.
-        Dado otroDadoDefensorMas = new Dado(3); // Gana contra el 2.
-        dadosDefensor.add(dadoDefensor);
-        dadosDefensor.add(otroDadoDefensor);
-        dadosDefensor.add(otroDadoDefensorMas);
-
+    public void testLuchaEntreEjercitos() throws Throwable{
         Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
         Ejercito ejercitoDefensor = new Ejercito(3, jugador2);
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
+
+        int numeroDadosAUtilizar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
+
+        GeneradorAleatorio generador = mock(GeneradorAleatorio.class);
+        
+        when(generador.generar()).thenReturn(5).thenReturn(4).thenReturn(2);
+        ConjuntoDados dadosAtacante = new ConjuntoDados(generador);
+        dadosAtacante.tirarDados(numeroDadosAUtilizar);
+        dadosAtacante.ordenarDadosDeMayorAMenor();
+       
+        when(generador.generar()).thenReturn(4).thenReturn(3).thenReturn(3);
+        ConjuntoDados dadosDefensor = new ConjuntoDados(generador);
+        dadosDefensor.tirarDados(numeroDadosAUtilizar);
+        dadosDefensor.ordenarDadosDeMayorAMenor();
+
         unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
 
         assertEquals(2, ejercitoAtacante.obtenerNumeroTotalDeTropas());
@@ -50,28 +46,27 @@ public class BatallaTest {
     }
     
     @Test
-    public void testLuchaEntreEjercitosConVictoriaDelAtacante() throws EjercitoYaVencidoException{
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
-        Dado dado = new Dado(6);
-        Dado otroDado = new Dado(5);
-        Dado otroDadoMas = new Dado(5);
-        dadosAtacante.add(dado);
-        dadosAtacante.add(otroDado);
-        dadosAtacante.add(otroDadoMas);
-
-        ArrayList<Dado> dadosDefensor = new ArrayList<>();
-        Dado dadoDefensor = new Dado(4); // Pierde contra el 6.
-        Dado otroDadoDefensor = new Dado(3); // Pierde contra el 5.
-        Dado otroDadoDefensorMas = new Dado(3); // Pierde contra el 3.
-        dadosDefensor.add(dadoDefensor);
-        dadosDefensor.add(otroDadoDefensor);
-        dadosDefensor.add(otroDadoDefensorMas);
-
+    public void testLuchaEntreEjercitosConVictoriaDelAtacante() throws Throwable{
         Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
         Ejercito ejercitoDefensor = new Ejercito(3, jugador2);
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
+        int numeroDadosAUtilizar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
+        
+        GeneradorAleatorio generador = mock(GeneradorAleatorio.class);
+        
+        when(generador.generar()).thenReturn(6).thenReturn(5).thenReturn(5);
+        ConjuntoDados dadosAtacante = new ConjuntoDados(generador);
+        dadosAtacante.tirarDados(numeroDadosAUtilizar);
+        dadosAtacante.ordenarDadosDeMayorAMenor();
+       
+        when(generador.generar()).thenReturn(4).thenReturn(3).thenReturn(3);
+        ConjuntoDados dadosDefensor = new ConjuntoDados(generador);
+        dadosDefensor.tirarDados(numeroDadosAUtilizar);
+        dadosDefensor.ordenarDadosDeMayorAMenor();
+
+        unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
 
         unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
 
@@ -80,24 +75,25 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaEntreEjercitosConVictoriaDelAtacanteConDiferenciaDeTropas() throws EjercitoYaVencidoException{
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
-        Dado dado = new Dado(6);
-        Dado otroDado = new Dado(5);
-        Dado otroDadoMas = new Dado(5);
-        dadosAtacante.add(dado);
-        dadosAtacante.add(otroDado);
-        dadosAtacante.add(otroDadoMas);
-
-        ArrayList<Dado> dadosDefensor = new ArrayList<>();
-        Dado dadoDefensor = new Dado(4); // Compara contra el 6 y pierde su unica tropa.
-        dadosDefensor.add(dadoDefensor);
-
+    public void testLuchaEntreEjercitosConVictoriaDelAtacanteConDiferenciaDeTropas() throws Throwable{
         Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
         Ejercito ejercitoDefensor = new Ejercito(1, jugador2);
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
+        int numeroDadosAUtilizar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
+        
+        GeneradorAleatorio generador = mock(GeneradorAleatorio.class);
+        
+        when(generador.generar()).thenReturn(6);
+        ConjuntoDados dadosAtacante = new ConjuntoDados(generador);
+        dadosAtacante.tirarDados(numeroDadosAUtilizar);
+        dadosAtacante.ordenarDadosDeMayorAMenor();
+
+        when(generador.generar()).thenReturn(4);
+        ConjuntoDados dadosDefensor = new ConjuntoDados(generador);
+        dadosDefensor.tirarDados(numeroDadosAUtilizar);
+        dadosDefensor.ordenarDadosDeMayorAMenor();
 
         unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
 
@@ -106,31 +102,28 @@ public class BatallaTest {
     }
 
     @Test
-    public void testLuchaEntreEjercitosConEmpateDeDadosConDiferenciaDeTropas() throws EjercitoYaVencidoException{
-        int numeroTropasAtacante = 3;
-        int numeroTropasDefensor = 1;
-        Ejercito ejercitoAtacante = new Ejercito(numeroTropasAtacante, jugador1);
-        Ejercito ejercitoDefensor = new Ejercito(numeroTropasDefensor, jugador2);
-        
-        // Los dados que le salieron al atacante.
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
-        Dado dado = new Dado(6);
-        Dado otroDado = new Dado(5);
-        Dado otroDadoMas = new Dado(5);
-        dadosAtacante.add(dado);
-        dadosAtacante.add(otroDado);
-        dadosAtacante.add(otroDadoMas);
-        
-        // Los dados del defensor.
-        ArrayList<Dado> dadosDefensor = new ArrayList<>();
-        Dado dadoDefensor = new Dado(6); // Compara contra el 6 y empata con el 6 del atacante.
-        dadosDefensor.add(dadoDefensor);
+    public void testLuchaEntreEjercitosConEmpateDeDadosConDiferenciaDeTropas() throws Throwable{
+        Ejercito ejercitoAtacante = new Ejercito(3, jugador1);
+        Ejercito ejercitoDefensor = new Ejercito(1, jugador2);
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
+        int numeroDadosAUtilizar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
+        
+        GeneradorAleatorio generador = mock(GeneradorAleatorio.class);
+        
+        when(generador.generar()).thenReturn(4);
+        ConjuntoDados dadosAtacante = new ConjuntoDados(generador);
+        dadosAtacante.tirarDados(numeroDadosAUtilizar);
+        dadosAtacante.ordenarDadosDeMayorAMenor();
+
+        when(generador.generar()).thenReturn(4);
+        ConjuntoDados dadosDefensor = new ConjuntoDados(generador);
+        dadosDefensor.tirarDados(numeroDadosAUtilizar);
+        dadosDefensor.ordenarDadosDeMayorAMenor();
 
         unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
-
+        
         assertEquals(2, ejercitoAtacante.obtenerNumeroTotalDeTropas());
         assertEquals(1, ejercitoDefensor.obtenerNumeroTotalDeTropas());
     }

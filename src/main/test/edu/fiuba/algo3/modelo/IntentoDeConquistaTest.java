@@ -2,8 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
-
-import java.util.ArrayList;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,44 +22,21 @@ public class IntentoDeConquistaTest {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
 
-        Ejercito ejercitoAtacante = new Ejercito(3, jugadorAtacante);
+        Ejercito ejercitoAtacante = new Ejercito(5, jugadorAtacante);
         Ejercito ejercitoDefensor = new Ejercito(3, jugadorDefensor);
-        Ejercito ejercitoQueSeQuedaEnElPais = new Ejercito(1, jugadorAtacante);
-
-        paisAtacante.asignarEjercito(ejercitoQueSeQuedaEnElPais);
+        paisAtacante.asignarEjercito(ejercitoAtacante);
         paisDefensor.asignarEjercito(ejercitoDefensor);
+
+        GeneradorAleatorio generador = mock(GeneradorAleatorio.class);
+        when(generador.generar()).thenReturn(6).thenReturn(5).thenReturn(4).thenReturn(2).thenReturn(2).thenReturn(2);
         
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
-        Dado dado = new Dado(6);
-        Dado otroDado = new Dado(5);
-        Dado otroDadoMas = new Dado(5);
-        dadosAtacante.add(dado);
-        dadosAtacante.add(otroDado);
-        dadosAtacante.add(otroDadoMas);
+        int numeroTropasParaAtacar = 3;
+        IntentoDeConquista intentarConquista = new IntentoDeConquista(paisAtacante, paisDefensor);
+        intentarConquista.intentarConquista(numeroTropasParaAtacar, generador);
 
-        ArrayList<Dado> dadosDefensor = new ArrayList<>();
-        Dado dadoDefensor = new Dado(4); // Pierde contra el 6.
-        Dado otroDadoDefensor = new Dado(3); // Pierde contra el 5.
-        Dado otroDadoDefensorMas = new Dado(3); // Pierde contra el 3.
-        dadosDefensor.add(dadoDefensor);
-        dadosDefensor.add(otroDadoDefensor);
-        dadosDefensor.add(otroDadoDefensorMas);
-
-        Batalla unaBatalla = new Batalla();
-        unaBatalla.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-
-        IntentoDeConquista intentarConquista = new IntentoDeConquista(
-            paisAtacante,
-            paisDefensor
-        );
-        intentarConquista.asignarBatalla(unaBatalla);
-        unaBatalla.luchar(dadosAtacante, dadosDefensor);
-        intentarConquista.resultadoDeConquista();
-
-        assertSame(ejercitoAtacante, paisDefensor.obtenerEjercito()); // Cambia el control del pais.
-        assertSame(jugadorAtacante, paisDefensor.obtenerJugadorEnControl());
+        assertSame(jugadorAtacante, paisDefensor.obtenerJugadorEnControl()); // Cambia el control del pais.
         assertEquals(3, paisDefensor.obtenerNumeroTotalDeTropas());
-        assertEquals(1, paisAtacante.obtenerNumeroTotalDeTropas());
+        assertEquals(2, paisAtacante.obtenerNumeroTotalDeTropas());
     }
 
     @Test
@@ -67,44 +44,21 @@ public class IntentoDeConquistaTest {
         Pais paisAtacante = new Pais("Argentina");
         Pais paisDefensor = new Pais("Brasil");
 
-        Ejercito ejercitoAtacante = new Ejercito(3, jugadorAtacante);
+        Ejercito ejercitoAtacante = new Ejercito(4, jugadorAtacante);
         Ejercito ejercitoDefensor = new Ejercito(3, jugadorDefensor);
-        Ejercito ejercitoQueSeQuedaEnElPais = new Ejercito(1, jugadorAtacante);
-
-        paisAtacante.asignarEjercito(ejercitoQueSeQuedaEnElPais);
+        paisAtacante.asignarEjercito(ejercitoAtacante);
         paisDefensor.asignarEjercito(ejercitoDefensor);
+
+        GeneradorAleatorio generador = mock(GeneradorAleatorio.class);
+        when(generador.generar()).thenReturn(6).thenReturn(2).thenReturn(2).thenReturn(4).thenReturn(4).thenReturn(3);
         
-        ArrayList<Dado> dadosAtacante = new ArrayList<>();
-        Dado dado = new Dado(6);
-        Dado otroDado = new Dado(5);
-        Dado otroDadoMas = new Dado(5);
-        dadosAtacante.add(dado);
-        dadosAtacante.add(otroDado);
-        dadosAtacante.add(otroDadoMas);
-
-        ArrayList<Dado> dadosDefensor = new ArrayList<>();
-        Dado dadoDefensor = new Dado(6); // Empata contra el 6.
-        Dado otroDadoDefensor = new Dado(3); // Pierde contra el 5.
-        Dado otroDadoDefensorMas = new Dado(3); // Pierde contra el 3.
-        dadosDefensor.add(dadoDefensor);
-        dadosDefensor.add(otroDadoDefensor);
-        dadosDefensor.add(otroDadoDefensorMas);
-
-        Batalla unaBatalla = new Batalla();
-        unaBatalla.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-
-        IntentoDeConquista intentarConquista = new IntentoDeConquista(
-            paisAtacante,
-            paisDefensor
-        );
-        intentarConquista.asignarBatalla(unaBatalla);
-
-        unaBatalla.luchar(dadosAtacante, dadosDefensor);
-        intentarConquista.resultadoDeConquista();
+        int numeroTropasParaAtacar = 3;
+        IntentoDeConquista intentarConquista = new IntentoDeConquista(paisAtacante, paisDefensor);
+        intentarConquista.intentarConquista(numeroTropasParaAtacar, generador);
 
         assertSame(ejercitoDefensor, paisDefensor.obtenerEjercito()); // Mantiene el pais.
         assertSame(jugadorDefensor, paisDefensor.obtenerJugadorEnControl());
-        assertEquals(1, paisDefensor.obtenerNumeroTotalDeTropas());
-        assertEquals(3, paisAtacante.obtenerNumeroTotalDeTropas()); // Vuelven 2 tropas + 1 que se habia quedado.
+        assertEquals(2, paisDefensor.obtenerNumeroTotalDeTropas());
+        assertEquals(2, paisAtacante.obtenerNumeroTotalDeTropas()); // Vuelven 1 tropa + 1 que se habia quedado.
     }
 }

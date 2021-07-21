@@ -17,15 +17,18 @@ public class IntentoDeConquista {
         batalla.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
         int numeroDeDados = batalla.numeroDeDadosQueSeUtilizaran();
 
-        ConjuntoDados dadosAtacante = new ConjuntoDados(generador);
-        ConjuntoDados dadosDefensor = new ConjuntoDados(generador);
+        Dados dados = new Dados(generador);
 
-        dadosAtacante.tirarDados(numeroDeDados);
-        dadosAtacante.ordenarDadosDeMayorAMenor();
-        dadosDefensor.tirarDados(numeroDeDados);
-        dadosDefensor.ordenarDadosDeMayorAMenor();
+        Tirada tiradaAtacante = dados.tirarDados(numeroDeDados);
+        Tirada tiradaDefensor = dados.tirarDados(numeroDeDados);
 
-        batalla.luchar(dadosAtacante, dadosDefensor);
+        tiradaAtacante.ordenarDadosDeMayorAMenor();
+        tiradaAtacante.setStrategy(new DadosParaAtaqueStrategy());
+
+        tiradaDefensor.ordenarDadosDeMayorAMenor();
+        tiradaDefensor.setStrategy(new DadosParaDefensaStrategy());
+
+        batalla.luchar(tiradaAtacante, tiradaDefensor);
 
         if (paisDefensor.suEjercitoFueVencido()){
             paisDefensor.asignarEjercito(ejercitoAtacante);

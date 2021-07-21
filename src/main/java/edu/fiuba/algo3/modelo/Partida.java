@@ -3,8 +3,6 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.excepciones.LeerArchivoError;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class Partida {
     private final int cantidadDeJugadores;

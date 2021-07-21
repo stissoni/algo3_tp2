@@ -28,12 +28,12 @@ public class Batalla {
         return this.ejercitoDefensor;
     }
 
-    public void luchar(ConjuntoDados dadosAtacante, ConjuntoDados dadosDefensor) throws Throwable{
+    public void luchar(Tirada tiradaAtacante, Tirada tiradaDefensor) throws Throwable{
         int numeroDeTropasPerdidasPorDefensor = 
-            dadosAtacante.numeroDeDadosQueSonMayores(dadosDefensor);
+            tiradaAtacante.compararTiradas(tiradaDefensor);
 
         int numeroDeTropasPerdidasPorAtacante =
-            dadosDefensor.numeroDeDadosQueSonMayoresOIguales(dadosAtacante);
+            tiradaDefensor.compararTiradas(tiradaAtacante);
 
         this.ejercitoAtacante.reducirTropas(numeroDeTropasPerdidasPorAtacante);
         this.ejercitoDefensor.reducirTropas(numeroDeTropasPerdidasPorDefensor);

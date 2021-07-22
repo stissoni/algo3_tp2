@@ -8,6 +8,11 @@ public class Mapa {
     private Hashtable<String, Continente> continentes;
     private Hashtable<String, Pais> paises;
 
+    public Mapa(){
+        this.paises = new Hashtable<String, Pais>();
+        this.continentes = new Hashtable<String, Continente>();
+    }
+
     public void agregarPais(Pais unPais){
         this.paises.put(unPais.obtenerNombrePais(), unPais);
     }

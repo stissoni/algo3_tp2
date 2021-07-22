@@ -20,7 +20,7 @@ public class MapaBuilder {
         ArrayList<String> paises = parser.cargar(rutaArchivo);
 
         for(String nombrePais: paises){
-            director.crearPais(paisBuilder, nombrePais);
+            director.crearTerritorio(paisBuilder, nombrePais);
             Pais nuevoPais = paisBuilder.obtenerResultado();
             this.resultado.agregarPais(nuevoPais);
         }
@@ -36,7 +36,7 @@ public class MapaBuilder {
         ArrayList<String> continentes = parser.cargar(rutaArchivo);
 
         for(String nombreContinente: continentes){
-            director.crearContinente(continenteBuilder, nombreContinente);
+            director.crearTerritorio(continenteBuilder, nombreContinente);
             Continente nuevoContinente = continenteBuilder.obtenerResultado();
             this.resultado.agregarContinente(nuevoContinente);
         }

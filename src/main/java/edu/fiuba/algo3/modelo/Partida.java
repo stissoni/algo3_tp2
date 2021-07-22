@@ -1,26 +1,46 @@
 package edu.fiuba.algo3.modelo;
 
+import java.io.IOException;
 import java.util.*;
-
-import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 
 public class Partida {
     private ArrayList<Jugador> jugadores;
-    private ArrayList<Pais> paises;
+    private Mapa mapaDelJuego;
+    int indexJugadorActual;
 
-    public Partida(ArrayList<Jugador> listaDeJugadores){
+    public Partida(){
         this.jugadores = new ArrayList<Jugador>();
+        this.indexJugadorActual = 0;
     }
 
     public void agregarJugador(Jugador unJugador){
         this.jugadores.add(unJugador);
     }
 
-    public void agregarPais(Pais unPais){
-        this.paises.add(unPais);
+    public void crearMapa() throws IOException{
+        Director director = new Director();
+        MapaBuilder builder = new MapaBuilder();
+        director.crearMapa(builder);
+        this.mapaDelJuego = builder.obtenerResultado();
     }
 
-    public void agregarEjercito(Ejercito unEjercito, Pais unPais) throws EjercitosDeJugadoresDiferentesException{
-        unPais.agregarEjercito(unEjercito);
+    public void siguienteJugador(){
+        this.indexJugadorActual = this.indexJugadorActual + 1;
+    }
+
+    public void colocarEjercitos(String paisDestino, int numeroTropas) throws Throwable{
+        MovimientoColocacion movimiento = new MovimientoColocacion();
+        Pais pais = mapaDelJuego.obtenerUnPais(paisDestino);
+        Jugador jugadorActual = this.jugadores.get(this.indexJugadorActual);
+        Ejercito ejercitoAColocar = new Ejercito(numeroTropas, jugadorActual);
+
+        movimiento.destinoPais(pais);
+        movimiento.ejercitoAColocar(ejercitoAColocar);
+        movimiento.ejecutar();
+    }
+
+    public Mapa obtenerMapa(){
+        return this.mapaDelJuego;
     }
 }
+

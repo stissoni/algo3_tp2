@@ -1,64 +1,32 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.excepciones.LeerArchivoError;
-import edu.fiuba.algo3.excepciones.PaisNoExisteError;
-import edu.fiuba.algo3.excepciones.VerticeNoExisteError;
+import java.util.Hashtable;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 
 public class Mapa {
-    Grafo grafoPaises;
+    private Hashtable<String, Continente> continentes;
+    private Hashtable<String, Pais> paises;
 
-    public Mapa(String ruta) throws LeerArchivoError {
-        grafoPaises = new Grafo();
-        cargarPaises(ruta);
+    public void asignarPaises(Hashtable<String, Pais> paises){
+        this.paises = paises;
     }
 
-    private void cargarPaises(String ruta) throws LeerArchivoError {
-        try {
-            BufferedReader csvReader = new BufferedReader(new FileReader(ruta));
-            String row;
-            while ((row = csvReader.readLine()) != null) {
-                String[] linea = row.split(",");
-                String paisOrigen = linea[0];
-                String continente = linea[1];
-                grafoPaises.agregarVertice(paisOrigen);
-                for (String pais: linea) {
-                    if (pais.equals(paisOrigen) || pais.equals(continente)) continue;
-                    grafoPaises.agregarVertice(pais);
-                    grafoPaises.agregarArista(paisOrigen,pais);
-                }
-            }
-            csvReader.close();
-        } catch (IOException | VerticeNoExisteError e) {
-            throw new LeerArchivoError(ruta);
-        }
+    public void asignarContinentes(Hashtable<String, Continente> continentes){
+        this.continentes = continentes;
     }
 
-    public int size() {
-        return grafoPaises.size();
+    public Pais obtenerUnPais(String nombrePais){
+        return this.paises.get(nombrePais);
     }
 
-    public boolean puedeAtacar(String unNombrePais, String otroNombrePais) throws PaisNoExisteError {
-        try {
-            return grafoPaises.estanUnidos(unNombrePais,otroNombrePais);
-        } catch (VerticeNoExisteError verticeNoExisteError) {
-            throw new PaisNoExisteError(unNombrePais);
-        }
+    public Continente obtenerUnContinente(String nombreContinente){
+        return this.continentes.get(nombreContinente);
     }
 
-    public List<String> obtenerPaises() {
-        return Arrays.asList(grafoPaises.obtenerVertices());
-    }
-
-    public List<String> obtenerPaisesMezclados() {
-        List<String> paises = obtenerPaises();
-        Collections.shuffle(paises);
-        return paises;
+    public void colocarEjercitoEn(String nombrePais, Jugador unJugador, int numeroEjercitos) throws EjercitosDeJugadoresDiferentesException{
+        Pais unPais = this.obtenerUnPais(nombrePais);
+        Ejercito nuevoEjercito = new Ejercito(numeroEjercitos, unJugador);
+        unPais.agregarEjercito(nuevoEjercito);
     }
 }

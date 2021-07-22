@@ -1,13 +1,26 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
+import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
 
 public class Pais {
     private String nombrePais;
     private Ejercito ejercitoEnControl;
+    private ArrayList<Pais> paisesLimitrofes;
 
     public Pais(String nombrePais){
         this.nombrePais = nombrePais;
+        this.paisesLimitrofes = new ArrayList<Pais>();
+    }
+
+    public Pais(){
+        this.paisesLimitrofes = new ArrayList<Pais>();
+    }
+
+    public void asignarNombre(String unNombre){
+        this.nombrePais = unNombre;
     }
 
     public Ejercito obtenerEjercito(){
@@ -22,12 +35,37 @@ public class Pais {
         return this.ejercitoEnControl.obtenerNumeroTotalDeTropas();
     }
 
-    public Jugador obtenerJugadorEnControl(){
+    public boolean esDominadoPorJugador(Jugador unJugador){
+        try{
+            return this.obtenerJugadorEnControl().sonElMismoJugador(unJugador);
+        }
+        catch (PaisSinEjercitoException e) {
+            return false;
+        }
+    }
+
+    public Jugador obtenerJugadorEnControl() throws PaisSinEjercitoException{
+        if (this.ejercitoEnControl == null){
+            throw new PaisSinEjercitoException("No hay jugador controlando este pais.");
+        }
         return this.ejercitoEnControl.obtenerJugador();
     }
 
     public String obtenerNombrePais(){
         return this.nombrePais;
+    }
+
+    public void agregarEjercito(Ejercito unEjercito) throws EjercitosDeJugadoresDiferentesException{
+        if (this.ejercitoEnControl == null){
+            this.asignarEjercito(unEjercito);
+        }
+        else {
+            this.reagruparEjercito(unEjercito);
+        }
+    }
+
+    public void agregarPaisLimitrofe(Pais unPais){
+        this.paisesLimitrofes.add(unPais);
     }
 
     public void reducirTropas(int numeroDeTropas) throws Throwable{

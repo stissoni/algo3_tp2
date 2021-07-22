@@ -25,7 +25,12 @@ public class Partida {
     }
 
     public void siguienteJugador(){
-        this.indexJugadorActual = this.indexJugadorActual + 1;
+        if (this.indexJugadorActual + 1 == this.jugadores.size()){
+            this.indexJugadorActual = 0;
+        }
+        else {
+            this.indexJugadorActual = this.indexJugadorActual + 1;
+        }
     }
 
     public void colocarEjercitos(String paisDestino, int numeroTropas) throws Throwable{

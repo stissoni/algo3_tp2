@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
-public class ContinenteBuilder implements IBuilder {
+public class ContinenteBuilder implements Builder{
     private Continente resultado;
 
     public void reset(){

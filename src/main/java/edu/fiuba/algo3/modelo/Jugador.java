@@ -18,6 +18,10 @@ public class Jugador {
     }
 
     public boolean sonJugadoresDiferentes(Jugador otroJugador){
-        return (this.obtenerId() != otroJugador.obtenerId());
+        return !this.sonElMismoJugador(otroJugador);
+    }
+
+    public boolean sonElMismoJugador(Jugador otroJugador){
+        return (this.obtenerId() == otroJugador.obtenerId());
     }
 }

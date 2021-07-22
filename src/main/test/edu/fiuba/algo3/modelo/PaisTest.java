@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
+import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -40,7 +41,7 @@ public class PaisTest {
     }
 
     @Test
-    public void testJugadorEnControl(){
+    public void testJugadorEnControl() throws PaisSinEjercitoException{
         unPais.asignarEjercito(unEjercito);
         assertSame(unJugador, unPais.obtenerJugadorEnControl());
     }
@@ -52,7 +53,7 @@ public class PaisTest {
     }
 
     @Test
-    public void testReagruparEjercitoQuePerdioUnaBatalla() throws EjercitosDeJugadoresDiferentesException{
+    public void testReagruparEjercitoQuePerdioUnaBatalla() throws EjercitosDeJugadoresDiferentesException, PaisSinEjercitoException{
         unPais.asignarEjercito(unEjercito);
         Ejercito ejercitoQuePerdioBatalla = new Ejercito(1, unJugador);
         unPais.reagruparEjercito(ejercitoQuePerdioBatalla);

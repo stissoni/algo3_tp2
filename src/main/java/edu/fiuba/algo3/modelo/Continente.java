@@ -18,6 +18,10 @@ public class Continente {
         this.paises.add(unPais);
     }
 
+    public String obtenerNombre(){
+        return this.nombre;
+    }
+
     public boolean sonElMismoContinente(Continente otroContinente){
         return this.nombre == otroContinente.nombre;
     }

@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
-public class PaisBuilder {
+public class PaisBuilder implements Builder {
     private Pais resultado;
 
     public void reset(){

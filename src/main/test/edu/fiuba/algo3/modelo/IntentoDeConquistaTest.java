@@ -31,8 +31,12 @@ public class IntentoDeConquistaTest {
         when(generador.generar()).thenReturn(6).thenReturn(5).thenReturn(4).thenReturn(2).thenReturn(2).thenReturn(2);
         
         int numeroTropasParaAtacar = 3;
-        IntentoDeConquista intentarConquista = new IntentoDeConquista(paisAtacante, paisDefensor);
-        intentarConquista.intentarConquista(numeroTropasParaAtacar, generador);
+        MovimientoAtaque intentarConquista = new MovimientoAtaque();
+        intentarConquista.paisAtacante(paisAtacante);
+        intentarConquista.paisDefensor(paisDefensor);
+        intentarConquista.numeroDeTropas(numeroTropasParaAtacar);
+        intentarConquista.generador(generador);
+        intentarConquista.ejecutar();
 
         assertSame(jugadorAtacante, paisDefensor.obtenerJugadorEnControl()); // Cambia el control del pais.
         assertEquals(3, paisDefensor.obtenerNumeroTotalDeTropas());
@@ -53,8 +57,12 @@ public class IntentoDeConquistaTest {
         when(generador.generar()).thenReturn(6).thenReturn(2).thenReturn(2).thenReturn(4).thenReturn(4).thenReturn(3);
         
         int numeroTropasParaAtacar = 3;
-        IntentoDeConquista intentarConquista = new IntentoDeConquista(paisAtacante, paisDefensor);
-        intentarConquista.intentarConquista(numeroTropasParaAtacar, generador);
+        MovimientoAtaque intentarConquista = new MovimientoAtaque();
+        intentarConquista.paisAtacante(paisAtacante);
+        intentarConquista.paisDefensor(paisDefensor);
+        intentarConquista.numeroDeTropas(numeroTropasParaAtacar);
+        intentarConquista.generador(generador);
+        intentarConquista.ejecutar();
 
         assertSame(ejercitoDefensor, paisDefensor.obtenerEjercito()); // Mantiene el pais.
         assertSame(jugadorDefensor, paisDefensor.obtenerJugadorEnControl());

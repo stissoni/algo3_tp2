@@ -6,15 +6,26 @@ import java.util.*;
 public class Partida {
     private ArrayList<Jugador> jugadores;
     private Mapa mapaDelJuego;
-    int indexJugadorActual;
+    private Fase faseActual;
+    private Turno turno;
 
     public Partida(){
         this.jugadores = new ArrayList<Jugador>();
-        this.indexJugadorActual = 0;
     }
 
     public void agregarJugador(Jugador unJugador){
         this.jugadores.add(unJugador);
+    }
+
+    public void iniciarPartida() throws Throwable{
+        this.turno = new Turno(this.jugadores, 0);
+        this.faseActual = new FaseInicial();
+        this.faseActual.asignarPartida(this);
+        this.faseActual.iniciarFase();
+    }
+
+    public void reiniciarTurno(){
+        this.turno.reiniciar();
     }
 
     public void crearMapa() throws IOException{
@@ -24,24 +35,32 @@ public class Partida {
         this.mapaDelJuego = builder.obtenerResultado();
     }
 
-    public void siguienteJugador(){
-        if (this.indexJugadorActual + 1 == this.jugadores.size()){
-            this.indexJugadorActual = 0;
-        }
-        else {
-            this.indexJugadorActual = this.indexJugadorActual + 1;
-        }
+    public void asignarFase(Fase unaFase){
+        this.faseActual = unaFase;
     }
 
-    public void colocarEjercitos(String paisDestino, int numeroTropas) throws Throwable{
-        MovimientoColocacion movimiento = new MovimientoColocacion();
-        Pais pais = mapaDelJuego.obtenerUnPais(paisDestino);
-        Jugador jugadorActual = this.jugadores.get(this.indexJugadorActual);
-        Ejercito ejercitoAColocar = new Ejercito(numeroTropas, jugadorActual);
+    public void ejecutarMovimiento(Movimiento unMovimiento) throws Throwable{
+        this.faseActual.ejecutarMovimiento(unMovimiento);
+    }
 
-        movimiento.destinoPais(pais);
-        movimiento.ejercitoAColocar(ejercitoAColocar);
-        movimiento.ejecutar();
+    public Turno obtenerTurnero(){
+        return this.turno;
+    }
+
+    public int obtenerNumeroJugadores(){
+        return this.turno.obtenerNumeroJugadores();
+    }
+
+    public Jugador obtenerJugadorActual(){
+        return this.turno.jugadorTurno();
+    }
+
+    public void siguienteTurno(){
+        this.turno.siguienteTurno();
+    }
+
+    public ArrayList<Pais> obtenerPaises(){
+        return this.mapaDelJuego.obtenerPaises();
     }
 
     public Mapa obtenerMapa(){

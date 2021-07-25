@@ -1,23 +1,45 @@
 package edu.fiuba.algo3.modelo;
 
-public class IntentoDeConquista {
+public class MovimientoAtaque implements Movimiento {
+    private Jugador unJugador;
     private Pais paisConquistador;
     private Pais paisDefensor;
+    private GeneradorAleatorio generador;
+    private int numeroTropas;
 
-    public IntentoDeConquista(Pais paisConquistador, Pais paisDefensor){
-        this.paisConquistador = paisConquistador;
+    public int tropasUtilizadas(){
+        return this.numeroTropas;
+    }
+
+    public void jugador(Jugador unJugador){
+        this.unJugador = unJugador;
+    }
+
+    public void paisAtacante(Pais paisAtacante){
+        this.paisConquistador = paisAtacante;
+    }
+
+    public void paisDefensor(Pais paisDefensor){
         this.paisDefensor = paisDefensor;
     }
 
-    public void intentarConquista(int numeroTropasAtacante, GeneradorAleatorio generador) throws Throwable{
-        Ejercito ejercitoAtacante = this.paisConquistador.ejercitoParaAtacar(numeroTropasAtacante);
+    public void numeroDeTropas(int numeroTropas){
+        this.numeroTropas = numeroTropas;
+    }
+
+    public void generador(GeneradorAleatorio generador){
+        this.generador = generador;
+    }
+
+    public void ejecutar() throws Throwable{
+        Ejercito ejercitoAtacante = this.paisConquistador.ejercitoParaAtacar(this.numeroTropas);
         Ejercito ejercitoDefensor = this.paisDefensor.obtenerEjercito();
 
         Batalla batalla = new Batalla();
         batalla.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
         int numeroDeDados = batalla.numeroDeDadosQueSeUtilizaran();
 
-        Dados dados = new Dados(generador);
+        Dados dados = new Dados(this.generador);
 
         Tirada tiradaAtacante = dados.tirarDados(numeroDeDados);
         Tirada tiradaDefensor = dados.tirarDados(numeroDeDados);

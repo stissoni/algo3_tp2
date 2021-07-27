@@ -48,10 +48,4 @@ public class RondaColocacion implements Ronda{
     public boolean terminoRonda(){
         return this.numeroJugadoresQueParticiparon == this.turnero.obtenerNumeroJugadores();
     }
-
-    public void estadoDeLaRonda(){
-        // For testing purposes.
-        System.out.println(this.turnero.jugadorTurno().obtenerNombre()+
-        " le quedan por jugar: "+this.numeroTropasRestantes);
-    }
 }

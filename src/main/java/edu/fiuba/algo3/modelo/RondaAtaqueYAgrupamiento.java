@@ -36,8 +36,4 @@ public class RondaAtaqueYAgrupamiento implements Ronda {
     public boolean terminoRonda(){
         return this.numeroJugadoresQueParticiparon == this.turnero.obtenerNumeroJugadores();
     }
-
-    public void estadoDeLaRonda(){
-        System.out.println("Aca hay un problema xd");
-    }
 }

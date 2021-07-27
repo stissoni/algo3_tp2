@@ -2,8 +2,6 @@ package edu.fiuba.algo3.modelo;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
 public class TurnoTest {
@@ -11,10 +9,10 @@ public class TurnoTest {
     public void testTurnoActual(){
         Jugador jugador1 = new Jugador("Santiago", 1);
         Jugador jugador2 = new Jugador("Julio", 2);
-        ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
-        Turno turnero = new Turno(jugadores, 0);
+        Turnero turnero = Turnero.getInstance();
+        turnero.agregarJugador(jugador1);
+        turnero.agregarJugador(jugador2);
+        turnero.jugadorInicial(0);
 
         assertSame(jugador1, turnero.jugadorTurno());
     }
@@ -22,10 +20,10 @@ public class TurnoTest {
     public void testAvanzarTurno(){
         Jugador jugador1 = new Jugador("Santiago", 1);
         Jugador jugador2 = new Jugador("Julio", 2);
-        ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
-        Turno turnero = new Turno(jugadores, 0);
+        Turnero turnero = Turnero.getInstance();
+        turnero.agregarJugador(jugador1);
+        turnero.agregarJugador(jugador2);
+        turnero.jugadorInicial(0);
 
         turnero.siguienteTurno();
 
@@ -36,10 +34,10 @@ public class TurnoTest {
     public void testAvanzarTurnoPeroYaSeCompletoLaRonda(){
         Jugador jugador1 = new Jugador("Santiago", 1);
         Jugador jugador2 = new Jugador("Julio", 2);
-        ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
-        Turno turnero = new Turno(jugadores, 0);
+        Turnero turnero = Turnero.getInstance();
+        turnero.agregarJugador(jugador1);
+        turnero.agregarJugador(jugador2);
+        turnero.jugadorInicial(0);
 
         turnero.siguienteTurno();
         turnero.siguienteTurno();
@@ -50,10 +48,10 @@ public class TurnoTest {
     public void reiniciarTurno(){
         Jugador jugador1 = new Jugador("Santiago", 1);
         Jugador jugador2 = new Jugador("Julio", 2);
-        ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
-        Turno turnero = new Turno(jugadores, 0);
+        Turnero turnero = Turnero.getInstance();
+        turnero.agregarJugador(jugador1);
+        turnero.agregarJugador(jugador2);
+        turnero.jugadorInicial(0);
 
         turnero.siguienteTurno();
         turnero.reiniciar();

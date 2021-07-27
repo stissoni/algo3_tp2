@@ -2,42 +2,44 @@ package edu.fiuba.algo3.modelo;
 
 public class FaseInicial implements Fase {
     private Partida partida;
-    private RondaColocacion ronda;
+    private Ronda ronda;
     private int numeroRondasColocacionJugadas;
 
     public void asignarPartida(Partida partida){
         this.partida = partida;
     }
 
-    public void iniciarFase() throws Throwable {
-        for (Pais pais: this.partida.obtenerPaises()){
-            Jugador jugador = this.partida.obtenerJugadorActual();
-            Ejercito ejercito = new Ejercito(1, jugador);
-            pais.agregarEjercito(ejercito);
-            this.partida.siguienteTurno();
-        }
-        this.ronda = new RondaColocacion();
-        this.ronda.turnero(this.partida.obtenerTurnero());
-        int tropasParaColocarPorJugador = 3;
-        this.ronda.numeroDeTropas(tropasParaColocarPorJugador);
-        this.ronda.fase(this);
+    public void iniciarFase() {
         this.numeroRondasColocacionJugadas = 0;
+        this.ronda = new RondaColocacion();
+        this.ronda.turnero(this.partida.getTurnero());
+        this.ronda.fase(this);
+        this.ronda.iniciarRonda();
+    }
+
+    public int tropasAColocarPorJugador(){
+        if (numeroRondasColocacionJugadas == 0){
+            return 3;
+        }
+        else {
+            return 5;
+        }
     }
 
     public void ejecutarMovimiento(Movimiento unMovimiento) throws Throwable{
         this.ronda.ejecutar(unMovimiento);
+    }
+
+    public void siguienteRonda(){
+        this.numeroRondasColocacionJugadas = this.numeroRondasColocacionJugadas + 1;
         if (this.terminoFase()){
             this.terminarFase();
         }
-    };
-
-    public void siguienteRonda(){
         this.ronda = new RondaColocacion();
-        this.ronda.turnero(this.partida.obtenerTurnero());
-        int tropasParaColocarPorJugador = 5;
-        this.ronda.numeroDeTropas(tropasParaColocarPorJugador);
+        this.partida.reiniciarTurno();
+        this.ronda.turnero(this.partida.getTurnero());
         this.ronda.fase(this);
-        this.numeroRondasColocacionJugadas = this.numeroRondasColocacionJugadas + 1;
+        this.ronda.iniciarRonda();
     }
 
     public boolean terminoFase(){
@@ -49,10 +51,14 @@ public class FaseInicial implements Fase {
         }
     }
 
-    public void terminarFase() throws Throwable{
+    public void terminarFase(){
         Fase siguienteFase = new FaseJuego();
         siguienteFase.asignarPartida(this.partida);
         siguienteFase.iniciarFase();
         this.partida.asignarFase(siguienteFase);
+    }
+
+    public Ronda obtenerRonda(){
+        return this.ronda;
     }
 }

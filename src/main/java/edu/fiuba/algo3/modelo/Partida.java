@@ -4,21 +4,33 @@ import java.io.IOException;
 import java.util.*;
 
 public class Partida {
-    private ArrayList<Jugador> jugadores;
     private Mapa mapaDelJuego;
     private Fase faseActual;
-    private Turno turno;
+    private Turnero turno;
 
     public Partida(){
-        this.jugadores = new ArrayList<Jugador>();
+        this.turno = Turnero.getInstance();
+    }
+
+    public Turnero getTurnero(){
+        return this.turno;
     }
 
     public void agregarJugador(Jugador unJugador){
-        this.jugadores.add(unJugador);
+        this.turno.agregarJugador(unJugador);
+    }
+
+    public void jugadorInicial(int index){
+        this.turno.jugadorInicial(index);
     }
 
     public void iniciarPartida() throws Throwable{
-        this.turno = new Turno(this.jugadores, 0);
+        for (Pais pais: this.mapaDelJuego.obtenerPaises()){
+            Jugador jugador = this.turno.jugadorTurno();
+            Ejercito ejercito = new Ejercito(1, jugador);
+            pais.agregarEjercito(ejercito);
+            this.turno.siguienteTurno();
+        }
         this.faseActual = new FaseInicial();
         this.faseActual.asignarPartida(this);
         this.faseActual.iniciarFase();
@@ -43,10 +55,6 @@ public class Partida {
         this.faseActual.ejecutarMovimiento(unMovimiento);
     }
 
-    public Turno obtenerTurnero(){
-        return this.turno;
-    }
-
     public int obtenerNumeroJugadores(){
         return this.turno.obtenerNumeroJugadores();
     }
@@ -65,6 +73,14 @@ public class Partida {
 
     public Mapa obtenerMapa(){
         return this.mapaDelJuego;
+    }
+
+    public Pais obtenerUnPais(String nombre){
+        return this.mapaDelJuego.obtenerUnPais(nombre);
+    }
+    
+    public Ronda obtenerRonda(){
+        return this.faseActual.obtenerRonda();
     }
 }
 

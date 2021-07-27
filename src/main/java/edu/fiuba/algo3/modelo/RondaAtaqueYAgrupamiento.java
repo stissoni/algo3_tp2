@@ -1,17 +1,15 @@
 package edu.fiuba.algo3.modelo;
 
-public class RondaColocacion implements Ronda{
+public class RondaAtaqueYAgrupamiento implements Ronda {
     private Turnero turnero;
     private Fase fase;
-    private int numeroTropasRestantes;
     private int numeroJugadoresQueParticiparon;
 
     public void iniciarRonda(){
         this.turnero.reiniciar();
-        this.numeroTropasRestantes = this.fase.tropasAColocarPorJugador();
         this.numeroJugadoresQueParticiparon = 0;
     }
-
+    
     public void fase(Fase fase){
         this.fase = fase;
     }
@@ -23,15 +21,6 @@ public class RondaColocacion implements Ronda{
     public void ejecutar(Movimiento unMovimiento) throws Throwable{
         unMovimiento.jugador(this.turnero.jugadorTurno());
         unMovimiento.ejecutar();
-        this.numeroTropasRestantes = this.numeroTropasRestantes - unMovimiento.tropasUtilizadas();
-        
-        this.verificarTurnoRonda();
-    }
-    
-    public void verificarTurnoRonda(){
-        if (numeroTropasRestantes <= 0){
-            this.terminarTurno();
-        }
     }
 
     public void terminarTurno(){
@@ -41,17 +30,14 @@ public class RondaColocacion implements Ronda{
         }
         else {
             this.turnero.siguienteTurno();
-            this.numeroTropasRestantes = this.fase.tropasAColocarPorJugador();
         }
     }
-    
+
     public boolean terminoRonda(){
         return this.numeroJugadoresQueParticiparon == this.turnero.obtenerNumeroJugadores();
     }
 
     public void estadoDeLaRonda(){
-        // For testing purposes.
-        System.out.println(this.turnero.jugadorTurno().obtenerNombre()+
-        " le quedan por jugar: "+this.numeroTropasRestantes);
+        System.out.println("Aca hay un problema xd");
     }
 }

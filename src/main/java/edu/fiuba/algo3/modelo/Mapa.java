@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
+import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
 
 public class Mapa {
     private Hashtable<String, Continente> continentes;
@@ -16,6 +17,36 @@ public class Mapa {
 
     public ArrayList<Pais> obtenerPaises(){
         return new ArrayList<Pais>(this.paises.values());
+    }
+
+    public ArrayList<Pais> obtenerPaisesDe(Jugador unJugador){
+        ArrayList<Pais> paisesDelJugador = new ArrayList<Pais>();
+        for (Pais pais: this.obtenerPaises()){
+            try{
+                Jugador jugadorControlando = pais.obtenerJugadorEnControl();
+                if (jugadorControlando.sonElMismoJugador(unJugador)){
+                    paisesDelJugador.add(pais);
+                }
+            }
+            catch (PaisSinEjercitoException e){
+            }
+        }
+        return paisesDelJugador;
+    }
+
+    public ArrayList<Pais> obtenerPaisesNoDe(Jugador unJugador){
+        ArrayList<Pais> paisesDelJugador = new ArrayList<Pais>();
+        for (Pais pais: this.obtenerPaises()){
+            try{
+                Jugador jugadorControlando = pais.obtenerJugadorEnControl();
+                if (!jugadorControlando.sonElMismoJugador(unJugador)){
+                    paisesDelJugador.add(pais);
+                }
+            }
+            catch (PaisSinEjercitoException e){
+            }
+        }
+        return paisesDelJugador;
     }
 
     public void agregarPais(Pais unPais){

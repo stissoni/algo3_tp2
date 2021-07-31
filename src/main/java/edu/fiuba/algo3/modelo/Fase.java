@@ -12,4 +12,8 @@ public interface Fase {
     public int tropasAColocarPorJugador();
 
     public Ronda obtenerRonda();
+
+    public void terminarTurno();
+
+    public boolean esRondaDeColocacion();
 }

@@ -24,22 +24,7 @@ public class PartidaTest {
             System.out.println(pais.obtenerNombrePais()+"-"+pais.obtenerJugadorEnControl().obtenerNombre());
         }
     }
-
-    @Test
-    public void testTurnero() throws Throwable{
-        // Preguntar a Pablo...
-        Jugador jugador1 = new Jugador("Santiago", 1);
-        Jugador jugador2 = new Jugador("Julio", 2);
-
-        Partida unaPartida = new Partida();
-        unaPartida.agregarJugador(jugador1);
-        unaPartida.agregarJugador(jugador2);
-        unaPartida.jugadorInicial(0);
-        
-        Turnero turnero = Turnero.getInstance();
-
-        assertSame(jugador1, turnero.jugadorTurno());
-    }
+    
     @Test
     public void testPaisesRepartidosCorrectamenteEntreTresJugadores() throws Throwable{
         Jugador jugador1 = new Jugador("Santiago", 1);

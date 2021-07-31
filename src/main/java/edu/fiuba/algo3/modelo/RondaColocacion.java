@@ -48,4 +48,8 @@ public class RondaColocacion implements Ronda{
     public boolean terminoRonda(){
         return this.numeroJugadoresQueParticiparon == this.turnero.obtenerNumeroJugadores();
     }
+
+    public boolean esRondaDeColocacion(){
+        return true;
+    }
 }

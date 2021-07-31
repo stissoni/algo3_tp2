@@ -36,4 +36,8 @@ public class RondaAtaqueYAgrupamiento implements Ronda {
     public boolean terminoRonda(){
         return this.numeroJugadoresQueParticiparon == this.turnero.obtenerNumeroJugadores();
     }
+
+    public boolean esRondaDeColocacion(){
+        return false;
+    }
 }

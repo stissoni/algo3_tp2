@@ -12,4 +12,6 @@ public interface Ronda {
     public void turnero(Turnero turnero);
 
     public void iniciarRonda();
+
+    public boolean esRondaDeColocacion();
 }

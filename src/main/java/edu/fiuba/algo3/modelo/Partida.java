@@ -16,6 +16,10 @@ public class Partida {
         return this.turno;
     }
 
+    public void terminarTurno(){
+        this.faseActual.terminarTurno();
+    }
+
     public void agregarJugador(Jugador unJugador){
         this.turno.agregarJugador(unJugador);
     }
@@ -71,6 +75,14 @@ public class Partida {
         return this.mapaDelJuego.obtenerPaises();
     }
 
+    public ArrayList<Pais> obtenerPaisesDe(Jugador unJugador){
+        return this.mapaDelJuego.obtenerPaisesDe(unJugador);
+    }
+
+    public ArrayList<Pais> obtenerPaisesNoDe(Jugador unJugador){
+        return this.mapaDelJuego.obtenerPaisesNoDe(unJugador);
+    }
+
     public Mapa obtenerMapa(){
         return this.mapaDelJuego;
     }
@@ -81,6 +93,10 @@ public class Partida {
     
     public Ronda obtenerRonda(){
         return this.faseActual.obtenerRonda();
+    }
+
+    public boolean esRondaDeColocacion(){
+        return this.faseActual.esRondaDeColocacion();
     }
 }
 

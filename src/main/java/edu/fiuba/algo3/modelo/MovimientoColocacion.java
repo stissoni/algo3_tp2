@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-
 public class MovimientoColocacion implements Movimiento{
     private Jugador jugador;
     private int numeroTropas;

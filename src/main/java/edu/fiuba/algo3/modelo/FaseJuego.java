@@ -16,6 +16,10 @@ public class FaseJuego implements Fase {
         this.ronda.iniciarRonda();
     }
 
+    public void terminarTurno(){
+        this.ronda.terminarTurno();
+    }
+
     public void ejecutarMovimiento(Movimiento unMovimiento) throws Throwable{
         this.ronda.ejecutar(unMovimiento);
         // Aca verificar si alguien gano la partida...
@@ -41,5 +45,9 @@ public class FaseJuego implements Fase {
 
     public Ronda obtenerRonda(){
         return this.ronda;
+    }
+
+    public boolean esRondaDeColocacion(){
+        return this.ronda.esRondaDeColocacion();
     }
 }

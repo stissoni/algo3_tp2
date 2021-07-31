@@ -17,6 +17,10 @@ public class FaseInicial implements Fase {
         this.ronda.iniciarRonda();
     }
 
+    public void terminarTurno(){
+        this.ronda.terminarTurno();
+    }
+
     public int tropasAColocarPorJugador(){
         if (numeroRondasColocacionJugadas == 0){
             return 3;
@@ -60,5 +64,9 @@ public class FaseInicial implements Fase {
 
     public Ronda obtenerRonda(){
         return this.ronda;
+    }
+
+    public boolean esRondaDeColocacion(){
+        return this.ronda.esRondaDeColocacion();
     }
 }

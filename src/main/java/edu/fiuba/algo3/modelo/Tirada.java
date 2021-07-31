@@ -32,11 +32,25 @@ public class Tirada {
         return this.dados.get(index);
     }
 
-    public int compararTiradas(Tirada otraTirada){
-        return strategy.compararDados(this, otraTirada);
+    public int compararTiradas(Tirada otraTirada, int numeroDeDados){
+        return strategy.compararDados(this, otraTirada, numeroDeDados);
     }
 
     public void agregarDado(Dado unDado){
         this.dados.add(unDado);
+    }
+
+    public String obtenerStringTirada(){
+        String tirada = "";
+        for (int i = 0; i < this.dados.size(); i++){
+            Dado dado = this.dados.get(i);
+            if (i == (this.dados.size() - 1)){
+                tirada = tirada + dado.obtenerValor();
+            }
+            else{
+                tirada = tirada + dado.obtenerValor()+ " - ";
+            }
+        }
+        return tirada;
     }
 }

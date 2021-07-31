@@ -25,22 +25,22 @@ public class BatallaTest {
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
 
-        int numeroDadosAUtilizar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
+        int numeroDeDadosAComparar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
 
         GeneradorAleatorio generador = mock(GeneradorAleatorio.class);
         when(generador.generar()).thenReturn(5).thenReturn(4).thenReturn(2).thenReturn(4).thenReturn(3).thenReturn(3);
 
         Dados dados = new Dados(generador);
 
-        Tirada dadosAtacante = dados.tirarDados(numeroDadosAUtilizar);
+        Tirada dadosAtacante = dados.tirarDados(ejercitoAtacante.obtenerNumeroTotalDeTropas());
         dadosAtacante.ordenarDadosDeMayorAMenor();
         dadosAtacante.setStrategy(new DadosParaAtaqueStrategy());
 
-        Tirada dadosDefensor = dados.tirarDados(numeroDadosAUtilizar);
+        Tirada dadosDefensor = dados.tirarDados(ejercitoDefensor.obtenerNumeroTotalDeTropas());
         dadosDefensor.ordenarDadosDeMayorAMenor();
         dadosDefensor.setStrategy(new DadosParaDefensaStrategy());
 
-        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
+        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor, numeroDeDadosAComparar);
 
         assertEquals(2, ejercitoAtacante.obtenerNumeroTotalDeTropas());
         assertEquals(1, ejercitoDefensor.obtenerNumeroTotalDeTropas());
@@ -53,22 +53,22 @@ public class BatallaTest {
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-        int numeroDadosAUtilizar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
+        int numeroDeDadosAComparar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
         
         GeneradorAleatorio generador = mock(GeneradorAleatorio.class);
-        when(generador.generar()).thenReturn(6).thenReturn(5).thenReturn(5).thenReturn(4).thenReturn(3).thenReturn(3);;
+        when(generador.generar()).thenReturn(6).thenReturn(5).thenReturn(5).thenReturn(4).thenReturn(3).thenReturn(3);
 
         Dados dados = new Dados(generador);
 
-        Tirada dadosAtacante = dados.tirarDados(numeroDadosAUtilizar);
+        Tirada dadosAtacante = dados.tirarDados(ejercitoAtacante.obtenerNumeroTotalDeTropas());
         dadosAtacante.ordenarDadosDeMayorAMenor();
         dadosAtacante.setStrategy(new DadosParaAtaqueStrategy());
        
-        Tirada dadosDefensor = dados.tirarDados(numeroDadosAUtilizar);
+        Tirada dadosDefensor = dados.tirarDados(ejercitoDefensor.obtenerNumeroTotalDeTropas());
         dadosDefensor.ordenarDadosDeMayorAMenor();
         dadosDefensor.setStrategy(new DadosParaDefensaStrategy());
 
-        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
+        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor, numeroDeDadosAComparar);
 
         assertEquals(3, ejercitoAtacante.obtenerNumeroTotalDeTropas());
         assertEquals(0, ejercitoDefensor.obtenerNumeroTotalDeTropas());
@@ -81,22 +81,22 @@ public class BatallaTest {
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-        int numeroDadosAUtilizar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
+        int numeroDeDadosAComparar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
         
         GeneradorAleatorio generador = mock(GeneradorAleatorio.class);        
-        when(generador.generar()).thenReturn(6).thenReturn(4);
+        when(generador.generar()).thenReturn(6).thenReturn(4).thenReturn(6).thenReturn(1);
 
         Dados dados = new Dados(generador);
 
-        Tirada dadosAtacante = dados.tirarDados(numeroDadosAUtilizar);
+        Tirada dadosAtacante = dados.tirarDados(ejercitoAtacante.obtenerNumeroTotalDeTropas());
         dadosAtacante.ordenarDadosDeMayorAMenor();
         dadosAtacante.setStrategy(new DadosParaAtaqueStrategy());
 
-        Tirada dadosDefensor = dados.tirarDados(numeroDadosAUtilizar);
+        Tirada dadosDefensor = dados.tirarDados(ejercitoDefensor.obtenerNumeroTotalDeTropas());
         dadosDefensor.ordenarDadosDeMayorAMenor();
         dadosDefensor.setStrategy(new DadosParaDefensaStrategy());
 
-        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
+        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor, numeroDeDadosAComparar);
 
         assertEquals(3, ejercitoAtacante.obtenerNumeroTotalDeTropas());
         assertEquals(0, ejercitoDefensor.obtenerNumeroTotalDeTropas());
@@ -109,22 +109,22 @@ public class BatallaTest {
 
         Batalla unaBatallaEpica = new Batalla();
         unaBatallaEpica.asignarEjercitos(ejercitoAtacante, ejercitoDefensor);
-        int numeroDadosAUtilizar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
+        int numeroDeDadosAComparar = unaBatallaEpica.numeroDeDadosQueSeUtilizaran();
         
         GeneradorAleatorio generador = mock(GeneradorAleatorio.class);
-        when(generador.generar()).thenReturn(4).thenReturn(4);
+        when(generador.generar()).thenReturn(4).thenReturn(4).thenReturn(2).thenReturn(4);
         
         Dados dados = new Dados(generador);
         
-        Tirada dadosAtacante = dados.tirarDados(numeroDadosAUtilizar);
+        Tirada dadosAtacante = dados.tirarDados(ejercitoAtacante.obtenerNumeroTotalDeTropas());
         dadosAtacante.ordenarDadosDeMayorAMenor();
         dadosAtacante.setStrategy(new DadosParaAtaqueStrategy());
 
-        Tirada dadosDefensor = dados.tirarDados(numeroDadosAUtilizar);
+        Tirada dadosDefensor = dados.tirarDados(ejercitoDefensor.obtenerNumeroTotalDeTropas());
         dadosDefensor.ordenarDadosDeMayorAMenor();
         dadosDefensor.setStrategy(new DadosParaDefensaStrategy());
 
-        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor);
+        unaBatallaEpica.luchar(dadosAtacante, dadosDefensor, numeroDeDadosAComparar);
         
         assertEquals(2, ejercitoAtacante.obtenerNumeroTotalDeTropas());
         assertEquals(1, ejercitoDefensor.obtenerNumeroTotalDeTropas());

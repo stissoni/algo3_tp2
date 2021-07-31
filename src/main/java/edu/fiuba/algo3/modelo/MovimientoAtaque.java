@@ -5,7 +5,9 @@ public class MovimientoAtaque implements Movimiento {
     private Pais paisConquistador;
     private Pais paisDefensor;
     private GeneradorAleatorio generador;
+    private String tirada;
     private int numeroTropas;
+    private Pais paisGanador;
 
     public int tropasUtilizadas(){
         return this.numeroTropas;
@@ -41,8 +43,8 @@ public class MovimientoAtaque implements Movimiento {
 
         Dados dados = new Dados(this.generador);
 
-        Tirada tiradaAtacante = dados.tirarDados(numeroDeDados);
-        Tirada tiradaDefensor = dados.tirarDados(numeroDeDados);
+        Tirada tiradaAtacante = dados.tirarDados(ejercitoAtacante.obtenerNumeroTotalDeTropas());
+        Tirada tiradaDefensor = dados.tirarDados(ejercitoDefensor.obtenerNumeroTotalDeTropas());
 
         tiradaAtacante.ordenarDadosDeMayorAMenor();
         tiradaAtacante.setStrategy(new DadosParaAtaqueStrategy());
@@ -50,13 +52,27 @@ public class MovimientoAtaque implements Movimiento {
         tiradaDefensor.ordenarDadosDeMayorAMenor();
         tiradaDefensor.setStrategy(new DadosParaDefensaStrategy());
 
-        batalla.luchar(tiradaAtacante, tiradaDefensor);
+        String stringTiradaAtacante = tiradaAtacante.obtenerStringTirada();
+        String stringTiradaDefensor = tiradaDefensor.obtenerStringTirada();
+        this.tirada = "Dados atacante: "+stringTiradaAtacante+"\nDados defensor: "+stringTiradaDefensor;
+
+        batalla.luchar(tiradaAtacante, tiradaDefensor, numeroDeDados);
 
         if (paisDefensor.suEjercitoFueVencido()){
             paisDefensor.asignarEjercito(ejercitoAtacante);
+            this.paisGanador = paisConquistador;
         }
         else {
             paisConquistador.reagruparEjercito(ejercitoAtacante);
+            this.paisGanador = paisDefensor;
         }
+    }
+
+    public Pais obtenerGanador(){
+        return this.paisGanador;
+    }
+
+    public String obtenerTiradas(){
+        return this.tirada;
     }
 }

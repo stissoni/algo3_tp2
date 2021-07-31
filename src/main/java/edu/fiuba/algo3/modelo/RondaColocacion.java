@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.excepciones.NoSePermiteColocarEseNumeroDeTropasException;
+
 public class RondaColocacion implements Ronda{
     private Turnero turnero;
     private Fase fase;
@@ -20,7 +22,10 @@ public class RondaColocacion implements Ronda{
         this.turnero = turnero;
     }
 
-    public void ejecutar(Movimiento unMovimiento) throws Throwable{
+    public void ejecutar(Movimiento unMovimiento) throws Throwable, NoSePermiteColocarEseNumeroDeTropasException{
+        if (this.numeroTropasRestantes - unMovimiento.tropasUtilizadas() < 0){
+            throw new NoSePermiteColocarEseNumeroDeTropasException("No se pueden colocar "+unMovimiento.tropasUtilizadas()+" tropas. Maximo "+this.numeroTropasRestantes+" tropas.");
+        }
         unMovimiento.jugador(this.turnero.jugadorTurno());
         unMovimiento.ejecutar();
         this.numeroTropasRestantes = this.numeroTropasRestantes - unMovimiento.tropasUtilizadas();

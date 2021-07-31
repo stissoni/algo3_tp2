@@ -8,6 +8,10 @@ public class Dados {
     }
 
     public Tirada tirarDados(int cantidadDados){
+        int numeroDadosMaximos = 3;
+        if (cantidadDados > numeroDadosMaximos){
+            cantidadDados = numeroDadosMaximos;
+        }
         Tirada unaTirada = new Tirada();
         for (int i = 0; i < cantidadDados; i++){
             int numeroDeTirada = this.generador.generar();

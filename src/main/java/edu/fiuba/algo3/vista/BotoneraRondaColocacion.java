@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.excepciones.NoSePermiteColocarEseNumeroDeTropasException;
 import edu.fiuba.algo3.modelo.MovimientoColocacion;
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.Partida;
@@ -10,9 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 
 public class BotoneraRondaColocacion extends VBox {
@@ -25,7 +28,7 @@ public class BotoneraRondaColocacion extends VBox {
         }
         listaPaises.setItems(items);
         
-        TextField cantidadTropas = new TextField("3");
+        TextField cantidadTropas = new TextField();
         cantidadTropas.setPrefWidth(40);
         cantidadTropas.setMaxWidth(40);
 
@@ -40,8 +43,16 @@ public class BotoneraRondaColocacion extends VBox {
             try{
                 partida.ejecutarMovimiento(nuevoMovimiento);
             }
-            catch (Throwable exception){
-                exception.printStackTrace();
+            catch (NoSePermiteColocarEseNumeroDeTropasException exception){
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("ALERTA");
+                alert.setHeaderText("¡No se puede colocar ese numero de tropas!");
+                String mensaje = exception.getMessage();
+                alert.setContentText(mensaje);
+                alert.show();
+            }
+            catch (Throwable exception2){
+                exception2.printStackTrace();
             }
             contenedor.refresh();
         };

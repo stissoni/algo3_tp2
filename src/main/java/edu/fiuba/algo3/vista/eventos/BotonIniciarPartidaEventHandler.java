@@ -12,9 +12,12 @@ public class BotonIniciarPartidaEventHandler implements EventHandler<ActionEvent
     Stage stage;
     int numeroJugadores;
 
-    public BotonIniciarPartidaEventHandler(Stage stage, int cantidadJugadores){
+    public BotonIniciarPartidaEventHandler(Stage stage){
         this.stage = stage;
-        this.numeroJugadores = cantidadJugadores;
+    }
+
+    public void setNumeroJugadores(int numeroJugadores){
+        this.numeroJugadores = numeroJugadores;
     }
     
     public void handle(ActionEvent actionEvent){
@@ -38,9 +41,9 @@ public class BotonIniciarPartidaEventHandler implements EventHandler<ActionEvent
                 String nombre = "Jugador " + (i+1);
                 Jugador nuevoJugador = new Jugador(nombre, i);
                 partida.agregarJugador(nuevoJugador);
-                partida.jugadorInicial(0);
-                partida.iniciarPartida();
             }
+            partida.jugadorInicial(0);
+            partida.iniciarPartida();
         }
         catch (Throwable e) {
             e.printStackTrace();

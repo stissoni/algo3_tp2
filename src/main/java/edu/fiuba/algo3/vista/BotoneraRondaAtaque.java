@@ -28,8 +28,7 @@ public class BotoneraRondaAtaque extends VBox{
             try{
                 String nombrePais = pais.obtenerNombrePais();
                 String cantidadTropas = String.valueOf(pais.obtenerNumeroTotalDeTropas());
-                String jugador = pais.obtenerJugadorEnControl().obtenerNombre();
-                String dato = nombrePais+ " ("+cantidadTropas+")"+ " "+ jugador;
+                String dato = nombrePais+ " ("+cantidadTropas+")";
                 itemsPaisesEnControl.addAll(dato);
             }
             catch (Throwable e){

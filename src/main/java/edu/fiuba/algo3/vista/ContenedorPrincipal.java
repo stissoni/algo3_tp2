@@ -1,11 +1,8 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Partida;
-import edu.fiuba.algo3.modelo.RondaColocacion;
-import edu.fiuba.algo3.vista.eventos.BotonSiguienteTurnoEventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -49,8 +46,8 @@ public class ContenedorPrincipal extends BorderPane{
 
     private void setPanelControl(){
         Label jugadorActual = new Label();
-        jugadorActual.setText(this.partida.obtenerJugadorActual().obtenerNombre());
-
+        jugadorActual.setText("Jugando ahora\n"+this.partida.obtenerJugadorActual().obtenerNombre());
+        jugadorActual.setStyle("-fx-font: 18 arial;");
         this.panelControl = new VBox(jugadorActual);
         this.panelControl.setSpacing(10);
         this.panelControl.setPadding(new Insets(15));

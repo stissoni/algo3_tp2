@@ -13,11 +13,11 @@ public class PaisBuilder implements Builder {
         this.resultado.asignarNombre(nombre);
     }
 
-    public void cargarPaises(ArrayList<Pais> paises){
-        for (Pais unPais: paises){
-            this.resultado.agregarPaisLimitrofe(unPais);
-        }
-    }
+    //public void cargarPaises(ArrayList<Pais> paises){
+      //  for (Pais unPais: paises){
+        //    this.resultado.agregarPaisLimitrofe(unPais);
+        //}
+    //}
 
     public Pais obtenerResultado(){
         return this.resultado;

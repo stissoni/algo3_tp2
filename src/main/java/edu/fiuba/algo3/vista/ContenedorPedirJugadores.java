@@ -1,8 +1,12 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.vista.eventos.BotonIniciarPartidaEventHandler;
+import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.Partida;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,6 +15,25 @@ import javafx.stage.Stage;
 
 public class ContenedorPedirJugadores extends VBox{
     Stage stage;
+    Partida partida;
+    
+    public void iniciarPartida(int cantidadJugadores){
+        this.partida = new Partida();
+        try {
+            partida.crearMapa();
+            for (int i = 0; i < cantidadJugadores; i++){
+                // Pedir nombre de jugadores
+                String nombre = "Jugador " + (i+1);
+                Jugador nuevoJugador = new Jugador(nombre, i);
+                partida.agregarJugador(nuevoJugador);
+            }
+            partida.jugadorInicial(0);
+            partida.iniciarPartida();
+        }
+        catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
 
     public ContenedorPedirJugadores(Stage stage){
         super();
@@ -25,7 +48,7 @@ public class ContenedorPedirJugadores extends VBox{
 
         Label mensajeCantidadJugadores = new Label("Numero de jugadores");
         mensajeCantidadJugadores.setStyle("-fx-font: 18 arial;");
-        mensajeCantidadJugadores.setTranslateY(-20);
+        mensajeCantidadJugadores.setTranslateY(-35);
         
         TextField cantidadJugadores = new TextField();
         cantidadJugadores.setPrefWidth(80);
@@ -34,16 +57,7 @@ public class ContenedorPedirJugadores extends VBox{
         Button botonIniciarPartida = new Button("Iniciar");
         botonIniciarPartida.setTranslateY(50);
         botonIniciarPartida.setStyle("-fx-font: 18 arial; -fx-border-color: #000000;");
-        BotonIniciarPartidaEventHandler iniciarPartidaEventHandler = new BotonIniciarPartidaEventHandler(stage);
         
-        cantidadJugadores.textProperty().addListener(
-            (observable, oldValue, newValue)->{
-                iniciarPartidaEventHandler.setNumeroJugadores(Integer.parseInt(newValue));
-                System.out.println("textfield changed from " + oldValue + " to " + newValue);
-            }
-        );
-
-        /*
         EventHandler<ActionEvent> iniciarPartidaEventHandler = e -> {
             this.iniciarPartida(Integer.parseInt(cantidadJugadores.getText()));
 

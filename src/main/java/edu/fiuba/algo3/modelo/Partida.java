@@ -83,6 +83,10 @@ public class Partida {
         return this.mapaDelJuego.obtenerPaisesNoDe(unJugador);
     }
 
+    public ArrayList<Pais> obtenerPaisesLimitrofesDe(Pais unPais, Jugador unJugador){
+        return this.mapaDelJuego.obtenerPaisesLimitrofesDe(unPais, unJugador);
+    }
+
     public Mapa obtenerMapa(){
         return this.mapaDelJuego;
     }

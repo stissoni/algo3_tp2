@@ -8,15 +8,15 @@ import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
 public class Pais {
     private String nombrePais;
     private Ejercito ejercitoEnControl;
-    private ArrayList<Pais> paisesLimitrofes;
+    private ArrayList<String> paisesLimitrofes;
 
     public Pais(String nombrePais){
         this.nombrePais = nombrePais;
-        this.paisesLimitrofes = new ArrayList<Pais>();
+        this.paisesLimitrofes = new ArrayList<String>();
     }
 
     public Pais(){
-        this.paisesLimitrofes = new ArrayList<Pais>();
+        this.paisesLimitrofes = new ArrayList<String>();
     }
 
     public void asignarNombre(String unNombre){
@@ -55,6 +55,10 @@ public class Pais {
         return this.nombrePais;
     }
 
+    public ArrayList<String> obtenerPaisesLimitrofes(){
+        return this.paisesLimitrofes;
+    }
+
     public void agregarEjercito(Ejercito unEjercito) throws EjercitosDeJugadoresDiferentesException{
         if (this.ejercitoEnControl == null){
             this.asignarEjercito(unEjercito);
@@ -64,8 +68,15 @@ public class Pais {
         }
     }
 
-    public void agregarPaisLimitrofe(Pais unPais){
+    public String obtenerNombrePaisLimitrofe(int posicion) { return paisesLimitrofes.get(posicion); }
+
+
+    public void agregarPaisLimitrofe(String unPais){
         this.paisesLimitrofes.add(unPais);
+    }
+
+    public int cantidadDePaisesLimitrofe(){
+        return this.paisesLimitrofes.size();
     }
 
     public void reducirTropas(int numeroDeTropas) throws Throwable{

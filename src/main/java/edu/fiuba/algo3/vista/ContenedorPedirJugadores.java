@@ -25,7 +25,6 @@ public class ContenedorPedirJugadores extends VBox{
 
         Label mensajeCantidadJugadores = new Label("Numero de jugadores");
         mensajeCantidadJugadores.setStyle("-fx-font: 18 arial;");
-        mensajeCantidadJugadores.setTranslateY(-20);
         
         TextField cantidadJugadores = new TextField();
         cantidadJugadores.setPrefWidth(80);
@@ -42,25 +41,6 @@ public class ContenedorPedirJugadores extends VBox{
                 System.out.println("textfield changed from " + oldValue + " to " + newValue);
             }
         );
-
-        /*
-        EventHandler<ActionEvent> iniciarPartidaEventHandler = e -> {
-            this.iniciarPartida(Integer.parseInt(cantidadJugadores.getText()));
-
-            ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(stage, this.partida);
-            Scene proximaEscena = new Scene(contenedorPrincipal, 640, 480);
-            stage.setScene(proximaEscena);
-            stage.setFullScreenExitHint("");
-            stage.setFullScreen(false);
-        };
-
-        /* 
-        Parece que para crear el objeto tiene que usar si o si el valor del campo textfield.
-        Esta solucion esta mejor porque encapsula la creacion de la partida en el controlador.
-        Pero no funciona :(
-        BotonIniciarPartidaEventHandler iniciarPartidaEventHandler = new BotonIniciarPartidaEventHandler(stage, Integer.parseInt(cantidadJugadores.getText()));
-        */
-
         botonIniciarPartida.setOnAction(iniciarPartidaEventHandler);
 
         this.getChildren().addAll(
@@ -69,7 +49,5 @@ public class ContenedorPedirJugadores extends VBox{
             cantidadJugadores,
             botonIniciarPartida
         );
-
     }
-
 }

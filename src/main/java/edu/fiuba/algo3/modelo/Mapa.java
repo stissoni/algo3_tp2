@@ -49,6 +49,23 @@ public class Mapa {
         return paisesDelJugador;
     }
 
+    public ArrayList<Pais> obtenerPaisesLimitrofesDe(Pais unPais, Jugador unJugador){
+        //ArrayList<String> paisesLimitrofes = unPais.obtenerPaisesLimitrofes();
+        ArrayList<Pais> paisesLimitrofesAConquistar = new ArrayList<Pais>();
+        for (int i = 1; i<unPais.cantidadDePaisesLimitrofe(); i++ ){
+            Pais otroPais=this.obtenerUnPais(unPais.obtenerNombrePaisLimitrofe(i));
+            try{
+                Jugador jugadorControlando = otroPais.obtenerJugadorEnControl();
+                if (!jugadorControlando.sonElMismoJugador(unJugador)){
+                    paisesLimitrofesAConquistar.add(otroPais);
+                }
+            }
+            catch (PaisSinEjercitoException e){
+            }
+        }
+        return paisesLimitrofesAConquistar;
+    }
+
     public void agregarPais(Pais unPais){
         this.paises.put(unPais.obtenerNombrePais(), unPais);
     }

@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.vista.ContenedorPartidaFinalizada;
 import edu.fiuba.algo3.vista.ContenedorPrincipal;
 import edu.fiuba.algo3.excepciones.NumeroDeTropasInsuficienteException;
+import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -72,11 +73,26 @@ public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
             alert.setContentText(mensaje);
             alert.show();
         }
-        catch (NumeroDeTropasInsuficienteException exception){
+        catch (NumeroDeTropasInsuficienteException exceptionTropasInsuficientes){
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("ALERTA");
             alert.setHeaderText("¡No hay tropas suficentes para el ataque!");
             String mensaje = this.nombrePaisConquistador+ " ataca a " +this.nombrePaisDefensor+" con "+this.numeroTropas+ " tropa(s) pero solo dispone de "+ paisConquistador.obtenerNumeroTotalDeTropas() +" tropa(s)"; 
+            alert.setContentText(mensaje);
+            alert.show();
+        }
+        catch(PaisSinEjercitoException exceptionSinTropas){
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("ALERTA");
+            alert.setHeaderText("¡Debe quedar por lo menos una tropa en el pais!");
+            String mensaje;
+            int numeroTropasEnElPaisAtacante = this.partida.obtenerUnPais(this.nombrePaisConquistador).obtenerNumeroTotalDeTropas();
+            if (numeroTropasEnElPaisAtacante - 1 <= 0){
+                mensaje = "Este pais no puede realizar ataques";
+            }
+            else {
+                mensaje = "Puedes atacar con maximo "+(numeroTropasEnElPaisAtacante-1)+" tropa(s)";
+            }
             alert.setContentText(mensaje);
             alert.show();
         }

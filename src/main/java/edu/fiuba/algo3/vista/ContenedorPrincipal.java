@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.Partida;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -54,7 +55,7 @@ public class ContenedorPrincipal extends BorderPane{
     private void setPanelControl(){
         Label jugadorActual = new Label();
         jugadorActual.setText("Jugando ahora\n"+this.partida.obtenerJugadorActual().obtenerNombre());
-        jugadorActual.setStyle("-fx-font: 18 arial;");
+        jugadorActual.setStyle("-fx-font-size: 14;");
         this.panelControl = new VBox();
         this.panelControl.setSpacing(10);
         this.panelControl.setPadding(new Insets(15));
@@ -62,17 +63,18 @@ public class ContenedorPrincipal extends BorderPane{
         Label objetivoDelJugador = new Label();
         ObjetivoConquista objetivo = this.partida.obtenerJugadorActual().obtenerObjetivo();
         objetivoDelJugador.setText(objetivo.descripcionDelObjetivo());
+        objetivoDelJugador.setStyle("-fx-font-size: 14;");
 
+        Label estadoDelObjetivo = new Label();
+        estadoDelObjetivo.setText(objetivo.estadoDelObjetivo(partida.obtenerMapa()));
+        estadoDelObjetivo.setStyle("-fx-font-size: 14;");
+
+        this.panelControl.getChildren().addAll(jugadorActual, new Separator(), objetivoDelJugador, estadoDelObjetivo);
         if (this.partida.esRondaDeColocacion()){
             Label numeroTropasAColocar = new Label();
-            numeroTropasAColocar.setText(String.valueOf(this.partida.tropasDisponiblesParaColocar())+ " tropa(s)");
-            Label tropasDisponibles = new Label("Tropas disponibles");
-            tropasDisponibles.setStyle("-fx-font: 18 arial;");
-            numeroTropasAColocar.setStyle("-fx-font: 18 arial;");
-            this.panelControl.getChildren().addAll(jugadorActual, tropasDisponibles, numeroTropasAColocar, objetivoDelJugador);
-        }
-        else {
-            this.panelControl.getChildren().addAll(jugadorActual, objetivoDelJugador);
+            numeroTropasAColocar.setText("Tropas disponibles\n"+String.valueOf(this.partida.tropasDisponiblesParaColocar())+ " tropa(s)");
+            numeroTropasAColocar.setStyle("-fx-font-size: 14;");
+            this.panelControl.getChildren().addAll(new Separator(), numeroTropasAColocar);
         }
         this.setRight(this.panelControl);
     }

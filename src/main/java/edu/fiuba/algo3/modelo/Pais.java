@@ -81,8 +81,7 @@ public class Pais {
     }
 
     public Ejercito ejercitoParaAtacar(int numeroDeTropas) throws Throwable{
-        this.reducirTropas(numeroDeTropas);
-        return new Ejercito(numeroDeTropas, this.obtenerJugadorEnControl());
+        return this.ejercitoEnControl.ejercitoParaAtacar(numeroDeTropas);
     }
 
     public ArrayList<Pais> obtenerLimitrofes(){

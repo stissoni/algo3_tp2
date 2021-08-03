@@ -47,11 +47,17 @@ public class Partida {
         director.crearObjetivos(builder, this.mapaDelJuego);
 
         ArrayList<ObjetivoConquista> objetivos = builder.obtenerResultado();
+        int numeroObjetivosDisponibles = objetivos.size();
+        System.out.println(numeroObjetivosDisponibles);
+        
         for (Jugador jugador: this.turno.obtenerJugadores()){
             GeneradorAleatorio generador = new GeneradorAleatorio();
-            int numero = generador.generar(0, objetivos.size());
-            jugador.asignarObjetivo(objetivos.get(numero));
-            objetivos.get(numero).setJugador(jugador);
+            int index = generador.generar(0, numeroObjetivosDisponibles);
+            jugador.asignarObjetivo(objetivos.get(index));
+            objetivos.get(index).setJugador(jugador);
+
+            objetivos.remove(index);
+            numeroObjetivosDisponibles = numeroObjetivosDisponibles - 1;
         }
     }
 

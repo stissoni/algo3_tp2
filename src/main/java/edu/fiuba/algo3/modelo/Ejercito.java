@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.excepciones.NumeroDeTropasInsuficienteException;
+import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
 import edu.fiuba.algo3.excepciones.EjercitoYaVencidoException;
 
@@ -50,5 +51,20 @@ public class Ejercito {
             throw new EjercitosDeJugadoresDiferentesException("Los ejercitos son de jugadores diferentes");
         }
         this.numeroDeTropas = this.numeroDeTropas + otroEjercito.obtenerNumeroTotalDeTropas();
+    }
+
+    public Ejercito ejercitoParaAtacar(int numeroTropas) throws PaisSinEjercitoException, NumeroDeTropasInsuficienteException{
+        Ejercito ejercitoParaAtaque;
+        if (numeroTropas > this.numeroDeTropas){
+            throw new NumeroDeTropasInsuficienteException("No hay tropas suficientes");
+        }
+        else if (this.numeroDeTropas == numeroTropas){
+            throw new PaisSinEjercitoException("Debe quedar una tropa en el pais para atacar.");
+        }
+        else {
+            this.reducirTropas(numeroTropas);
+            ejercitoParaAtaque = new Ejercito(numeroTropas, this.jugador);
+        }
+        return ejercitoParaAtaque;
     }
 }

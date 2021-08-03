@@ -20,11 +20,11 @@ public class ContenedorPedirJugadores extends VBox{
         this.setPadding(new Insets(25));
 
         Label mensajeTitulo = new Label("Bienvenido a A.L.T.E.G.O");
-        mensajeTitulo.setStyle("-fx-font: 24 arial;");
+        mensajeTitulo.setStyle("-fx-font-size: 24;");
         mensajeTitulo.setTranslateY(-100);
 
         Label mensajeCantidadJugadores = new Label("Numero de jugadores");
-        mensajeCantidadJugadores.setStyle("-fx-font: 18 arial;");
+        mensajeCantidadJugadores.setStyle("-fx-font-size: 18;");
         
         TextField cantidadJugadores = new TextField();
         cantidadJugadores.setPrefWidth(80);
@@ -32,7 +32,7 @@ public class ContenedorPedirJugadores extends VBox{
 
         Button botonIniciarPartida = new Button("Iniciar");
         botonIniciarPartida.setTranslateY(50);
-        botonIniciarPartida.setStyle("-fx-font: 18 arial; -fx-border-color: #000000;");
+        botonIniciarPartida.setStyle("-fx-font-size: 18; -fx-border-color: #000000;");
         BotonIniciarPartidaEventHandler iniciarPartidaEventHandler = new BotonIniciarPartidaEventHandler(stage);
         
         cantidadJugadores.textProperty().addListener(

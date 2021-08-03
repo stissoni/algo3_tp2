@@ -25,11 +25,11 @@ public class BotonIniciarPartidaEventHandler implements EventHandler<ActionEvent
         Partida nuevaPartida = this.iniciarPartida(this.numeroJugadores);
 
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(stage, nuevaPartida);
-        Scene proximaEscena = new Scene(contenedorPrincipal, 640, 480);
+        Scene proximaEscena = new Scene(contenedorPrincipal, 1080, 720);
         
         stage.setScene(proximaEscena);
         stage.setFullScreenExitHint("");
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
     }
 
     private Partida iniciarPartida(int cantidadJugadores){

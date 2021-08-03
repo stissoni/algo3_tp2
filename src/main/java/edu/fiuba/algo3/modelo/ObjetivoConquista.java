@@ -31,9 +31,22 @@ public class ObjetivoConquista {
     }
 
     public String descripcionDelObjetivo(){
-        String descripcion = "Objetivo:\n";
+        String descripcion = "Objetivo\n";
         for (Continente continente: this.continentes.keySet()){
-            String objetivoParticular = "conquistar "+ this.continentes.get(continente)+" de "+continente.obtenerNombre()+"\n";
+            String objetivoParticular = "Conquistar "+ this.continentes.get(continente)+" paises de "+continente.obtenerNombre()+"\n";
+            descripcion = descripcion + objetivoParticular;
+        }
+        return descripcion;
+    }
+
+    public String estadoDelObjetivo(Mapa mapa){
+        String descripcion = "Estado de objetivo\n";
+        for (Continente continente: this.continentes.keySet()){
+            int numeroObjetivo = this.continentes.get(continente);
+            int numeroActual = numeroObjetivo - continente.numeroPaisesDominadosPor(this.jugadorDelObjetivo);
+            String objetivoParticular =(
+                "Faltan "+numeroActual+" pais(es)"+" de "+continente.obtenerNombre()+"\n"
+            );
             descripcion = descripcion + objetivoParticular;
         }
         return descripcion;

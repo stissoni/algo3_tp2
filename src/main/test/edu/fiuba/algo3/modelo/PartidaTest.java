@@ -117,7 +117,7 @@ public class PartidaTest {
         assertSame(jugador1, unaPartida.obtenerJugadorActual());
 
         MovimientoColocacion movimiento = new MovimientoColocacion();
-        Pais destino = unaPartida.obtenerUnPais("Alemania");
+        Pais destino = unaPartida.obtenerUnPais("Francia");
         movimiento.destinoPais(destino);
         movimiento.numeroTropas(3);
         unaPartida.ejecutarMovimiento(movimiento);
@@ -125,7 +125,7 @@ public class PartidaTest {
         assertSame(jugador2, unaPartida.obtenerJugadorActual());
 
         movimiento = new MovimientoColocacion();
-        destino = unaPartida.obtenerUnPais("Francia");
+        destino = unaPartida.obtenerUnPais("Alemania");
         movimiento.destinoPais(destino);
         movimiento.numeroTropas(3);
         unaPartida.ejecutarMovimiento(movimiento);

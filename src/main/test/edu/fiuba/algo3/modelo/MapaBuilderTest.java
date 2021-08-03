@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 
@@ -14,14 +15,37 @@ public class MapaBuilderTest {
         mapaBuilder.reset();
         mapaBuilder.asignarPaises();
         mapaBuilder.asignarContinentes();
+        mapaBuilder.asignarPaisesLimitrofes();
 
         Mapa mapa = mapaBuilder.obtenerResultado();
         
         assertEquals(50, mapa.numeroPaises());
         assertEquals(6, mapa.numeroContinentes());
 
-        Pais argentina = mapa.obtenerUnPais("Argentina");
+        Pais chile = mapa.obtenerUnPais("Chile");
 
-        assertEquals("Argentina", argentina.obtenerNombrePais());
+        assertEquals("Chile", chile.obtenerNombrePais());
+        assertEquals(3, chile.obtenerNumeroDePaisesLimitrofes());
+        for (Pais paisLimitrofe: chile.obtenerLimitrofes()){
+            System.out.println(paisLimitrofe.obtenerNombrePais());
+        }
+    }
+
+    @Test
+    public void testPaisesLimitrofes() throws IOException{
+        MapaBuilder mapaBuilder = new MapaBuilder();
+
+        mapaBuilder.reset();
+        mapaBuilder.asignarPaises();
+        mapaBuilder.asignarContinentes();
+        mapaBuilder.asignarPaisesLimitrofes();
+
+        Mapa mapa = mapaBuilder.obtenerResultado();
+
+        Pais siberia = mapa.obtenerUnPais("Siberia");
+        Pais tartaria = mapa.obtenerUnPais("Tartaria");
+
+        assertTrue(siberia.esLimitrofeDe(tartaria));
+        assertTrue(tartaria.esLimitrofeDe(siberia));
     }
 }

@@ -14,4 +14,6 @@ public interface Ronda {
     public void iniciarRonda();
 
     public boolean esRondaDeColocacion();
+
+    public int tropasDisponiblesParaColocar();
 }

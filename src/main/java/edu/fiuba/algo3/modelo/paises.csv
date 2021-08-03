@@ -5,20 +5,20 @@ Uruguay,America Del Sur,Argentina,Brasil
 Peru,America Del Sur,Chile,Argentina,Brasil,Colombia
 Colombia,America Del Sur,Brasil,Peru,Mexico
 Mexico,America Del Norte,Colombia,California
-California,America Del Norte,Mexico,Oregon,Nueva York
-Oregon,America Del Norte,California,Nueva York,Canada,Yukon,Alaska
+California,America Del Norte,Mexico,Oregon,NuevaYork
+Oregon,America Del Norte,California,NuevaYork,Canada,Yukon,Alaska
 Alaska,America Del Norte,Oregon,Yukon,Kamchatka
 Yukon,America Del Norte,Alaska,Oregon,Canada
-Canada,America Del Norte,Yukon,Nueva York,Terranova,Oregon
-Nueva York,America Del Norte,California,Oregon,Canada,Terranova,Groenlandia
-Terranova,America Del Norte,Canada,Nueva York,Labrador
+Canada,America Del Norte,Yukon,NuevaYork,Terranova,Oregon
+NuevaYork,America Del Norte,California,Oregon,Canada,Terranova,Groenlandia
+Terranova,America Del Norte,Canada,NuevaYork,Labrador
 Labrador,America Del Norte,Terranova,Groenlandia
-Groenlandia,America Del Norte,Labrador,Nueva York,Islandia
-Islandia,Europa,Groenlandia,Suecia,Gran Bretaña
-Gran Bretaña,Europa,Islandia,España,Alemania
-España,Europa,Gran Bretaña,Francia,Sahara
+Groenlandia,America Del Norte,Labrador,NuevaYork,Islandia
+Islandia,Europa,Groenlandia,Suecia,GranBretaña
+GranBretaña,Europa,Islandia,España,Alemania
+España,Europa,GranBretaña,Francia,Sahara
 Francia,Europa,España,Alemania,Italia
-Alemania,Europa,Francia,Italia,Gran Bretaña,Polonia
+Alemania,Europa,Francia,Italia,GranBretaña,Polonia
 Italia,Europa,Francia,Alemania
 Polonia,Europa,Alemania,Rusia,Egipto,Turquia
 Rusia,Europa,Polonia,Suecia,Aral,Iran,Turquia

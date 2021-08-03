@@ -84,4 +84,22 @@ public class Pais {
         this.reducirTropas(numeroDeTropas);
         return new Ejercito(numeroDeTropas, this.obtenerJugadorEnControl());
     }
+
+    public ArrayList<Pais> obtenerLimitrofes(){
+        return this.paisesLimitrofes;
+    }
+
+    public int obtenerNumeroDePaisesLimitrofes(){
+        return this.paisesLimitrofes.size();
+    }
+
+    public boolean esLimitrofeDe(Pais otroPais){
+        boolean esLimitrofe = false;
+        for (Pais paisLimitrofe: this.paisesLimitrofes){
+            if (paisLimitrofe.nombrePais == otroPais.nombrePais){
+                esLimitrofe = true;
+            }
+        }
+        return esLimitrofe;
+    }
 }

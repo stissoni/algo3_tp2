@@ -69,4 +69,8 @@ public class FaseInicial implements Fase {
     public boolean esRondaDeColocacion(){
         return this.ronda.esRondaDeColocacion();
     }
+
+    public int tropasDisponiblesParaColocar(){
+        return this.ronda.tropasDisponiblesParaColocar();
+    }
 }

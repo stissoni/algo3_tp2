@@ -22,6 +22,9 @@ public class MovimientoAtaque implements Movimiento {
     }
 
     public void paisDefensor(Pais paisDefensor){
+        if (!paisDefensor.esLimitrofeDe(this.paisConquistador)){
+            // Lanzar exception.
+        }
         this.paisDefensor = paisDefensor;
     }
 

@@ -182,4 +182,19 @@ public class PartidaTest {
         assertSame(jugador1, unaPartida.obtenerUnPais("Nueva York").obtenerJugadorEnControl());
         assertEquals(5, unaPartida.obtenerUnPais("Nueva York").obtenerNumeroTotalDeTropas());
     }
+    
+    @Test
+    public void paisesLimitrofes() throws Throwable{
+        Jugador jugador1 = new Jugador("Santiago", 1);
+        Jugador jugador2 = new Jugador("Julio", 2);
+
+        Partida unaPartida = new Partida();
+        unaPartida.crearMapa();
+        unaPartida.agregarJugador(jugador1);
+        unaPartida.agregarJugador(jugador2);
+        unaPartida.jugadorInicial(0);
+        unaPartida.iniciarPartida();
+
+        assertEquals(4, unaPartida.obtenerPaisesLimitrofesDe("Argentina").size());
+    }
 }

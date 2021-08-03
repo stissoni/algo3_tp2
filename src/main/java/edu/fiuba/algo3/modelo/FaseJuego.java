@@ -50,4 +50,8 @@ public class FaseJuego implements Fase {
     public boolean esRondaDeColocacion(){
         return this.ronda.esRondaDeColocacion();
     }
+
+    public int tropasDisponiblesParaColocar(){
+        return this.ronda.tropasDisponiblesParaColocar();
+    }
 }

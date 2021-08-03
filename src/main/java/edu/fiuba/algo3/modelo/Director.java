@@ -12,5 +12,6 @@ public class Director {
         builder.reset();
         builder.asignarPaises();
         builder.asignarContinentes();
+        builder.asignarPaisesLimitrofes();
     }
 }

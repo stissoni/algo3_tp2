@@ -98,5 +98,21 @@ public class Partida {
     public boolean esRondaDeColocacion(){
         return this.faseActual.esRondaDeColocacion();
     }
+
+    public ArrayList<Pais> obtenerPaisesLimitrofesDe(String nombrePais){
+        return this.mapaDelJuego.obtenerPaisesLimitrofesDe(nombrePais);
+    }
+
+    public ArrayList<Pais> obtenerPaisesLimitrofesEnemigosDe(String nombrePais, Jugador unJugador){
+        return this.mapaDelJuego.obtenerPaisesLimitrofesEnemigosDe(nombrePais, unJugador);
+    }
+
+    public ArrayList<Pais> obtenerPaisesLimitrofesDe(String nombrePais, Jugador unJugador){
+        return this.mapaDelJuego.obtenerPaisesLimitrofesDe(nombrePais, unJugador);
+    }
+
+    public int tropasDisponiblesParaColocar(){
+        return this.faseActual.tropasDisponiblesParaColocar();
+    }
 }
 

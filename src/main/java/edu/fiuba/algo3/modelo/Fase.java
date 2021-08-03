@@ -16,4 +16,6 @@ public interface Fase {
     public void terminarTurno();
 
     public boolean esRondaDeColocacion();
+
+    public int tropasDisponiblesParaColocar();
 }

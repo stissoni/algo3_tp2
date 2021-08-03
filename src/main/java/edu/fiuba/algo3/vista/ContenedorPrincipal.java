@@ -33,6 +33,9 @@ public class ContenedorPrincipal extends BorderPane{
         if (this.partida.esRondaDeColocacion()){
             this.botonera = new BotoneraRondaColocacion(this, this.partida);
         }
+        else if (this.partida.esRondaDeReagrupamiento()){
+            this.botonera = new BotoneraRondaReagrupar(this, this.partida);
+        }
         else {
             this.botonera = new BotoneraRondaAtaque(this, this.partida);
         }
@@ -42,16 +45,28 @@ public class ContenedorPrincipal extends BorderPane{
     public void refresh(){
         this.setPanelControl();
         this.setBotonera();
+        this.setPanelControl();
     }
 
     private void setPanelControl(){
         Label jugadorActual = new Label();
         jugadorActual.setText("Jugando ahora\n"+this.partida.obtenerJugadorActual().obtenerNombre());
         jugadorActual.setStyle("-fx-font: 18 arial;");
-        this.panelControl = new VBox(jugadorActual);
+        this.panelControl = new VBox();
         this.panelControl.setSpacing(10);
         this.panelControl.setPadding(new Insets(15));
 
+        if (this.partida.esRondaDeColocacion()){
+            Label numeroTropasAColocar = new Label();
+            numeroTropasAColocar.setText(String.valueOf(this.partida.tropasDisponiblesParaColocar())+ " tropa(s)");
+            Label tropasDisponibles = new Label("Tropas disponibles");
+            tropasDisponibles.setStyle("-fx-font: 18 arial;");
+            numeroTropasAColocar.setStyle("-fx-font: 18 arial;");
+            this.panelControl.getChildren().addAll(jugadorActual, tropasDisponibles, numeroTropasAColocar);
+        }
+        else {
+            this.panelControl.getChildren().addAll(jugadorActual);
+        }
         this.setRight(this.panelControl);
     }
 

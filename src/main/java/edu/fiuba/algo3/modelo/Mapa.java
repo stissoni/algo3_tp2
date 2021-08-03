@@ -34,6 +34,43 @@ public class Mapa {
         return paisesDelJugador;
     }
 
+    public ArrayList<Pais> obtenerPaisesLimitrofesDe(String nombrePais){
+        Pais unPais = this.obtenerUnPais(nombrePais);
+        return unPais.obtenerLimitrofes();
+    }
+
+    public ArrayList<Pais> obtenerPaisesLimitrofesDe(String nombrePais, Jugador unJugador){
+        ArrayList<Pais> paisesLimitrofesDeJugador = new ArrayList<Pais>();
+        Pais unPais = this.obtenerUnPais(nombrePais);
+        for(Pais pais: unPais.obtenerLimitrofes()){
+            try{
+                Jugador jugadorControlando = pais.obtenerJugadorEnControl();
+                if (jugadorControlando.sonElMismoJugador(unJugador)){
+                    paisesLimitrofesDeJugador.add(pais);
+                }
+            }
+            catch (PaisSinEjercitoException e){
+            }
+        }
+        return paisesLimitrofesDeJugador;
+    }
+
+    public ArrayList<Pais> obtenerPaisesLimitrofesEnemigosDe(String nombrePais, Jugador unJugador){
+        ArrayList<Pais> paisesLimitrofesDeJugador = new ArrayList<Pais>();
+        Pais unPais = this.obtenerUnPais(nombrePais);
+        for(Pais pais: unPais.obtenerLimitrofes()){
+            try{
+                Jugador jugadorControlando = pais.obtenerJugadorEnControl();
+                if (!jugadorControlando.sonElMismoJugador(unJugador)){
+                    paisesLimitrofesDeJugador.add(pais);
+                }
+            }
+            catch (PaisSinEjercitoException e){
+            }
+        }
+        return paisesLimitrofesDeJugador;
+    }
+
     public ArrayList<Pais> obtenerPaisesNoDe(Jugador unJugador){
         ArrayList<Pais> paisesDelJugador = new ArrayList<Pais>();
         for (Pais pais: this.obtenerPaises()){

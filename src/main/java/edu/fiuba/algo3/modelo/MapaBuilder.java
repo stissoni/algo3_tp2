@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 public class MapaBuilder {
     Mapa resultado;
@@ -39,6 +41,21 @@ public class MapaBuilder {
             director.crearTerritorio(continenteBuilder, nombreContinente);
             Continente nuevoContinente = continenteBuilder.obtenerResultado();
             this.resultado.agregarContinente(nuevoContinente);
+        }
+    }
+
+    public void asignarPaisesLimitrofes() throws IOException{
+        Parser parser = new Parser();
+        String rutaArchivo = "./src/main/java/edu/fiuba/algo3/modelo/paises.csv";
+        
+        Hashtable<String, List<String>> paisesLimtrofes = parser.cargarLimitrofes(rutaArchivo);
+        
+        for (String nombrePais: paisesLimtrofes.keySet()){
+            Pais unPais = this.resultado.obtenerUnPais(nombrePais);
+            for (String nombreDelLimitrofe: paisesLimtrofes.get(nombrePais)){
+                Pais paisLimitrofe = this.resultado.obtenerUnPais(nombreDelLimitrofe);
+                unPais.agregarPaisLimitrofe(paisLimitrofe);
+            }
         }
     }
 

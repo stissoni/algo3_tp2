@@ -40,4 +40,8 @@ public class RondaAtaqueYAgrupamiento implements Ronda {
     public boolean esRondaDeColocacion(){
         return false;
     }
+
+    public int tropasDisponiblesParaColocar(){
+        return 0;
+    }
 }

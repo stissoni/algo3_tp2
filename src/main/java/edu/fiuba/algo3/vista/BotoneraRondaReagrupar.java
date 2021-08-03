@@ -2,7 +2,7 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.Partida;
-import edu.fiuba.algo3.vista.eventos.BotonAtacarEventHandler;
+import edu.fiuba.algo3.vista.eventos.BotonReagruparEventHandler;
 import edu.fiuba.algo3.vista.eventos.BotonSiguienteTurnoEventHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,10 +13,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class BotoneraRondaAtaque extends VBox{
-    public BotoneraRondaAtaque(ContenedorPrincipal contenedor, Partida partida){
-        Label labelPaisAtacante = new Label("Pais atacante (numero de tropas)");
-        
+public class BotoneraRondaReagrupar extends VBox {
+    public BotoneraRondaReagrupar(ContenedorPrincipal contenedor, Partida partida){
+        Label labelPaisOrigen = new Label("Pais origen (numero de tropas)");
+            
         ListView<String> listaPaisesEnControl = new ListView<String>();
         ObservableList<String> itemsPaisesEnControl = FXCollections.observableArrayList();
         for (Pais pais: partida.obtenerPaisesDe(partida.obtenerJugadorActual())){
@@ -27,21 +27,21 @@ public class BotoneraRondaAtaque extends VBox{
         }
         listaPaisesEnControl.setItems(itemsPaisesEnControl);
 
-        Label labelPaisAAtacar = new Label("Pais a atacar (numero de tropas)");
+        Label labelPaiDestino= new Label("Pais destino (numero de tropas)");
         
-        ListView<String> listaPaisesParaAtacar = new ListView<String>();
-        ObservableList<String> itemsPaisesParaAtacar = FXCollections.observableArrayList();
-        listaPaisesParaAtacar.setItems(itemsPaisesParaAtacar);
+        ListView<String> listaPaisesParaDestinarTropas = new ListView<String>();
+        //ObservableList<String> itemsPaisesParaDestinarTropas = FXCollections.observableArrayList();
+        //listaPaisesParaDestinarTropas.setItems(itemsPaisesParaDestinarTropas);
 
         Label labelCantidadDeTropas = new Label("Cantidad de tropas");
         TextField cantidadTropas = new TextField();
         cantidadTropas.setPrefWidth(40);
         cantidadTropas.setMaxWidth(40);
 
-        Button botonAtacar = new Button();
-        botonAtacar.setText("Atacar");
-        BotonAtacarEventHandler atacarHandler = new BotonAtacarEventHandler(contenedor, partida);
-        botonAtacar.setOnAction(atacarHandler);
+        Button botonTransferir = new Button();
+        botonTransferir.setText("Transferir tropas");
+        BotonReagruparEventHandler transferirHandler = new BotonReagruparEventHandler(contenedor, partida);
+        botonTransferir.setOnAction(transferirHandler);
 
         Button botonTerminarTurno = new Button();
         botonTerminarTurno.setText("Terminar Turno");
@@ -51,42 +51,42 @@ public class BotoneraRondaAtaque extends VBox{
         // Set listeners.
         cantidadTropas.textProperty().addListener(
             (observable, oldValue, newValue)->{
-                atacarHandler.setNumeroTropas(Integer.parseInt(newValue));
+                transferirHandler.setNumeroTropas(Integer.parseInt(newValue));
             }
         );
         listaPaisesEnControl.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue)->{
                 String[] splited = newValue.split("\\s+");
                 String nombrePaisAtacante = splited[0];
-                atacarHandler.setPaisAtacante(nombrePaisAtacante);
+                transferirHandler.setPaisOrigen(nombrePaisAtacante);
 
-                ObservableList<String> itemsPaisesParaAtacarLimitrofes = FXCollections.observableArrayList();
-                for (Pais pais: partida.obtenerPaisesLimitrofesEnemigosDe(nombrePaisAtacante, partida.obtenerJugadorActual())){
+                ObservableList<String> itemsPaisesLimitrofesParaTransferir = FXCollections.observableArrayList();
+                for (Pais pais: partida.obtenerPaisesLimitrofesDe(nombrePaisAtacante, partida.obtenerJugadorActual())){
                     String nombrePaisDelLimitrofe = pais.obtenerNombrePais();
                     System.out.println(nombrePaisDelLimitrofe);
                     String cantidadTropasDelLimitrofe = String.valueOf(pais.obtenerNumeroTotalDeTropas());
                     String dato = String.format("%s (%s)", nombrePaisDelLimitrofe, cantidadTropasDelLimitrofe);
-                    itemsPaisesParaAtacarLimitrofes.addAll(dato);
+                    itemsPaisesLimitrofesParaTransferir.addAll(dato);
                 }
-                listaPaisesParaAtacar.setItems(itemsPaisesParaAtacarLimitrofes);
+                listaPaisesParaDestinarTropas.setItems(itemsPaisesLimitrofesParaTransferir);
             }
         );
-        listaPaisesParaAtacar.getSelectionModel().selectedItemProperty().addListener(
+        listaPaisesParaDestinarTropas.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue)->{
                 String[] splited = newValue.split("\\s+");
                 String nombrePaisDefensor = splited[0];
-                atacarHandler.setPaisDefensor(nombrePaisDefensor);
+                transferirHandler.setPaisDestino(nombrePaisDefensor);
             }
         );
 
         this.getChildren().addAll(
-            labelPaisAtacante,
+            labelPaisOrigen,
             listaPaisesEnControl,
-            labelPaisAAtacar,
-            listaPaisesParaAtacar,
+            labelPaiDestino,
+            listaPaisesParaDestinarTropas,
             labelCantidadDeTropas,
             cantidadTropas,
-            botonAtacar,
+            botonTransferir,
             botonTerminarTurno
         );
         this.setSpacing(10);

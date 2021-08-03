@@ -57,4 +57,8 @@ public class RondaColocacion implements Ronda{
     public boolean esRondaDeColocacion(){
         return true;
     }
+
+    public int tropasDisponiblesParaColocar(){
+        return this.numeroTropasRestantes;
+    }
 }

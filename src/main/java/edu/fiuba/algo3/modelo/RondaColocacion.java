@@ -9,6 +9,7 @@ public class RondaColocacion implements Ronda{
     private int numeroJugadoresQueParticiparon;
 
     public void iniciarRonda(){
+        System.out.println("INICIANDO RONDA DE COLOCACION!!!");
         this.turnero.reiniciar();
         this.numeroTropasRestantes = this.fase.tropasAColocarPorJugador();
         this.numeroJugadoresQueParticiparon = 0;
@@ -56,6 +57,10 @@ public class RondaColocacion implements Ronda{
 
     public boolean esRondaDeColocacion(){
         return true;
+    }
+
+    public boolean esRondaDeReagrupamiento(){
+        return false;
     }
 
     public int tropasDisponiblesParaColocar(){

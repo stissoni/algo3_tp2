@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-public class RondaAtaqueYAgrupamiento implements Ronda {
+public class RondaAtaque implements Ronda {
     private Turnero turnero;
     private Fase fase;
     private int numeroJugadoresQueParticiparon;
@@ -38,6 +38,10 @@ public class RondaAtaqueYAgrupamiento implements Ronda {
     }
 
     public boolean esRondaDeColocacion(){
+        return false;
+    }
+
+    public boolean esRondaDeReagrupamiento(){
         return false;
     }
 

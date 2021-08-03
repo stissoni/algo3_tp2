@@ -9,12 +9,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class BotoneraRondaColocacion extends VBox {
     public BotoneraRondaColocacion(ContenedorPrincipal contenedor, Partida partida){
+        Label paisesParaColocar = new Label("Paises para colocar");
         ListView<String> listaPaises = new ListView<String>();
         ObservableList<String> items = FXCollections.observableArrayList();
         for (Pais pais: partida.obtenerPaisesDe(partida.obtenerJugadorActual())){
@@ -55,7 +57,12 @@ public class BotoneraRondaColocacion extends VBox {
         BotonSiguienteTurnoEventHandler siguienteTurnoHandler = new BotonSiguienteTurnoEventHandler(contenedor, partida);
         botonTerminarTurno.setOnAction(siguienteTurnoHandler);
 
-        this.getChildren().addAll(listaPaises, cantidadTropas, botonColocar, botonTerminarTurno);
+        this.getChildren().addAll(
+            paisesParaColocar,
+            listaPaises,
+            cantidadTropas,
+            botonColocar,
+            botonTerminarTurno);
         this.setSpacing(10);
         this.setPadding(new Insets(15));
     }

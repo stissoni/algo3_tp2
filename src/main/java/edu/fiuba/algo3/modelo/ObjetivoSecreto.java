@@ -21,13 +21,15 @@ public class ObjetivoSecreto {
         }
     }
 
-    public String obtenerTipoDeOjetivo(){  return this.tipoDeObjetivo;  }
+    public String obtenerTipoDeOjetivo(){  
+        return this.tipoDeObjetivo;  
+    }
 
     public String obtenerJugadorADerrotar(){
         return this.jugadorADerrotar;
     }
 
-    public ArrayList<ContinenteAConquistar> obtenerContinentesADerrotar(){ return this.continentes; }
-
-
+    public ArrayList<ContinenteAConquistar> obtenerContinentesADerrotar(){ 
+        return this.continentes;
+    }
 }

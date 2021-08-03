@@ -33,9 +33,10 @@ public class ContenedorPrincipal extends BorderPane{
         if (this.partida.esRondaDeColocacion()){
             this.botonera = new BotoneraRondaColocacion(this, this.partida);
         }
-        else if (this.partida.esRondaDeReagrupamiento()){
+        /*else if (this.partida.esRondaDeReagrupamiento()){
             this.botonera = new BotoneraRondaReagrupar(this, this.partida);
         }
+        */
         else {
             this.botonera = new BotoneraRondaAtaque(this, this.partida);
         }

@@ -15,7 +15,7 @@ public class Ejercito {
     }
 
     public void reducirTropas (int numeroDeTropasARestar) throws NumeroDeTropasInsuficienteException {
-        if ((this.numeroDeTropas - numeroDeTropasARestar) < 0){
+        if ((this.numeroDeTropas - numeroDeTropasARestar) <= 0){
             throw new NumeroDeTropasInsuficienteException("No hay tropas suficientes");
         }
         this.numeroDeTropas = this.numeroDeTropas - numeroDeTropasARestar;

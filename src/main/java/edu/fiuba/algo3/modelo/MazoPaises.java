@@ -3,22 +3,25 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 public class MazoPaises {
-    ArrayList<CartaPais> mazoDePaises;
+    ArrayList<CartaPais> mazoDeTarjetas;
 
-    public MazoPaises(String rutaArchivoDeDatos) {
-        mazoDePaises = new ArrayList<>();
-        inicializarMazo(rutaArchivoDeDatos);
+    public MazoPaises() {
+        mazoDeTarjetas = new ArrayList<CartaPais>();
     }
 
-    /**Carga el mazo del archivo parseado */
-    private void inicializarMazo(String rutaArchivoPaises) {
-        MazoPaisesFachada facade = new MazoPaisesFachada(this);
-        facade.parsearArchivoMazo(rutaArchivoPaises,"csv");
-        facade.cargarMazo();
-    }
-
-    /**Agrega una carta Pais al mazo*/
     void agregarCarta(CartaPais nuevaCarta) {
-        mazoDePaises.add(nuevaCarta);
+        mazoDeTarjetas.add(nuevaCarta);
+    }
+
+    public int numeroDeCartas(){
+        return this.mazoDeTarjetas.size();
+    }
+
+    public CartaPais obtenerSiguienteCarta(){
+        return this.mazoDeTarjetas.remove(0);
+    }
+
+    public void agregarAlFondo(CartaPais carta){
+        this.mazoDeTarjetas.add(carta);
     }
 }

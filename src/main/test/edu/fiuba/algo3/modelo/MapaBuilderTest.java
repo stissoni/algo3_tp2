@@ -70,4 +70,24 @@ public class MapaBuilderTest {
 
         assertTrue(islandia.esLimitrofeDe(suecia));
     }
+
+    @Test
+    public void testTropasAdicionalesDePaises() throws IOException{
+        MapaBuilder mapaBuilder = new MapaBuilder();
+
+        mapaBuilder.reset();
+        mapaBuilder.asignarPaises();
+        mapaBuilder.asignarContinentes();
+        mapaBuilder.asignarPaisesLimitrofes();
+        mapaBuilder.asignarPaisesAContinentes();
+
+        Mapa mapa = mapaBuilder.obtenerResultado();
+        Continente europa = mapa.obtenerUnContinente("Europa");
+        Continente asia = mapa.obtenerUnContinente("Asia");
+        Continente americaSur = mapa.obtenerUnContinente("America Del Sur");
+
+        assertEquals(5, europa.tropasAdicionales());
+        assertEquals(7, asia.tropasAdicionales());
+        assertEquals(3, americaSur.tropasAdicionales());
+    }
 }

@@ -7,9 +7,21 @@ public class Partida {
     private Mapa mapaDelJuego;
     private Fase faseActual;
     private Turnero turno;
+    private MazoPaises mazo;
 
     public Partida(){
         this.turno = Turnero.getInstance();
+    }
+
+    public void cargarMazo() throws IOException{
+        Director director = new Director();
+        MazoPaisBuilder builder = new MazoPaisBuilder();
+        director.crearMazo(builder);
+        this.mazo = builder.obtenerResultado();
+    }
+
+    public MazoPaises obtenerMazo(){
+        return this.mazo;
     }
 
     public Turnero getTurnero(){

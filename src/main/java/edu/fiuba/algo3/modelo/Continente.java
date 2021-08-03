@@ -7,9 +7,18 @@ import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
 public class Continente {
     private ArrayList<Pais> paises;
     private String nombre;
+    private int tropasAdicionales;
 
     public Continente(){
         this.paises = new ArrayList<Pais>();
+    }
+
+    public void setTropas(int tropas){
+        this.tropasAdicionales = tropas;
+    }
+
+    public int tropasAdicionales(){
+        return this.tropasAdicionales;
     }
 
     public void asignarNombre(String unNombre){

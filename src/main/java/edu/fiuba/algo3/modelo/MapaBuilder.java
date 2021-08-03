@@ -38,7 +38,7 @@ public class MapaBuilder {
         ArrayList<String> continentes = parser.cargarContinentes(rutaArchivo);
 
         for(String nombreContinente: continentes){
-            director.crearTerritorio(continenteBuilder, nombreContinente);
+            director.crearContinente(continenteBuilder, nombreContinente);
             Continente nuevoContinente = continenteBuilder.obtenerResultado();
             this.resultado.agregarContinente(nuevoContinente);
         }

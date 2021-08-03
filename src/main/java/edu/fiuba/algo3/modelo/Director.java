@@ -8,6 +8,12 @@ public class Director {
         builder.asignarNombre(nombre);
     }
 
+    public void crearContinente(ContinenteBuilder builder, String nombre){
+        builder.reset();
+        builder.asignarNombre(nombre);
+        builder.asignarTropasAdicionales();
+    }
+
     public void crearMapa(MapaBuilder builder) throws IOException{
         builder.reset();
         builder.asignarPaises();
@@ -19,5 +25,10 @@ public class Director {
     public void crearObjetivos(ObjetivosBuilder builder, Mapa mapaJuego) throws IOException{
         builder.reset();
         builder.cargarObjetivos(mapaJuego);
+    }
+
+    public void crearMazo(MazoPaisBuilder builder) throws IOException{
+        builder.reset();
+        builder.cargarTarjetas();
     }
 }

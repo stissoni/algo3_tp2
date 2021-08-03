@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
+
 public class MovimientoAtaque implements Movimiento {
     private Jugador unJugador;
     private Pais paisConquistador;
@@ -8,6 +10,12 @@ public class MovimientoAtaque implements Movimiento {
     private String tirada;
     private int numeroTropas;
     private Pais paisGanador;
+
+    public void entregarCarta(MazoPaises mazo) throws PaisSinEjercitoException{
+        if (paisGanador.obtenerJugadorEnControl().sonElMismoJugador(paisConquistador.obtenerJugadorEnControl())){
+            paisGanador.obtenerJugadorEnControl().entregarCarta(mazo.obtenerSiguienteCarta());
+        }
+    }
 
     public int tropasUtilizadas(){
         return this.numeroTropas;

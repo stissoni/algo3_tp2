@@ -1,11 +1,14 @@
 package edu.fiuba.algo3.vista.eventos;
 
+import edu.fiuba.algo3.excepciones.NumeroDeTropasInsuficienteException;
 import edu.fiuba.algo3.modelo.MovimientoReagrupacion;
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.vista.ContenedorPrincipal;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class BotonReagruparEventHandler implements EventHandler<ActionEvent> {
     private ContenedorPrincipal contenedor;
@@ -41,8 +44,16 @@ public class BotonReagruparEventHandler implements EventHandler<ActionEvent> {
         try{
             this.partida.ejecutarMovimiento(movimiento);
         }
+        catch (NumeroDeTropasInsuficienteException e){
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("ALERTA");
+            alert.setHeaderText("¡No se pueden mover ese numero de tropas!");
+            String mensaje = e.getMessage();
+            alert.setContentText(mensaje);
+            alert.show();
+        }
         catch (Throwable e){
-
+            
         }
         this.contenedor.refresh();
     }

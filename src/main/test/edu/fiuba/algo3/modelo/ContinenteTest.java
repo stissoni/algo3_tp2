@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -55,5 +56,15 @@ public class ContinenteTest {
         americaDelSur.agregarPais(otroPais);
 
         assertFalse(americaDelSur.esDominadoPorJugador(unJugador));
+    }
+
+    @Test
+    public void testTropasAdicionales(){
+        Continente continente = new Continente();
+        continente.asignarNombre("Asia");
+        continente.setTropas(7);
+
+        assertEquals(7, continente.tropasAdicionales());
+        assertTrue("Asia" == continente.obtenerNombre());
     }
 }

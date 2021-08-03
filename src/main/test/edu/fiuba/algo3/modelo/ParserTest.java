@@ -70,4 +70,16 @@ public class ParserTest {
             }
         }
     }
+
+    @Test 
+    public void testTarjetasPais() throws IOException{
+        Parser parser = new Parser();
+        ArrayList<String[]> tarjetas = parser.cargarTarjetasPais("./src/main/java/edu/fiuba/algo3/modelo/tarjetas.csv");
+
+        assertEquals(50, tarjetas.size());
+
+        for (String[] tarjeta: tarjetas){
+            System.out.println(tarjeta[0]+"-"+tarjeta[1]);
+        }
+    }
 }

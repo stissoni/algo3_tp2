@@ -60,7 +60,9 @@ public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
                 stage.setFullScreen(false);
                 return;
             }
+            nuevoMovimiento.entregarCarta(this.partida.obtenerMazo());
             contenedor.refresh();
+
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("RESULTADO TIRADA");
             String alertText =(

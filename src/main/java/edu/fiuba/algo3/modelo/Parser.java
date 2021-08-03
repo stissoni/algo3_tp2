@@ -94,4 +94,15 @@ public class Parser {
         csvReader.close();
         return objetivos;
     }
+
+    public ArrayList<String[]> cargarTarjetasPais(String rutaArchivo) throws IOException{
+        ArrayList<String[]> tarjetasPais = new ArrayList<String[]>();
+        BufferedReader csvReader = new BufferedReader(new FileReader(rutaArchivo));
+        String row;
+        while ((row = csvReader.readLine()) != null) {
+            tarjetasPais.add(row.split(","));
+        }
+        csvReader.close();
+        return tarjetasPais;
+    }
 }

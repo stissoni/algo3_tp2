@@ -41,9 +41,16 @@ public class FaseJuego implements Fase {
     }
 
     public int tropasAColocarPorJugador(){
+        int tropasTotalesAColocar = 0;
         Jugador jugadorActual = this.partida.obtenerJugadorActual();
         Mapa mapa = this.partida.obtenerMapa();
-        return mapa.numeroPaisesControladosPor(jugadorActual) / 2;
+        tropasTotalesAColocar = tropasTotalesAColocar + mapa.numeroPaisesControladosPor(jugadorActual) / 2;
+        for (Continente continente: mapa.obtenerContinentes()){
+            if (continente.esDominadoPorJugador(jugadorActual)){
+                tropasTotalesAColocar = tropasTotalesAColocar + continente.tropasAdicionales();
+            }
+        }
+        return tropasTotalesAColocar;
     }
 
     public Ronda obtenerRonda(){

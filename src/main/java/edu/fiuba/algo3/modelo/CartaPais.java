@@ -1,18 +1,19 @@
 package edu.fiuba.algo3.modelo;
 
 public class CartaPais {
-    private final String nombrePais;
-    private final String simbolo;
+    private String nombrePais;
+    private String simbolo;
 
-    public CartaPais(String nombre, String id){
+    public CartaPais(String nombre, String simbolo){
         this.nombrePais = nombre;
-        this.simbolo = id;
+        this.simbolo = simbolo;
     }
 
-    public String obtenerNombrePais(){  return this.nombrePais;  }
+    public String obtenerNombrePais(){  
+        return this.nombrePais;  
+    }
 
     public String obtenerSimbolo(){
         return this.simbolo;
     }
-
 }

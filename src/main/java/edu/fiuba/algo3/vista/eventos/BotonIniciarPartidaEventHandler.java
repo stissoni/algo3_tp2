@@ -43,6 +43,7 @@ public class BotonIniciarPartidaEventHandler implements EventHandler<ActionEvent
                 partida.agregarJugador(nuevoJugador);
             }
             partida.jugadorInicial(0);
+            partida.cargarMazo();
             partida.iniciarPartida();
         }
         catch (Throwable e) {

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
@@ -17,6 +18,10 @@ public class Mapa {
 
     public ArrayList<Pais> obtenerPaises(){
         return new ArrayList<Pais>(this.paises.values());
+    }
+
+    public Collection<Continente> obtenerContinentes(){
+        return this.continentes.values();
     }
 
     public ArrayList<Pais> obtenerPaisesDe(Jugador unJugador){

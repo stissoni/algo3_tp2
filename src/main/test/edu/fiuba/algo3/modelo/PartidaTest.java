@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
 public class PartidaTest {
@@ -224,5 +226,22 @@ public class PartidaTest {
         conquistar4DeAmericaDelSur.setJugador(jugador1);
 
         assertTrue(conquistar4DeAmericaDelSur.logroElObjetivo(unaPartida.obtenerMapa()));
+    }
+
+    @Test
+    public void testMazo() throws IOException{
+        Partida unaPartida = new Partida();
+        unaPartida.cargarMazo();
+        MazoPaises mazo = unaPartida.obtenerMazo();
+
+        assertEquals(50, mazo.numeroDeCartas());
+
+        CartaPais carta = mazo.obtenerSiguienteCarta();
+
+        assertEquals(49, mazo.numeroDeCartas());
+
+        mazo.agregarAlFondo(carta);
+
+        assertEquals(50, mazo.numeroDeCartas());
     }
 }

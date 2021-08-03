@@ -25,7 +25,7 @@ Aquellos que deseen colaborar con el proyecto pueden consultar la [guía de desa
 
 ## Informe
 
-https://docs.google.com/document/d/1ut1Gs1r1TBprwiZiw31I2FsFaeaV_EPrmMdTLPqeqdw/edit#[Link al informet](https://docs.google.com/document/d/1ut1Gs1r1TBprwiZiw31I2FsFaeaV_EPrmMdTLPqeqdw/edit#)
+https://docs.google.com/document/d/1ut1Gs1r1TBprwiZiw31I2FsFaeaV_EPrmMdTLPqeqdw/edit# [Link al informe](https://docs.google.com/document/d/1ut1Gs1r1TBprwiZiw31I2FsFaeaV_EPrmMdTLPqeqdw/edit#)
 
 ## Licencia
 

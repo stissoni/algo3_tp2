@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.eventos;
 
+import edu.fiuba.algo3.modelo.GeneradorAleatorio;
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.vista.ContenedorPrincipal;
@@ -29,7 +30,7 @@ public class BotonIniciarPartidaEventHandler implements EventHandler<ActionEvent
         
         stage.setScene(proximaEscena);
         stage.setFullScreenExitHint("");
-        stage.setFullScreen(false);
+        stage.setFullScreen(true);
     }
 
     private Partida iniciarPartida(int cantidadJugadores){
@@ -42,8 +43,9 @@ public class BotonIniciarPartidaEventHandler implements EventHandler<ActionEvent
                 Jugador nuevoJugador = new Jugador(nombre, i);
                 partida.agregarJugador(nuevoJugador);
             }
-            partida.jugadorInicial(0);
-            partida.cargarMazo();
+            GeneradorAleatorio generador = new GeneradorAleatorio();
+            int jugadorInicial = generador.generar(0, cantidadJugadores);
+            partida.jugadorInicial(jugadorInicial);
             partida.iniciarPartida();
         }
         catch (Throwable e) {

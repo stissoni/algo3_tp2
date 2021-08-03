@@ -1,15 +1,8 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.CartaPais;
-import edu.fiuba.algo3.modelo.ObjetivoConquista;
 import edu.fiuba.algo3.modelo.Partida;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -18,6 +11,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class ContenedorPrincipal extends BorderPane{

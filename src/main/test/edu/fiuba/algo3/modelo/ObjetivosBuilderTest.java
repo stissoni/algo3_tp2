@@ -21,7 +21,7 @@ public class ObjetivosBuilderTest {
 
         ArrayList<ObjetivoConquista> objetivos = objetivosBuilder.obtenerResultado();
         
-        assertEquals(5, objetivos.size());
+        assertEquals(6, objetivos.size());
 
         for (ObjetivoConquista objetivo: objetivos){
             System.out.println(objetivo.descripcionDelObjetivo());

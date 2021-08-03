@@ -61,7 +61,7 @@ public class ParserTest {
         Parser parser = new Parser();
         ArrayList<Hashtable<String, Integer>> objetivos = parser.cargarObjetivos("./src/main/java/edu/fiuba/algo3/modelo/objetivos.csv");
 
-        assertEquals(1, objetivos.get(0).get("America Del Sur"));
+        assertEquals(6, objetivos.get(0).get("America Del Sur"));
 
         for (Hashtable<String, Integer> objetivo: objetivos){
             System.out.println("Objetivo...");

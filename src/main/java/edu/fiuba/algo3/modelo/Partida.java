@@ -41,6 +41,7 @@ public class Partida {
     }
 
     public void iniciarPartida() throws Throwable{
+        Collections.shuffle(this.mapaDelJuego.obtenerPaises());
         for (Pais pais: this.mapaDelJuego.obtenerPaises()){
             Jugador jugador = this.turno.jugadorTurno();
             Ejercito ejercito = new Ejercito(1, jugador);

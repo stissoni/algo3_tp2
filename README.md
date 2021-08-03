@@ -7,10 +7,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 ## Grupo 21
 
 * **Santiago Tissoni** - [stissoni](https://github.com/stissoni)
-* **Ramiro Gestoso** - [ramirogestoso](https://github.com/ramirogestoso)
-* **Matias Montero** - [mattzt](https://github.com/mattzt)
 * **Julian Pinango** - [julioPinango](https://github.com/julioPinango)
-* **Stephany Galindo** - [GaSteph](https://github.com/GaSteph)
 
 Corrector: **Pablo M y Maia**
 
@@ -25,6 +22,10 @@ $ java -jar <archivo.jar>
 ## Desarrollo
 
 Aquellos que deseen colaborar con el proyecto pueden consultar la [guía de desarrollo](./docs/Desarrollo.md).
+
+## Informe
+
+https://docs.google.com/document/d/1ut1Gs1r1TBprwiZiw31I2FsFaeaV_EPrmMdTLPqeqdw/edit#[Link al informet](https://docs.google.com/document/d/1ut1Gs1r1TBprwiZiw31I2FsFaeaV_EPrmMdTLPqeqdw/edit#)
 
 ## Licencia
 

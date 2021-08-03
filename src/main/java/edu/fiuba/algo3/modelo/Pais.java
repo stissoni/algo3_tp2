@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 import edu.fiuba.algo3.excepciones.EjercitosDeJugadoresDiferentesException;
+import edu.fiuba.algo3.excepciones.NumeroDeTropasInsuficienteException;
 import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
 
 public class Pais {
@@ -70,6 +71,10 @@ public class Pais {
 
     public void reducirTropas(int numeroDeTropas) throws Throwable{
         this.ejercitoEnControl.reducirTropas(numeroDeTropas);
+    }
+
+    public Ejercito enviarTropas(int cantidadTropas) throws NumeroDeTropasInsuficienteException{
+        return this.ejercitoEnControl.enviarTropas(cantidadTropas);
     }
 
     public void reagruparEjercito(Ejercito otroEjercito) throws EjercitosDeJugadoresDiferentesException{

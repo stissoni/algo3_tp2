@@ -44,6 +44,9 @@ public class ObjetivoConquista {
         for (Continente continente: this.continentes.keySet()){
             int numeroObjetivo = this.continentes.get(continente);
             int numeroActual = numeroObjetivo - continente.numeroPaisesDominadosPor(this.jugadorDelObjetivo);
+            if (numeroActual < 0){
+                numeroActual = 0;
+            }
             String objetivoParticular =(
                 "Faltan "+numeroActual+" pais(es)"+" de "+continente.obtenerNombre()+"\n"
             );

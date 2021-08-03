@@ -15,7 +15,7 @@ public class Ejercito {
     }
 
     public void reducirTropas (int numeroDeTropasARestar) throws NumeroDeTropasInsuficienteException {
-        if ((this.numeroDeTropas - numeroDeTropasARestar) <= 0){
+        if ((this.numeroDeTropas - numeroDeTropasARestar) < 0){
             throw new NumeroDeTropasInsuficienteException("No hay tropas suficientes");
         }
         this.numeroDeTropas = this.numeroDeTropas - numeroDeTropasARestar;
@@ -35,6 +35,16 @@ public class Ejercito {
         }
         catch (NumeroDeTropasInsuficienteException e){
             throw new EjercitoYaVencidoException("El ejercito ya no cuenta con tropas", e);
+        }
+    }
+
+    public Ejercito enviarTropas(int cantidadTropas) throws NumeroDeTropasInsuficienteException{
+        if (this.numeroDeTropas-cantidadTropas < 1){
+            throw new NumeroDeTropasInsuficienteException("No hay suficientes tropas para enviar");
+        }
+        else {
+            this.reducirTropas(cantidadTropas);
+            return new Ejercito(cantidadTropas, this.jugador);
         }
     }
 

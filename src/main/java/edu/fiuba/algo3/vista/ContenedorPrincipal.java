@@ -36,6 +36,12 @@ public class ContenedorPrincipal extends BorderPane{
         this.setBotonera();
         this.setPanelControl();
     }
+    
+    public void refresh(){
+        this.setPanelControl();
+        this.setBotonera();
+        this.setPanelControl();
+    }
 
     private void setBotonera(){
         String nombreRonda = this.partida.nombreDeLaRonda();
@@ -51,11 +57,6 @@ public class ContenedorPrincipal extends BorderPane{
         this.setLeft(botonera);
     } 
 
-    public void refresh(){
-        this.setPanelControl();
-        this.setBotonera();
-        this.setPanelControl();
-    }
 
     private void setPanelControl(){
         this.panelControl = new PanelDeControl(this.stage, this, this.partida);
@@ -82,7 +83,6 @@ public class ContenedorPrincipal extends BorderPane{
             BackgroundSize.DEFAULT
         );
         this.contenedorCentral.setBackground(new Background(imagenFondo));
-
         this.setCenter(this.contenedorCentral);
     }
 

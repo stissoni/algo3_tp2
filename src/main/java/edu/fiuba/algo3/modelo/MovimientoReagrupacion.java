@@ -27,8 +27,7 @@ public class MovimientoReagrupacion implements Movimiento {
     }
 
     public void ejecutar() throws Throwable{
-        this.origen.reducirTropas(this.cantidadTropas);
-        Ejercito ejercito = new Ejercito(cantidadTropas, this.origen.obtenerJugadorEnControl());
+        Ejercito ejercito = this.origen.enviarTropas(this.cantidadTropas);
         this.destino.reagruparEjercito(ejercito);
     }
 }

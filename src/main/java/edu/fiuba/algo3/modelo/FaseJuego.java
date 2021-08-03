@@ -10,7 +10,7 @@ public class FaseJuego implements Fase {
 
     public void iniciarFase(){
         this.partida.reiniciarTurno();
-        this.ronda = new RondaAtaqueYAgrupamiento();
+        this.ronda = new RondaAtaque();
         this.ronda.fase(this);
         this.ronda.turnero(this.partida.getTurnero());
         this.ronda.iniciarRonda();
@@ -26,11 +26,14 @@ public class FaseJuego implements Fase {
     }
 
     public void siguienteRonda(){
-        if (ronda.getClass().equals(RondaAtaqueYAgrupamiento.class)){
+        if (this.ronda.esRondaDeReagrupamiento()){
             this.ronda = new RondaColocacion();
         }
+        else if (this.ronda.esRondaDeColocacion()){
+            this.ronda = new RondaAtaque();
+        }
         else {
-            this.ronda = new RondaAtaqueYAgrupamiento();
+            this.ronda = new RondaReagrupamiento();
         }
         this.ronda.fase(this);
         this.ronda.turnero(this.partida.getTurnero());
@@ -53,5 +56,9 @@ public class FaseJuego implements Fase {
 
     public int tropasDisponiblesParaColocar(){
         return this.ronda.tropasDisponiblesParaColocar();
+    }
+
+    public boolean esRondaDeReagrupamiento(){
+        return this.ronda.esRondaDeReagrupamiento();
     }
 }

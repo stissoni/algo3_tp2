@@ -16,4 +16,6 @@ public interface Ronda {
     public boolean esRondaDeColocacion();
 
     public int tropasDisponiblesParaColocar();
+    
+    public boolean esRondaDeReagrupamiento();
 }

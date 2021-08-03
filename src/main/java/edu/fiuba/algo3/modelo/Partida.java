@@ -114,5 +114,9 @@ public class Partida {
     public int tropasDisponiblesParaColocar(){
         return this.faseActual.tropasDisponiblesParaColocar();
     }
+
+    public boolean esRondaDeReagrupamiento(){
+        return this.faseActual.esRondaDeReagrupamiento();
+    }
 }
 

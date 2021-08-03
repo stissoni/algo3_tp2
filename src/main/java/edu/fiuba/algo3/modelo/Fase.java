@@ -18,4 +18,6 @@ public interface Fase {
     public boolean esRondaDeColocacion();
 
     public int tropasDisponiblesParaColocar();
+
+    public boolean esRondaDeReagrupamiento();
 }

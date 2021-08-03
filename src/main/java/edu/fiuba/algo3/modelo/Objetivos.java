@@ -21,7 +21,4 @@ public class Objetivos {
     void agregarObjetivo(ObjetivoSecreto nuevoObjetivo) {
         MazoObjetivosSecretos.add(nuevoObjetivo);
     }
-
-
-
 }

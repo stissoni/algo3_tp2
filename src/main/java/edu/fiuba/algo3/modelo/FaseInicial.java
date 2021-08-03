@@ -73,4 +73,8 @@ public class FaseInicial implements Fase {
     public int tropasDisponiblesParaColocar(){
         return this.ronda.tropasDisponiblesParaColocar();
     }
+
+    public boolean esRondaDeReagrupamiento(){
+        return this.ronda.esRondaDeReagrupamiento();
+    }
 }

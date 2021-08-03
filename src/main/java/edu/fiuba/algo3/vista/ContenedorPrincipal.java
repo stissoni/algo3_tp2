@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.ObjetivoConquista;
 import edu.fiuba.algo3.modelo.Partida;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,10 +21,12 @@ public class ContenedorPrincipal extends BorderPane{
     VBox botonera;
     VBox panelControl;
     VBox contenedorCentral;
+    Stage stage;
 
     public ContenedorPrincipal(Stage stage, Partida partida){
         this.partida = partida;
-        this.setMenu(stage);
+        this.stage = stage;
+        this.setMenu();
         this.setCentro();
         this.setBotonera();
         this.setPanelControl();
@@ -37,10 +40,10 @@ public class ContenedorPrincipal extends BorderPane{
             this.botonera = new BotoneraRondaReagrupar(this, this.partida);
         }
         else {
-            this.botonera = new BotoneraRondaAtaque(this, this.partida);
+            this.botonera = new BotoneraRondaAtaque(this.stage, this, this.partida);
         }
         this.setLeft(botonera);
-    }
+    } 
 
     public void refresh(){
         this.setPanelControl();
@@ -56,22 +59,26 @@ public class ContenedorPrincipal extends BorderPane{
         this.panelControl.setSpacing(10);
         this.panelControl.setPadding(new Insets(15));
 
+        Label objetivoDelJugador = new Label();
+        ObjetivoConquista objetivo = this.partida.obtenerJugadorActual().obtenerObjetivo();
+        objetivoDelJugador.setText(objetivo.descripcionDelObjetivo());
+
         if (this.partida.esRondaDeColocacion()){
             Label numeroTropasAColocar = new Label();
             numeroTropasAColocar.setText(String.valueOf(this.partida.tropasDisponiblesParaColocar())+ " tropa(s)");
             Label tropasDisponibles = new Label("Tropas disponibles");
             tropasDisponibles.setStyle("-fx-font: 18 arial;");
             numeroTropasAColocar.setStyle("-fx-font: 18 arial;");
-            this.panelControl.getChildren().addAll(jugadorActual, tropasDisponibles, numeroTropasAColocar);
+            this.panelControl.getChildren().addAll(jugadorActual, tropasDisponibles, numeroTropasAColocar, objetivoDelJugador);
         }
         else {
-            this.panelControl.getChildren().addAll(jugadorActual);
+            this.panelControl.getChildren().addAll(jugadorActual, objetivoDelJugador);
         }
         this.setRight(this.panelControl);
     }
 
-    private void setMenu(Stage stage){
-        this.menuBar = new BarraDeMenu(stage);
+    private void setMenu(){
+        this.menuBar = new BarraDeMenu(this.stage);
         this.setTop(this.menuBar);
     }
 

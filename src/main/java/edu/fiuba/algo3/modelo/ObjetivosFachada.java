@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ObjetivosFachada {
+    /*
     Objetivos mazo;
     ArrayList<String[]> archivoParseado;
     int lineaActual;
@@ -72,6 +73,6 @@ public class ObjetivosFachada {
     private int devolverCantidadDePaisesAConquistar( int posicion) {
         return Integer.parseInt(archivoParseado.get(lineaActual)[posicion]);
     }
-
+    */
 }
 

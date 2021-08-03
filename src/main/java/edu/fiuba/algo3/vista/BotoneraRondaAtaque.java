@@ -12,9 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class BotoneraRondaAtaque extends VBox{
-    public BotoneraRondaAtaque(ContenedorPrincipal contenedor, Partida partida){
+    public BotoneraRondaAtaque(Stage stage, ContenedorPrincipal contenedor, Partida partida){
         Label labelPaisAtacante = new Label("Pais atacante (numero de tropas)");
         
         ListView<String> listaPaisesEnControl = new ListView<String>();
@@ -28,10 +29,7 @@ public class BotoneraRondaAtaque extends VBox{
         listaPaisesEnControl.setItems(itemsPaisesEnControl);
 
         Label labelPaisAAtacar = new Label("Pais a atacar (numero de tropas)");
-        
         ListView<String> listaPaisesParaAtacar = new ListView<String>();
-        ObservableList<String> itemsPaisesParaAtacar = FXCollections.observableArrayList();
-        listaPaisesParaAtacar.setItems(itemsPaisesParaAtacar);
 
         Label labelCantidadDeTropas = new Label("Cantidad de tropas");
         TextField cantidadTropas = new TextField();
@@ -40,7 +38,7 @@ public class BotoneraRondaAtaque extends VBox{
 
         Button botonAtacar = new Button();
         botonAtacar.setText("Atacar");
-        BotonAtacarEventHandler atacarHandler = new BotonAtacarEventHandler(contenedor, partida);
+        BotonAtacarEventHandler atacarHandler = new BotonAtacarEventHandler(stage, contenedor, partida);
         botonAtacar.setOnAction(atacarHandler);
 
         Button botonTerminarTurno = new Button();

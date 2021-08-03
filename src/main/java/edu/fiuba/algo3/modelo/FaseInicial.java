@@ -23,7 +23,7 @@ public class FaseInicial implements Fase {
 
     public int tropasAColocarPorJugador(){
         if (numeroRondasColocacionJugadas == 0){
-            return 3;
+            return 9999;
         }
         else {
             return 5;

@@ -27,12 +27,9 @@ public class BotoneraRondaReagrupar extends VBox {
         }
         listaPaisesEnControl.setItems(itemsPaisesEnControl);
 
-        Label labelPaiDestino= new Label("Pais destino (numero de tropas)");
-        
+        Label labelPaiDestino= new Label("Pais destino (numero de tropas)");    
         ListView<String> listaPaisesParaDestinarTropas = new ListView<String>();
-        //ObservableList<String> itemsPaisesParaDestinarTropas = FXCollections.observableArrayList();
-        //listaPaisesParaDestinarTropas.setItems(itemsPaisesParaDestinarTropas);
-
+    
         Label labelCantidadDeTropas = new Label("Cantidad de tropas");
         TextField cantidadTropas = new TextField();
         cantidadTropas.setPrefWidth(40);

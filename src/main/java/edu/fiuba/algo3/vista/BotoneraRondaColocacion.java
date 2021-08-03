@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.vista.eventos.BotonColocarEventHandler;
 import edu.fiuba.algo3.vista.eventos.BotonSiguienteTurnoEventHandler;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;

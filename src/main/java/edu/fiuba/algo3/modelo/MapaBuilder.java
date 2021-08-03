@@ -33,9 +33,9 @@ public class MapaBuilder {
         Director director = new Director();
         ContinenteBuilder continenteBuilder = new ContinenteBuilder();
 
-        String rutaArchivo = "./src/main/java/edu/fiuba/algo3/modelo/continentes.csv";
+        String rutaArchivo = "./src/main/java/edu/fiuba/algo3/modelo/paises.csv";
         
-        ArrayList<String> continentes = parser.cargar(rutaArchivo);
+        ArrayList<String> continentes = parser.cargarContinentes(rutaArchivo);
 
         for(String nombreContinente: continentes){
             director.crearTerritorio(continenteBuilder, nombreContinente);
@@ -55,6 +55,21 @@ public class MapaBuilder {
             for (String nombreDelLimitrofe: paisesLimtrofes.get(nombrePais)){
                 Pais paisLimitrofe = this.resultado.obtenerUnPais(nombreDelLimitrofe);
                 unPais.agregarPaisLimitrofe(paisLimitrofe);
+            }
+        }
+    }
+
+    public void asignarPaisesAContinentes() throws IOException{
+        Parser parser = new Parser();
+        String rutaArchivo = "./src/main/java/edu/fiuba/algo3/modelo/paises.csv";
+        
+        Hashtable<String, List<String>> continentesYSusPaises = parser.cargarPaisesDeContinentes(rutaArchivo);
+
+        for (String nombreDelContinente: continentesYSusPaises.keySet()){
+            Continente unContinente = this.resultado.obtenerUnContinente(nombreDelContinente);
+            for (String nombrePais: continentesYSusPaises.get(nombreDelContinente)){
+                Pais unPais = this.resultado.obtenerUnPais(nombrePais);
+                unContinente.agregarPais(unPais);
             }
         }
     }

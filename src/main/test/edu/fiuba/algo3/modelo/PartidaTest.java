@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -196,5 +197,32 @@ public class PartidaTest {
         unaPartida.iniciarPartida();
 
         assertEquals(4, unaPartida.obtenerPaisesLimitrofesDe("Argentina").size());
+    }
+
+    @Test
+    public void testObjetivosCumplidos() throws Throwable{
+        Jugador jugador1 = new Jugador("Santiago", 1);
+        Jugador jugador2 = new Jugador("Julio", 2);
+
+        Partida unaPartida = new Partida();
+        unaPartida.crearMapa();
+        unaPartida.agregarJugador(jugador1);
+        unaPartida.agregarJugador(jugador2);
+        unaPartida.jugadorInicial(0);
+        unaPartida.iniciarPartida();
+
+        for(Pais pais: unaPartida.obtenerPaises()){
+            System.out.println(pais.obtenerNombrePais()+" "+pais.obtenerJugadorEnControl().obtenerNombre());
+        }
+
+        Continente americaDelSur = unaPartida.obtenerMapa().obtenerUnContinente("America Del Sur");
+        ObjetivoConquista conquistar4DeAmericaDelSur = new ObjetivoConquista();
+        conquistar4DeAmericaDelSur.agregarContinenteAConquistar(
+            americaDelSur,
+            4
+        );
+        conquistar4DeAmericaDelSur.setJugador(jugador1);
+
+        assertTrue(conquistar4DeAmericaDelSur.logroElObjetivo(unaPartida.obtenerMapa()));
     }
 }

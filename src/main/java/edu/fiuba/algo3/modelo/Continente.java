@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.excepciones.PaisSinEjercitoException;
+
 public class Continente {
     private ArrayList<Pais> paises;
     private String nombre;
@@ -33,5 +35,25 @@ public class Continente {
             }
         }
         return true;
+    }
+
+    public ArrayList<Pais> obtenerPaises(){
+        return this.paises;
+    }
+
+    public int numeroPaisesDominadosPor(Jugador unJugador){
+        int numeroPaises = 0;
+        for (Pais pais: this.paises){
+            try{
+                Jugador jugadorControlando = pais.obtenerJugadorEnControl();
+                if (jugadorControlando.sonElMismoJugador(unJugador)){
+                   numeroPaises = numeroPaises + 1;
+                }
+            }
+            catch (PaisSinEjercitoException e){
+                continue;
+            }
+        }
+        return numeroPaises;
     }
 }

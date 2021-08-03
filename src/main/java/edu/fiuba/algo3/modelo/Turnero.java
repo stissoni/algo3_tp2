@@ -52,4 +52,8 @@ public class Turnero {
     public void reiniciar(){
         this.indexJugadorActual = this.indexJugadorInicial;
     }
+
+    public ArrayList<Jugador> obtenerJugadores(){
+        return this.jugadores;
+    }
 }

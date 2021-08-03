@@ -48,4 +48,26 @@ public class MapaBuilderTest {
         assertTrue(siberia.esLimitrofeDe(tartaria));
         assertTrue(tartaria.esLimitrofeDe(siberia));
     }
+
+    @Test
+    public void testPaisesEnSusContinentes() throws IOException{
+        MapaBuilder mapaBuilder = new MapaBuilder();
+
+        mapaBuilder.reset();
+        mapaBuilder.asignarPaises();
+        mapaBuilder.asignarContinentes();
+        mapaBuilder.asignarPaisesLimitrofes();
+        mapaBuilder.asignarPaisesAContinentes();
+
+        Mapa mapa = mapaBuilder.obtenerResultado();
+
+        Continente europa = mapa.obtenerUnContinente("Europa");
+
+        assertEquals(9, europa.obtenerPaises().size());
+
+        Pais islandia = europa.obtenerPaises().get(0);
+        Pais suecia = europa.obtenerPaises().get(8);
+
+        assertTrue(islandia.esLimitrofeDe(suecia));
+    }
 }

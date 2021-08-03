@@ -13,5 +13,11 @@ public class Director {
         builder.asignarPaises();
         builder.asignarContinentes();
         builder.asignarPaisesLimitrofes();
+        builder.asignarPaisesAContinentes();
+    }
+
+    public void crearObjetivos(ObjetivosBuilder builder, Mapa mapaJuego) throws IOException{
+        builder.reset();
+        builder.cargarObjetivos(mapaJuego);
     }
 }

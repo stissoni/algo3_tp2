@@ -29,7 +29,7 @@ public class BotonIniciarPartidaEventHandler implements EventHandler<ActionEvent
         
         stage.setScene(proximaEscena);
         stage.setFullScreenExitHint("");
-        stage.setFullScreen(false);
+        stage.setFullScreen(true);
     }
 
     private Partida iniciarPartida(int cantidadJugadores){

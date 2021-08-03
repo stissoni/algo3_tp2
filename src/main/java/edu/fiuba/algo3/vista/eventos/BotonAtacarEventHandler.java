@@ -3,22 +3,27 @@ package edu.fiuba.algo3.vista.eventos;
 import edu.fiuba.algo3.modelo.MovimientoAtaque;
 import edu.fiuba.algo3.modelo.Pais;
 import edu.fiuba.algo3.modelo.Partida;
+import edu.fiuba.algo3.vista.ContenedorPartidaFinalizada;
 import edu.fiuba.algo3.vista.ContenedorPrincipal;
 import edu.fiuba.algo3.excepciones.NumeroDeTropasInsuficienteException;
 import edu.fiuba.algo3.modelo.GeneradorAleatorio;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
+    Stage stage;
     ContenedorPrincipal contenedor;
     Partida partida;
     String nombrePaisConquistador;
     String nombrePaisDefensor;
     int numeroTropas;
     
-    public BotonAtacarEventHandler(ContenedorPrincipal contenedor, Partida partida){
+    public BotonAtacarEventHandler(Stage stage, ContenedorPrincipal contenedor, Partida partida){
+        this.stage = stage;
         this.contenedor = contenedor;
         this.partida = partida;
     }
@@ -45,6 +50,16 @@ public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
         nuevoMovimiento.generador(new GeneradorAleatorio());
         try{
             partida.ejecutarMovimiento(nuevoMovimiento);
+            if (this.partida.ganoLaPartida(this.partida.obtenerJugadorActual())){
+                ContenedorPartidaFinalizada contenedorPartidaFinalizada = new ContenedorPartidaFinalizada(this.stage, this.partida);
+                Scene ultimaEscena = new Scene(contenedorPartidaFinalizada, 640, 480);
+        
+                stage.setScene(ultimaEscena);
+                stage.setFullScreenExitHint("");
+                stage.setFullScreen(false);
+                return;
+            }
+            contenedor.refresh();
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("RESULTADO TIRADA");
             String alertText =(

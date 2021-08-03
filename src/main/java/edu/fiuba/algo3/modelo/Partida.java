@@ -35,9 +35,24 @@ public class Partida {
             pais.agregarEjercito(ejercito);
             this.turno.siguienteTurno();
         }
+        this.repartirObjetivos();
         this.faseActual = new FaseInicial();
         this.faseActual.asignarPartida(this);
         this.faseActual.iniciarFase();
+    }
+
+    private void repartirObjetivos() throws IOException{
+        Director director = new Director();
+        ObjetivosBuilder builder = new ObjetivosBuilder();
+        director.crearObjetivos(builder, this.mapaDelJuego);
+
+        ArrayList<ObjetivoConquista> objetivos = builder.obtenerResultado();
+        for (Jugador jugador: this.turno.obtenerJugadores()){
+            GeneradorAleatorio generador = new GeneradorAleatorio();
+            int numero = generador.generar(0, objetivos.size());
+            jugador.asignarObjetivo(objetivos.get(numero));
+            objetivos.get(numero).setJugador(jugador);
+        }
     }
 
     public void reiniciarTurno(){
@@ -118,5 +133,26 @@ public class Partida {
     public boolean esRondaDeReagrupamiento(){
         return this.faseActual.esRondaDeReagrupamiento();
     }
-}
 
+    public boolean alguienGanoLaPartida(){
+        for(Jugador jugador: this.turno.obtenerJugadores()){
+            if (jugador.cumplioSuObjetivo(this.mapaDelJuego)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Jugador obtenerGanador(){
+        for(Jugador jugador: this.turno.obtenerJugadores()){
+            if (jugador.cumplioSuObjetivo(this.mapaDelJuego)){
+                return jugador;
+            }
+        }
+        return null;
+    }
+
+    public boolean ganoLaPartida(Jugador unJugador){
+        return (this.alguienGanoLaPartida() && unJugador.sonElMismoJugador(this.obtenerGanador()));
+    }
+}

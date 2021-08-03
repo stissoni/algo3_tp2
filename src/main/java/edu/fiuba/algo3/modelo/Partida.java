@@ -49,7 +49,7 @@ public class Partida {
         ArrayList<ObjetivoConquista> objetivos = builder.obtenerResultado();
         int numeroObjetivosDisponibles = objetivos.size();
         System.out.println(numeroObjetivosDisponibles);
-        
+
         for (Jugador jugador: this.turno.obtenerJugadores()){
             GeneradorAleatorio generador = new GeneradorAleatorio();
             int index = generador.generar(0, numeroObjetivosDisponibles);
@@ -160,5 +160,9 @@ public class Partida {
 
     public boolean ganoLaPartida(Jugador unJugador){
         return (this.alguienGanoLaPartida() && unJugador.sonElMismoJugador(this.obtenerGanador()));
+    }
+
+    public String nombreDeLaRonda(){
+        return this.faseActual.nombreDeLaRonda();
     }
 }

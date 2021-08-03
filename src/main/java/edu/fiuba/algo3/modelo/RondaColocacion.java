@@ -66,4 +66,8 @@ public class RondaColocacion implements Ronda{
     public int tropasDisponiblesParaColocar(){
         return this.numeroTropasRestantes;
     }
+
+    public String nombreDeLaRonda(){
+        return "Ronda de colocacion";
+    }
 }

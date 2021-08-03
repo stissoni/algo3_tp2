@@ -14,7 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class BotoneraRondaColocacion extends VBox {
-    public BotoneraRondaColocacion(ContenedorPrincipal contenedor, Partida partida){
+    public BotoneraRondaColocacion(ContenedorPrincipal contenedor, Partida partida, String nombreRonda){
+        Label nombreDeLaRonda = new Label(nombreRonda);
+        nombreDeLaRonda.setStyle("-fx-font-size: 16");
         Label paisesParaColocar = new Label("Paises para colocar");
         ListView<String> listaPaises = new ListView<String>();
         ObservableList<String> items = FXCollections.observableArrayList();
@@ -57,6 +59,7 @@ public class BotoneraRondaColocacion extends VBox {
         botonTerminarTurno.setOnAction(siguienteTurnoHandler);
 
         this.getChildren().addAll(
+            nombreDeLaRonda,
             paisesParaColocar,
             listaPaises,
             cantidadTropas,

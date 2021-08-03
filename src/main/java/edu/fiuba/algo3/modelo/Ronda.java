@@ -18,4 +18,6 @@ public interface Ronda {
     public int tropasDisponiblesParaColocar();
     
     public boolean esRondaDeReagrupamiento();
+
+    public String nombreDeLaRonda();
 }

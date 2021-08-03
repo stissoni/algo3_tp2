@@ -48,4 +48,8 @@ public class RondaAtaque implements Ronda {
     public int tropasDisponiblesParaColocar(){
         return 0;
     }
+
+    public String nombreDeLaRonda(){
+        return "Ronda de ataque";
+    }
 }

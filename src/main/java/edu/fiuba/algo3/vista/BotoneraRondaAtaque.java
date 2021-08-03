@@ -15,7 +15,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class BotoneraRondaAtaque extends VBox{
-    public BotoneraRondaAtaque(Stage stage, ContenedorPrincipal contenedor, Partida partida){
+    public BotoneraRondaAtaque(Stage stage, ContenedorPrincipal contenedor, Partida partida, String nombreRonda){
+        Label nombreDeLaRonda = new Label(nombreRonda);
+        nombreDeLaRonda.setStyle("-fx-font-size: 16");
         Label labelPaisAtacante = new Label("Pais atacante (numero de tropas)");
         
         ListView<String> listaPaisesEnControl = new ListView<String>();
@@ -57,7 +59,8 @@ public class BotoneraRondaAtaque extends VBox{
                 String[] splited = newValue.split("\\s+");
                 String nombrePaisAtacante = splited[0];
                 atacarHandler.setPaisAtacante(nombrePaisAtacante);
-
+                atacarHandler.setPaisDefensor(null);
+                
                 ObservableList<String> itemsPaisesParaAtacarLimitrofes = FXCollections.observableArrayList();
                 for (Pais pais: partida.obtenerPaisesLimitrofesEnemigosDe(nombrePaisAtacante, partida.obtenerJugadorActual())){
                     String nombrePaisDelLimitrofe = pais.obtenerNombrePais();
@@ -78,6 +81,7 @@ public class BotoneraRondaAtaque extends VBox{
         );
 
         this.getChildren().addAll(
+            nombreDeLaRonda,
             labelPaisAtacante,
             listaPaisesEnControl,
             labelPaisAAtacar,

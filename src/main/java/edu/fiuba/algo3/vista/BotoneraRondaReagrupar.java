@@ -14,9 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class BotoneraRondaReagrupar extends VBox {
-    public BotoneraRondaReagrupar(ContenedorPrincipal contenedor, Partida partida){
+    public BotoneraRondaReagrupar(ContenedorPrincipal contenedor, Partida partida, String nombreRonda){
+        Label nombreDeLaRonda = new Label(nombreRonda);
         Label labelPaisOrigen = new Label("Pais origen (numero de tropas)");
-            
+        nombreDeLaRonda.setStyle("-fx-font-size: 16");
+        
         ListView<String> listaPaisesEnControl = new ListView<String>();
         ObservableList<String> itemsPaisesEnControl = FXCollections.observableArrayList();
         for (Pais pais: partida.obtenerPaisesDe(partida.obtenerJugadorActual())){
@@ -77,6 +79,7 @@ public class BotoneraRondaReagrupar extends VBox {
         );
 
         this.getChildren().addAll(
+            nombreDeLaRonda,
             labelPaisOrigen,
             listaPaisesEnControl,
             labelPaiDestino,

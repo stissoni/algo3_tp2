@@ -61,4 +61,8 @@ public class FaseJuego implements Fase {
     public boolean esRondaDeReagrupamiento(){
         return this.ronda.esRondaDeReagrupamiento();
     }
+
+    public String nombreDeLaRonda(){
+        return "Fase juego: "+this.ronda.nombreDeLaRonda();
+    }
 }

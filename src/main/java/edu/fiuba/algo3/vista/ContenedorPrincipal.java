@@ -34,14 +34,15 @@ public class ContenedorPrincipal extends BorderPane{
     }
 
     private void setBotonera(){
+        String nombreRonda = this.partida.nombreDeLaRonda();
         if (this.partida.esRondaDeColocacion()){
-            this.botonera = new BotoneraRondaColocacion(this, this.partida);
+            this.botonera = new BotoneraRondaColocacion(this, this.partida, nombreRonda);
         }
         else if (this.partida.esRondaDeReagrupamiento()){
-            this.botonera = new BotoneraRondaReagrupar(this, this.partida);
+            this.botonera = new BotoneraRondaReagrupar(this, this.partida, nombreRonda);
         }
         else {
-            this.botonera = new BotoneraRondaAtaque(this.stage, this, this.partida);
+            this.botonera = new BotoneraRondaAtaque(this.stage, this, this.partida, nombreRonda);
         }
         this.setLeft(botonera);
     } 
@@ -69,7 +70,7 @@ public class ContenedorPrincipal extends BorderPane{
         estadoDelObjetivo.setText(objetivo.estadoDelObjetivo(partida.obtenerMapa()));
         estadoDelObjetivo.setStyle("-fx-font-size: 14;");
 
-        this.panelControl.getChildren().addAll(jugadorActual, new Separator(), objetivoDelJugador, estadoDelObjetivo);
+        this.panelControl.getChildren().addAll(jugadorActual, new Separator(), estadoDelObjetivo);
         if (this.partida.esRondaDeColocacion()){
             Label numeroTropasAColocar = new Label();
             numeroTropasAColocar.setText("Tropas disponibles\n"+String.valueOf(this.partida.tropasDisponiblesParaColocar())+ " tropa(s)");

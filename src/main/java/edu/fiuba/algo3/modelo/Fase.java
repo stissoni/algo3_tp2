@@ -20,4 +20,6 @@ public interface Fase {
     public int tropasDisponiblesParaColocar();
 
     public boolean esRondaDeReagrupamiento();
+
+    public String nombreDeLaRonda();
 }

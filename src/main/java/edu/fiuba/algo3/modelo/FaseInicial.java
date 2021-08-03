@@ -77,4 +77,8 @@ public class FaseInicial implements Fase {
     public boolean esRondaDeReagrupamiento(){
         return this.ronda.esRondaDeReagrupamiento();
     }
+
+    public String nombreDeLaRonda(){
+        return "Fase inicial: "+this.ronda.nombreDeLaRonda();
+    }
 }
